@@ -27,24 +27,24 @@ You should also install "teleop-twist-keyboard" if you want control your robot b
 
 ## Install JAUS Tool Set
 
-See the installation instructions on https://gitlab.fkie.fraunhofer.de/jaus/iop_core/blob/master/doc/install.md to install the JAUS Tool Set.
+See the installation instructions on https://github.com/fkie/iop_cfg_sim_stage_fkie/iop_core/blob/master/doc/install.md to install the JAUS Tool Set.
 
 ## Get the IOP/ROS-Bridge
 
 To run the simulator you do not need all ROS/IOP-Bridge packages. It is sufficient to clone the following repositories into your ROS workspace:
 
 ```
-git clone https://gitlab.fkie.fraunhofer.de/jaus/core
-git clone https://gitlab.fkie.fraunhofer.de/jaus/mobility
-git clone https://gitlab.fkie.fraunhofer.de/jaus/sensing
-git clone https://gitlab.fkie.fraunhofer.de/jaus/mobility_clients
-git clone https://gitlab.fkie.fraunhofer.de/jaus/sensing_clients
-git clone https://gitlab.fkie.fraunhofer.de/jaus/iop_core
-git clone https://gitlab.fkie.fraunhofer.de/jaus/iop_platform
-git clone https://gitlab.fkie.fraunhofer.de/jaus/iop_sensing
-git clone https://gitlab.fkie.fraunhofer.de/jaus/iop_sensing_clients
-git clone https://gitlab.fkie.fraunhofer.de/jaus/iop_gui
-git clone https://gitlab.fkie.fraunhofer.de/jaus/iop_cfg_sim_stage_fkie
+git clone https://github.com/fkie/iop_jaus_core
+git clone https://github.com/fkie/iop_jaus_mobility
+git clone https://github.com/fkie/iop_jaus_sensing
+git clone https://github.com/fkie/iop_jaus_mobility_clients
+git clone https://github.com/fkie/iop_jaus_sensing_clients
+git clone https://github.com/fkie/iop_core
+git clone https://github.com/fkie/iop_platform
+git clone https://github.com/fkie/iop_sensing
+git clone https://github.com/fkie/iop_sensing_clients
+git clone https://github.com/fkie/iop_gui
+git clone https://github.com/fkie/iop_cfg_sim_stage_fkie
 ```
 
 Finally you need to compile the sources:
