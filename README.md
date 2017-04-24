@@ -27,7 +27,7 @@ You should also install "teleop-twist-keyboard" if you want control your robot b
 
 ## Install JAUS Tool Set
 
-See the installation instructions on https://github.com/fkie/iop_cfg_sim_stage_fkie/iop_core/blob/master/doc/install.md to install the JAUS Tool Set.
+See the installation instructions on https://github.com/fkie/iop_core/blob/master/doc/install.md to install the JAUS Tool Set.
 
 ## Get the IOP/ROS-Bridge
 
@@ -45,6 +45,18 @@ git clone https://github.com/fkie/iop_sensing
 git clone https://github.com/fkie/iop_sensing_clients
 git clone https://github.com/fkie/iop_gui
 git clone https://github.com/fkie/iop_cfg_sim_stage_fkie
+```
+You can also use the [wstool](http://wiki.ros.org/wstool):
+  > If you do not already have an *.rosinstall* go into you ROS workspace and call
+```
+cd catkin_ws/
+wstool init src
+```
+
+Merge the iop.rosinstall file and fetch code.
+```
+wstool merge -t src https://raw.githubusercontent.com/fkie/iop_cfg_sim_stage_fkie/master/iop.rosinstall
+wstool update -t src
 ```
 
 Finally you need to compile the sources:
