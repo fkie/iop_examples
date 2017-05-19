@@ -76,22 +76,22 @@
             <param name="capability_group" value="iop_bridge"/>
             <rosparam param="services">
               [
-                iop_global_pose_sensor_fkie: "urn:jaus:jss:mobility:GlobalPoseSensor_1_0",
-                iop_local_pose_sensor_fkie: "urn:jaus:jss:mobility:LocalPoseSensor_1_0",
-                iop_range_sensor_fkie: "urn:jaus:jss:environmentSensing:RangeSensor_1_0",
-                iop_primitive_driver_fkie: "urn:jaus:jss:mobility:PrimitiveDriver_1_0",
-                iop_digital_resource_discovery_fkie: "urn:jaus:jss:iop:DigitalResourceDiscovery_1_0",
-                iop_health_monitor_fkie: "urn:jaus:jss:exp:aeodrs:HealthMonitor_1_2",
-                iop_platform_mode_fkie: "urn:jaus:jss:iop:PlatformMode_1_1",
-                iop_platform_state_fkie: "urn:jaus:jss:iop:PlatformState_1_0",
-                iop_liveness_1_0_fkie: "urn:jaus:jss:core:Liveness_1_0",
-                iop_discovery_1_0_fkie: "urn:jaus:jss:core:Discovery_1_0",
-                iop_discovery_1_0_fkie: "urn:jaus:jss:core:DiscoveryClient_1_0",
-                iop_management_1_0_fkie: "urn:jaus:jss:core:Management_1_0",
-                iop_accesscontrol_1_0_fkie: "urn:jaus:jss:core:AccessControl_1_0",
-                iop_events_1_0_fkie: "urn:jaus:jss:core:Events_1_0",
-                iop_events_1_0_fkie: "urn:jaus:jss:core:EventsClient_1_0",
-                iop_transport_1_0_fkie: "urn:jaus:jss:core:Transport_1_0",
+                iop_transport_1_1_fkie: "Transport_1_1",
+                iop_events_1_0_fkie: "Events_1_0",
+                iop_events_1_0_fkie: "EventsClient_1_0",
+                iop_accesscontrol_1_0_fkie: "AccessControl_1_0",
+                iop_discovery_1_0_fkie: "Discovery_1_0",
+                iop_discovery_1_0_fkie: "DiscoveryClient_1_0",
+                iop_management_1_0_fkie: "Management_1_0",
+                iop_liveness_1_0_fkie: "Liveness_1_0",
+                iop_global_pose_sensor_fkie: "GlobalPoseSensor_1_0",
+                iop_local_pose_sensor_fkie: "LocalPoseSensor_1_0",
+                iop_range_sensor_fkie: "RangeSensor_1_0",
+                iop_primitive_driver_fkie: "PrimitiveDriver_1_0",
+                iop_digital_resource_discovery_fkie: "DigitalResourceDiscovery_1_0",
+                iop_health_monitor_fkie: "HealthMonitor_1_2",
+                iop_platform_mode_fkie: "PlatformMode_1_1",
+                iop_platform_state_fkie: "PlatformState_1_0",
               ]
             </rosparam>
             <param name="name_node" value="$(arg robot_ns)"/>
@@ -106,7 +106,7 @@
               2: Subsystem Identification
               3: Node Identification
               4: Component Identification
-              5 – 255: Reserved
+              5: 255: Reserved
              -->
             <param name="system_id" value="2"/>
             <!-- 
@@ -144,12 +144,12 @@
             <param name="capability_group" value="iop_bridge"/>
             <rosparam param="services">
               [
-                iop_costmap2d_fkie: "urn:jaus:jss:iop:CostMap2D_1_0",
-                iop_discovery_1_0_fkie: "urn:jaus:jss:core:DiscoveryClient_1_0",
-                iop_accesscontrol_1_0_fkie: "urn:jaus:jss:core:AccessControl_1_0",
-                iop_events_1_0_fkie: "urn:jaus:jss:core:Events_1_0",
-                iop_events_1_0_fkie: "urn:jaus:jss:core:EventsClient_1_0",
-                iop_transport_1_0_fkie: "urn:jaus:jss:core:Transport_1_0",
+                iop_costmap2d_fkie: "CostMap2D_1_0",
+                iop_discovery_1_0_fkie: "DiscoveryClient_1_0",
+                iop_accesscontrol_1_0_fkie: "AccessControl_1_0",
+                iop_events_1_0_fkie: "Events_1_0",
+                iop_events_1_0_fkie: "EventsClient_1_0",
+                iop_transport_1_0_fkie: "Transport_1_0",
               ]
             </rosparam>
             <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).71"/>
