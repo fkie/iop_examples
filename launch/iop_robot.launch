@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
     <arg name="robot_ns" default="bobrob"/>
     <param name="utm_zone" value="33" />
@@ -6,6 +7,11 @@
     <arg name="id_subsystem" default="133"/>
     <arg name="id_node" default="64"/>
     <param name="use_sim_time" value="true"/>
+
+    <node name="jaus_node_manager" pkg="node_manager_fkie" type="script_runner.py">
+        <param name="script" value="$(find jaustoolset)/JTSNodeManager $(find jaustoolset)/cfg/nm.cfg" />
+        <!-- <param name="stop_script" value="pkg://iop_builder_fkie///jaus_node_manager.sh stop" /> -->
+    </node>
 
     <group ns="$(arg robot_ns)">
         <!-- TFs: -->
@@ -76,22 +82,23 @@
             <param name="capability_group" value="iop_bridge"/>
             <rosparam param="services">
               [
-                iop_transport_1_1_fkie: "Transport_1_1",
-                iop_events_1_0_fkie: "Events_1_0",
-                iop_events_1_0_fkie: "EventsClient_1_0",
-                iop_accesscontrol_1_0_fkie: "AccessControl_1_0",
-                iop_discovery_1_0_fkie: "Discovery_1_0",
-                iop_discovery_1_0_fkie: "DiscoveryClient_1_0",
-                iop_management_1_0_fkie: "Management_1_0",
-                iop_liveness_1_0_fkie: "Liveness_1_0",
-                iop_global_pose_sensor_fkie: "GlobalPoseSensor_1_0",
-                iop_local_pose_sensor_fkie: "LocalPoseSensor_1_0",
-                iop_range_sensor_fkie: "RangeSensor_1_0",
-                iop_primitive_driver_fkie: "PrimitiveDriver_1_0",
-                iop_digital_resource_discovery_fkie: "DigitalResourceDiscovery_1_0",
-                iop_health_monitor_fkie: "HealthMonitor_1_2",
-                iop_platform_mode_fkie: "PlatformMode_1_1",
-                iop_platform_state_fkie: "PlatformState_1_0",
+                iop_transport_fkie: "Transport",
+                iop_events_fkie: "Events",
+                iop_events_fkie: "EventsClient",
+                iop_accesscontrol_fkie: "AccessControl",
+                iop_discovery_fkie: "Discovery",
+                iop_discovery_fkie: "DiscoveryClient",
+                iop_management_fkie: "Management",
+                iop_liveness_fkie: "Liveness",
+                iop_digital_resource_discovery_fkie: "DigitalResourceDiscovery",
+                iop_health_monitor_fkie: "HealthMonitor",
+                iop_platform_mode_fkie: "PlatformMode",
+                iop_platform_state_fkie: "PlatformState",
+                iop_primitive_driver_fkie: "PrimitiveDriver",
+                iop_local_pose_sensor_fkie: "LocalPoseSensor",
+                iop_range_sensor_fkie: "RangeSensor",
+                iop_global_pose_sensor_fkie: "GlobalPoseSensor",
+                iop_range_sensor_fkie: "RangeSensor",
               ]
             </rosparam>
             <param name="name_node" value="$(arg robot_ns)"/>
@@ -144,12 +151,12 @@
             <param name="capability_group" value="iop_bridge"/>
             <rosparam param="services">
               [
-                iop_costmap2d_fkie: "CostMap2D_1_0",
-                iop_discovery_1_0_fkie: "DiscoveryClient_1_0",
-                iop_accesscontrol_1_0_fkie: "AccessControl_1_0",
-                iop_events_1_0_fkie: "Events_1_0",
-                iop_events_1_0_fkie: "EventsClient_1_0",
-                iop_transport_1_0_fkie: "Transport_1_0",
+                iop_costmap2d_fkie: "CostMap2D",
+                iop_accesscontrol_fkie: "AccessControl",
+                iop_discovery_fkie: "DiscoveryClient",
+                iop_events_fkie: "Events",
+                iop_events_fkie: "EventsClient",
+                iop_transport_fkie: "Transport",
               ]
             </rosparam>
             <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).71"/>

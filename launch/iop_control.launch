@@ -27,16 +27,16 @@
         <param name="capability_group" value="iop_bridge"/>
         <rosparam param="services">
           [
-            iop_transport_1_1_fkie: "Transport_1_1",
-            iop_events_1_0_fkie: "EventsClient_1_0",
-            iop_discovery_1_0_fkie: "DiscoveryClient_1_0",
-            iop_accesscontrol_1_0_fkie: "AccessControlClient_1_0",
-            iop_management_1_0_fkie: "ManagementClient_1_0",
-            iop_client_costmap2d_fkie: "CostMap2DClient_1_0",
-            iop_client_range_sensor_fkie: "RangeSensorClient_1_0",
-            iop_client_primitive_driver_fkie: "PrimitiveDriverClient_1_0",
-            iop_client_global_pose_sensor_fkie: "GlobalPoseSensorClient_1_0",
-            iop_client_local_pose_sensor_fkie: "LocalPoseSensorClient_1_0",
+            iop_transport_fkie: "Transport",
+            iop_events_fkie: "EventsClient",
+            iop_discovery_fkie: "DiscoveryClient",
+            iop_accesscontrol_fkie: "AccessControlClient",
+            iop_client_global_pose_sensor_fkie: "GlobalPoseSensorClient",
+            iop_management_fkie: "ManagementClient",
+            iop_client_costmap2d_fkie: "CostMap2DClient",
+            iop_client_range_sensor_fkie: "RangeSensorClient",
+            iop_client_primitive_driver_fkie: "PrimitiveDriverClient",
+            iop_client_local_pose_sensor_fkie: "LocalPoseSensorClient",
           ]
         </rosparam>
         <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).200"/>
