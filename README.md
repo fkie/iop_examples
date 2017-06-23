@@ -25,10 +25,6 @@ sudo apt install \
 
 You should also install "teleop-twist-keyboard" if you want control your robot by keyboard.
 
-## Install JAUS Tool Set
-
-See the installation instructions on https://github.com/fkie/iop_core/blob/master/doc/install.md to install the JAUS Tool Set.
-
 ## Get the IOP/ROS-Bridge
 
 To run the simulator you do not need all ROS/IOP-Bridge packages. It is sufficient to clone the following repositories into your ROS workspace:
