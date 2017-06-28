@@ -2,17 +2,7 @@ Setup of a simulation environment to test basic IOP cababilities
 
 ## What you need:
 
-Install the following ROS packages depending on your ROS version:
-```
-sudo apt install \
-  ros-indigo-hector-mapping \
-  ros-indigo-stage-ros \
-  ros-indigo-topic-tools \
-  ros-indigo-rqt-gui \
-  ros-indigo-rqt-robot-steering \
-```
-
-OR
+Install the following ROS packages (replace `kinetic` for other ROS version):
 
 ```
 sudo apt install \
@@ -27,31 +17,11 @@ You should also install "teleop-twist-keyboard" if you want control your robot b
 
 ## Get the IOP/ROS-Bridge
 
-To run the simulator you do not need all ROS/IOP-Bridge packages. It is sufficient to clone the following repositories into your ROS workspace:
+To install ROS/IOP-Bridge packages follow the instruction [here](https://github.com/fkie/iop_core/blob/master/README.md)
 
+Merge the iop_cfg_sim_stage.rosinstall file and fetch code.
 ```
-git clone https://github.com/fkie/iop_jaus_core
-git clone https://github.com/fkie/iop_jaus_mobility
-git clone https://github.com/fkie/iop_jaus_sensing
-git clone https://github.com/fkie/iop_jaus_mobility_clients
-git clone https://github.com/fkie/iop_jaus_sensing_clients
-git clone https://github.com/fkie/iop_core
-git clone https://github.com/fkie/iop_platform
-git clone https://github.com/fkie/iop_sensing
-git clone https://github.com/fkie/iop_sensing_clients
-git clone https://github.com/fkie/iop_gui
-git clone https://github.com/fkie/iop_cfg_sim_stage_fkie
-```
-You can also use the [wstool](http://wiki.ros.org/wstool):
-  > If you do not already have an *.rosinstall* go into you ROS workspace and call
-```
-cd catkin_ws/
-wstool init src
-```
-
-Merge the iop.rosinstall file and fetch code.
-```
-wstool merge -t src https://raw.githubusercontent.com/fkie/iop_cfg_sim_stage_fkie/master/iop.rosinstall
+wstool merge -t src https://raw.githubusercontent.com/fkie/iop_cfg_sim_stage_fkie/master/iop_cfg_sim_stage.rosinstall
 wstool update -t src
 ```
 
@@ -62,16 +32,11 @@ catkin build
 
 ## Launch the example
 
-Before you start the launch files, you have to start the **JAUS Node Manager**. You can do this by
-
-  ```rosrun iop_builder_fkie jaus_node_manager.sh start```
-  
->To exit the script type `rosrun iop_builder_fkie jaus_node_manager.sh stop` in a new terminal window (`CTRL+C` won't work).
-
 There are two example launch files in the **iop_cfg_sim_stage_fkie** package:
 
 - **iop_robot.launch**
-contains the simulation configuration and also the ROS/IOP-Bridge components to make the simulated robot IOP compliant.
+contains the simulation configuration and also the ROS/IOP-Bridge components to make the simulated robot IOP compliant. It contains also the **JAUS Node Manager**, so you do not need to start it separately!
+>requires installed multimaster_fkie
 
 - **iop_control.launch**
 contains the RQT and RVIZ gui with corresponding ROS/IOP-Bridge components. So you can control the simulated robot by IOP commands.
