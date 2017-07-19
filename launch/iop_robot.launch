@@ -98,7 +98,6 @@
                 iop_local_pose_sensor_fkie: "LocalPoseSensor",
                 iop_range_sensor_fkie: "RangeSensor",
                 iop_global_pose_sensor_fkie: "GlobalPoseSensor",
-                iop_range_sensor_fkie: "RangeSensor",
               ]
             </rosparam>
             <param name="name_node" value="$(arg robot_ns)"/>
@@ -169,4 +168,5 @@
         </node>
     
     </group>
+
 </launch>

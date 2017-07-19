@@ -25,21 +25,21 @@
 
     <node name="iop_ocu_client" pkg="iop_component_fkie" type="iop_component">
         <param name="capability_group" value="iop_bridge"/>
+        <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).200"/>
         <rosparam param="services">
           [
             iop_transport_fkie: "Transport",
             iop_events_fkie: "EventsClient",
             iop_discovery_fkie: "DiscoveryClient",
             iop_accesscontrol_fkie: "AccessControlClient",
-            iop_client_global_pose_sensor_fkie: "GlobalPoseSensorClient",
             iop_management_fkie: "ManagementClient",
-            iop_client_costmap2d_fkie: "CostMap2DClient",
-            iop_client_range_sensor_fkie: "RangeSensorClient",
             iop_client_primitive_driver_fkie: "PrimitiveDriverClient",
             iop_client_local_pose_sensor_fkie: "LocalPoseSensorClient",
+            iop_client_global_pose_sensor_fkie: "GlobalPoseSensorClient",
+            iop_client_range_sensor_fkie: "RangeSensorClient",
+            iop_client_costmap2d_fkie: "CostMap2DClient",
           ]
         </rosparam>
-        <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).200"/>
         <param name="register_own_services" value="false"/>
         <param name="name_subsystem" value="OCU for $(arg ns)"/>
         <param name="name_node" value="Client Discovery"/>
