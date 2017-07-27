@@ -3,29 +3,22 @@
   <arg name="ns" default="ocu"/>
   <arg name="id_subsystem" default="150"/>
   <arg name="id_node" default="64"/>
-  <arg name="load_gui" default="true"/>
-  <param name="$(arg ns)/authority" value="220"/>
-  <param name="$(arg ns)/control_addr" type="str" value="133"/>
+  <arg name="only_monitor" default="false"/>
+  <arg name="client_suffix" default=""/>
+  <arg name="subsystem_restricted" default="65535" />
 
-<!--  <include file="$(find rqt_js_velocity_fkie)/launch/rqt_js_velocity_fkie.launch" ns="$(arg ns)"/>-->
-  <node if="$(arg load_gui)" name="rqt_ocu" pkg="rqt_gui" type="rqt_gui"
-        ns="$(arg ns)" args="--force-discover --perspective-file $(find iop_cfg_sim_stage_fkie)/launch/iop.perspective">
-    <param name="capability_group" value="control"/>
-  </node>
-  <node if="$(arg load_gui)" name="rviz_ocu" pkg="rviz" type="rviz"
-        ns="$(arg ns)" args="-d $(find iop_cfg_sim_stage_fkie)/launch/iop.rviz">
-    <param name="capability_group" value="control"/>
-  </node>
-
-  <group ns="$(arg ns)">
-
+<!--
     <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py">
       <param name="capability_group" value="control"/>
     </node>
-
-    <node name="iop_ocu_client" pkg="iop_component_fkie" type="iop_component">
+-->
+    <param name="name_subsystem" value="OCU for $(arg ns)"/>
+    <node name="iop_ocu_client$(arg client_suffix)" pkg="iop_component_fkie" type="iop_component">
         <param name="capability_group" value="iop_bridge"/>
         <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).200"/>
+        <param name="name_node" value="control_client"/>
+        <param name="only_monitor" value="$(arg only_monitor)"/>
+        <param name="subsystem_restricted" value="$(arg subsystem_restricted)" />
         <rosparam param="services">
           [
             iop_transport_fkie: "Transport",
@@ -41,8 +34,6 @@
           ]
         </rosparam>
         <param name="register_own_services" value="false"/>
-        <param name="name_subsystem" value="OCU for $(arg ns)"/>
-        <param name="name_node" value="Client Discovery"/>
         <param name="register_own_services" value="false" />
         <param name="enable_ros_interface" value="true"/>
         <!-- Primitive Driver Parameter -->
@@ -56,12 +47,9 @@
         <!-- <remap from="fix" to="fix_new"/> -->
         <!-- Range Sensor Parameter -->
         <param name="tf_frame_robot" value="/$(arg ns)/base_link"/>
-        <!-- This remap is needed if you run the simulator and ocu nodes on the same ROS core -->
-        <remap from="/bobrob/base_scan" to="/$(arg ns)/base_scan"/>
         <!-- CostMap2D Parameter -->
         <param name="tf_frame_odom" value="/$(arg ns)/odom"/>
         <param name="tf_frame_costmap" value="/$(arg ns)/costmap"/>
     </node>
-  </group>
 
 </launch>

@@ -71,12 +71,12 @@ class TfPose():
     rospy.loginfo("~hz: '%s'", 1. / self.PUB_INTERVAL)
     self.ORI_OFFSET = rospy.get_param('~ori_offset', TfPose.ORI_OFFSET)
     rospy.loginfo("~ori_offset: '%f'", self.ORI_OFFSET)
-    ori_bml_invert = rospy.get_param('~ori_bml_invert', TfPose.ORI_INVERT)
-    if ori_bml_invert not in [-1., 1.]:
-      rospy.logwarn("Invalid value for ~ori_bml_invert %s, expected: {1., -1.}; use default: %s" % (ori_bml_invert, self.ORI_INVERT))
-      ori_bml_invert = 1.
-    self.ORI_INVERT = ori_bml_invert
-    rospy.loginfo("~ori_bml_invert: '%f'", self.ORI_INVERT)
+    ori_invert = rospy.get_param('~ori_invert', TfPose.ORI_INVERT)
+    if ori_invert not in [-1., 1.]:
+      rospy.logwarn("Invalid value for ~ori_invert %s, expected: {1., -1.}; use default: %s" % (ori_invert, self.ORI_INVERT))
+      ori_invert = 1.
+    self.ORI_INVERT = ori_invert
+    rospy.loginfo("~ori_invert: '%f'", self.ORI_INVERT)
     self._pub_gps = rospy.Publisher("gps_info", NavSatFix, queue_size=1)
     rospy.loginfo("Publisher `%s` created", self._pub_gps.name)
     self._pub_imu = rospy.Publisher("imu", Imu, queue_size=1)
@@ -104,10 +104,10 @@ class TfPose():
       imu_msg.header.frame_id = self._world_frame
       roll, pitch, yaw = euler_from_quaternion(quat)
       quat = quaternion_from_euler(roll, pitch, (yaw * self.ORI_INVERT) + self.ORI_OFFSET)
-      imu_msg.orientation.w = quat[0]
-      imu_msg.orientation.x = quat[1]
-      imu_msg.orientation.y = quat[2]
-      imu_msg.orientation.z = quat[3]
+      imu_msg.orientation.x = quat[0]
+      imu_msg.orientation.y = quat[1]
+      imu_msg.orientation.z = quat[2]
+      imu_msg.orientation.w = quat[3]
       #print "EULER", math.degrees(roll), math.degrees(pitch), math.degrees(yaw), "mit offset:", math.degrees(yaw + self.ORI_OFFSET)
       self._pub_gps.publish(gps_msg)
       self._pub_imu.publish(imu_msg)

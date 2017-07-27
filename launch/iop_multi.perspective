@@ -1,0 +1,281 @@
+{
+  "keys": {}, 
+  "groups": {
+    "pluginmanager": {
+      "keys": {
+        "running-plugins": {
+          "type": "repr", 
+          "repr": "{u'rqt_robot_steering/RobotSteering': [2, 1], u'iop_rqt_access_control_fkie/IOPAccessControl': [1]}"
+        }
+      }, 
+      "groups": {
+        "plugin__rqt_robot_steering__RobotSteering__2": {
+          "keys": {}, 
+          "groups": {
+            "dock_widget__RobotSteeringUi": {
+              "keys": {
+                "dockable": {
+                  "type": "repr", 
+                  "repr": "True"
+                }, 
+                "parent": {
+                  "type": "repr", 
+                  "repr": "None"
+                }, 
+                "dock_widget_title": {
+                  "type": "repr", 
+                  "repr": "u'Robot &Steering (2)'"
+                }
+              }, 
+              "groups": {}
+            }, 
+            "plugin": {
+              "keys": {
+                "topic": {
+                  "type": "repr", 
+                  "repr": "u'/ocu/robot_1/cmd_vel'"
+                }, 
+                "vx_min": {
+                  "type": "repr", 
+                  "repr": "-1.0"
+                }, 
+                "vw_min": {
+                  "type": "repr", 
+                  "repr": "-3.0"
+                }, 
+                "vw_max": {
+                  "type": "repr", 
+                  "repr": "3.0"
+                }, 
+                "vx_max": {
+                  "type": "repr", 
+                  "repr": "1.0"
+                }
+              }, 
+              "groups": {}
+            }
+          }
+        }, 
+        "plugin__rqt_rviz__RViz__1": {
+          "keys": {}, 
+          "groups": {
+            "dock_widget__": {
+              "keys": {
+                "dockable": {
+                  "type": "repr", 
+                  "repr": "u'true'"
+                }, 
+                "parent": {
+                  "type": "repr", 
+                  "repr": "None"
+                }, 
+                "dock_widget_title": {
+                  "type": "repr", 
+                  "repr": "u'iop.rviz[*] - RViz'"
+                }
+              }, 
+              "groups": {}
+            }
+          }
+        }, 
+        "plugin__rqt_robot_steering__RobotSteering__1": {
+          "keys": {}, 
+          "groups": {
+            "dock_widget__RobotSteeringUi": {
+              "keys": {
+                "dockable": {
+                  "type": "repr", 
+                  "repr": "True"
+                }, 
+                "parent": {
+                  "type": "repr", 
+                  "repr": "None"
+                }, 
+                "dock_widget_title": {
+                  "type": "repr", 
+                  "repr": "u'&Robot Steering'"
+                }
+              }, 
+              "groups": {}
+            }, 
+            "plugin": {
+              "keys": {
+                "topic": {
+                  "type": "repr", 
+                  "repr": "u'/ocu/robot_0/cmd_vel'"
+                }, 
+                "vx_min": {
+                  "type": "repr", 
+                  "repr": "-1.0"
+                }, 
+                "vw_min": {
+                  "type": "repr", 
+                  "repr": "-3.0"
+                }, 
+                "vw_max": {
+                  "type": "repr", 
+                  "repr": "3.0"
+                }, 
+                "vx_max": {
+                  "type": "repr", 
+                  "repr": "1.0"
+                }
+              }, 
+              "groups": {}
+            }
+          }
+        }, 
+        "plugin__iop_rqt_digital_resource_viewer_fkie__DigitalResourceViewer__1": {
+          "keys": {}, 
+          "groups": {
+            "dock_widget__DigitalResourceViewerUi": {
+              "keys": {
+                "dockable": {
+                  "type": "repr", 
+                  "repr": "u'true'"
+                }, 
+                "parent": {
+                  "type": "repr", 
+                  "repr": "None"
+                }, 
+                "dock_widget_title": {
+                  "type": "repr", 
+                  "repr": "u'DigitalResourceViewer'"
+                }
+              }, 
+              "groups": {}
+            }, 
+            "plugin": {
+              "keys": {
+                "service_update_endpoints": {
+                  "type": "repr", 
+                  "repr": "u'/control/update_endpoints'"
+                }, 
+                "topic_endpoints": {
+                  "type": "repr", 
+                  "repr": "u'/control/endpoints'"
+                }
+              }, 
+              "groups": {}
+            }
+          }
+        }, 
+        "plugin__iop_rqt_selection_fkie__JAUSSelection__1": {
+          "keys": {}, 
+          "groups": {
+            "dock_widget__SelectionClientUi": {
+              "keys": {
+                "dockable": {
+                  "type": "repr", 
+                  "repr": "u'true'"
+                }, 
+                "parent": {
+                  "type": "repr", 
+                  "repr": "None"
+                }, 
+                "dock_widget_title": {
+                  "type": "repr", 
+                  "repr": "u'SelectionClient'"
+                }
+              }, 
+              "groups": {}
+            }, 
+            "plugin": {
+              "keys": {
+                "service_update_discovery": {
+                  "type": "repr", 
+                  "repr": "u'/service_update_discovery'"
+                }, 
+                "topic_selection": {
+                  "type": "repr", 
+                  "repr": "u'/iop_system'"
+                }, 
+                "authority": {
+                  "type": "repr", 
+                  "repr": "u'220'"
+                }
+              }, 
+              "groups": {}
+            }
+          }
+        }, 
+        "plugin__iop_rqt_access_control_fkie__IOPAccessControl__1": {
+          "keys": {}, 
+          "groups": {
+            "dock_widget__AccessControlClientUi": {
+              "keys": {
+                "dockable": {
+                  "type": "repr", 
+                  "repr": "True"
+                }, 
+                "parent": {
+                  "type": "repr", 
+                  "repr": "None"
+                }, 
+                "dock_widget_title": {
+                  "type": "repr", 
+                  "repr": "u'&AccessControlClient'"
+                }
+              }, 
+              "groups": {}
+            }, 
+            "plugin": {
+              "keys": {
+                "ocu_feedback": {
+                  "type": "repr", 
+                  "repr": "u'/ocu_feedback'"
+                }, 
+                "ocu_cmd": {
+                  "type": "repr", 
+                  "repr": "u'/ocu_cmd'"
+                }, 
+                "authority": {
+                  "type": "repr", 
+                  "repr": "220"
+                }, 
+                "iop_identification": {
+                  "type": "repr", 
+                  "repr": "u'/iop_identification'"
+                }, 
+                "iop_system": {
+                  "type": "repr", 
+                  "repr": "u'/iop_system'"
+                }, 
+                "iop_update_discovery": {
+                  "type": "repr", 
+                  "repr": "u'/iop_update_discovery'"
+                }
+              }, 
+              "groups": {}
+            }
+          }
+        }
+      }
+    }, 
+    "mainwindow": {
+      "keys": {
+        "geometry": {
+          "type": "repr(QByteArray.hex)", 
+          "repr(QByteArray.hex)": "QtCore.QByteArray('01d9d0cb0002000000000804000000fd00000a0a0000030b000008080000011a00000a060000030700000001000000000780')", 
+          "pretty-print": "                         "
+        }, 
+        "state": {
+          "type": "repr(QByteArray.hex)", 
+          "repr(QByteArray.hex)": "QtCore.QByteArray('000000ff00000000fd0000000100000003000001ff000001b9fc0100000001fc00000000000001ff000001d500fffffffc0200000002fb0000008e0069006f0070005f007200710074005f006100630063006500730073005f0063006f006e00740072006f006c005f0066006b00690065005f005f0049004f00500041006300630065007300730043006f006e00740072006f006c005f005f0031005f005f0041006300630065007300730043006f006e00740072006f006c0043006c00690065006e007400550069010000001e000000670000006701000003fc00000086000001510000012b00fffffffc0100000002fb0000006a007200710074005f0072006f0062006f0074005f007300740065006500720069006e0067005f005f0052006f0062006f0074005300740065006500720069006e0067005f005f0031005f005f0052006f0062006f0074005300740065006500720069006e00670055006901000000000000010c000000e201000003fb0000006a007200710074005f0072006f0062006f0074005f007300740065006500720069006e0067005f005f0052006f0062006f0074005300740065006500720069006e0067005f005f0032005f005f0052006f0062006f0074005300740065006500720069006e006700550069010000010d000000f2000000f201000003000001ff0000000000000004000000040000000800000008fc00000001000000030000000100000036004d0069006e0069006d0069007a006500640044006f0063006b00570069006400670065007400730054006f006f006c0062006100720000000000ffffffff0000000000000000')", 
+          "pretty-print": "                                                                                                        g g               jrqt_robot_steering__RobotSteering__1__RobotSteeringUi          jrqt_robot_steering__RobotSteering__2__RobotSteeringUi                            6MinimizedDockWidgetsToolbar        "
+        }
+      }, 
+      "groups": {
+        "toolbar_areas": {
+          "keys": {
+            "MinimizedDockWidgetsToolbar": {
+              "type": "repr", 
+              "repr": "8"
+            }
+          }, 
+          "groups": {}
+        }
+      }
+    }
+  }
+}

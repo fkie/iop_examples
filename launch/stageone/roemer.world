@@ -31,7 +31,7 @@ window
 # load an environment bitmap
 floorplan
 ( 
-  bitmap "roemer.png"
+  bitmap "../stage_maps/roemer.png"
   size [90 50 1]
   name "roemer"
 )

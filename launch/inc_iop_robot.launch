@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot_ns" default="robot_0"/>
+    <arg name="id_subsystem" default="133"/>
+    <arg name="id_node" value="64"/>
+
+    <param name="utm_zone" value="32" />
+    <param name="utm_band" value="U" />
+
+    <!-- SIMULATED GPS -->
+    <node name="tf2satfix" pkg="iop_cfg_sim_stage_fkie" type="tf2satfix.py" >
+        <param name="capability_group" value="iop_bridge"/>
+        <param name="world_frame" value="world"/>
+        <param name="robot_frame" value="$(arg robot_ns)/base_link"/>
+        <param name="ori_offset" value="0.0" />
+        <param name="hz" value="10.0"/>
+    </node>
+
+    <!-- MAPPING -->
+    <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" respawn="true" >
+        <param name="capability_group" value="mapping" />
+        <!-- Map size / start point -->
+        <param name="map_resolution" value="0.25"/>
+        <param name="map_size" value="400"/>
+        <param name="map_start_x" value="0.5"/>
+        <param name="map_start_y" value="0.5" />
+        <param name="map_multi_res_levels" value="3" />
+        <!-- <param name="map_update_distance_thresh" value="0.25" /> -->
+        <!-- <param name="map_update_angle_thresh" value="0.25" /> -->
+
+        <!-- TFs -->
+        <param name="use_tf_scan_transformation" value="true"/>
+        <param name="base_frame" value="$(arg robot_ns)/base_link" />
+        <param name="map_frame" value="$(arg robot_ns)/map" />
+        <param name="odom_frame" value="$(arg robot_ns)/odom" />
+        <param name="tf_map_scanmatch_transform_frame_name" value="$(arg robot_ns)/scanmatcher_frame" />
+        <param name="pub_map_odom_transform" value="true"/>
+        <param name="use_tf_pose_start_estimate" value="false"/>
+        <param name="advertise_map_service" value="false"/>
+        <param name="scan_subscriber_queue_size" value="5"/>
+        <param name="scan_topic" value="base_scan"/>
+    </node>
+    
+    <node name="throttle_laser_front" pkg="topic_tools" type="throttle" args="messages laser_front 1">
+        <param name="capability_group" value="iop_bridge"/>
+    </node>
+
+    <!-- IOP-ROS-BRIDGE -->
+    <param name="name_subsystem" value="$(arg robot_ns)"/>
+
+    <node name="iop_platform_manager" pkg="iop_component_fkie" type="iop_component">
+        <param name="capability_group" value="iop_bridge"/>
+        <param name="name_node" value="platform"/>
+        <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).15"/>
+        <rosparam param="services">
+            [
+            iop_transport_fkie: "Transport",
+            iop_events_fkie: "Events",
+            iop_events_fkie: "EventsClient",
+            iop_accesscontrol_fkie: "AccessControl",
+            iop_discovery_fkie: "Discovery",
+            iop_discovery_fkie: "DiscoveryClient",
+            iop_management_fkie: "Management",
+            iop_liveness_fkie: "Liveness",
+            iop_digital_resource_discovery_fkie: "DigitalResourceDiscovery",
+            iop_health_monitor_fkie: "HealthMonitor",
+            iop_platform_mode_fkie: "PlatformMode",
+            iop_platform_state_fkie: "PlatformState",
+            iop_primitive_driver_fkie: "PrimitiveDriver",
+            iop_local_pose_sensor_fkie: "LocalPoseSensor",
+            iop_range_sensor_fkie: "RangeSensor",
+            iop_global_pose_sensor_fkie: "GlobalPoseSensor",
+            ]
+        </rosparam>
+        <param name="enable_ros_interface" value="true"/>
+        <!--
+            0: Reserved
+            1: System Identification
+            2: Subsystem Identification
+            3: Node Identification
+            4: Component Identification
+            5: 255: Reserved
+            -->
+        <param name="system_id" value="2"/>
+        <!-- 
+            00000: Reserved
+            10001: VEHICLE
+            20001: OCU
+            30001: OTHER_SUBSYSTEM
+            40001: NODE
+            50001: PAYLOAD
+            60001: COMPONENT
+            -->
+        <param name="system_type" value="10001"/>
+
+        <!-- PlatformMode:
+            0: Standard_Operating
+            1: Training
+            2: Maintenance
+            -->
+        <param name="platform_mode" value="0"/>
+        <!-- PlatformState:
+            0: Initializing
+            1: Active
+            2: Exiting
+            -->
+        <param name="mode_status" value="1"/>
+
+        <!-- Primitive Driver Parameter-->
+        <param name="max_linear_x" value="3.0"/>
+        <param name="max_angular_z" value="1.5"/>
+        <param name="use_stamped" value="false" />
+        <remap from="odom" to="$(arg robot_ns)/odom"/>
+        <remap from="cmd_vel" to="cmd_vel"/>
+
+        <!-- Local Pose Parameter-->
+        <param name="tf_hz" value="10.0"/>
+        <param name="tf_frame_odom" value="$(arg robot_ns)/odom" />
+        <param name="tf_frame_robot" value="$(arg robot_ns)/base_link" />
+        <!-- Global Pose Parameter-->
+        <remap from="fix" to="gps_info"/>
+
+        <!-- Range Sensor Parameter-->
+        <!-- tf_frame_robot is used to determine the vehicle's coordinates for the range sensor.
+                If the transformation is not possible only native laser data will be send. -->
+        <!-- <param name="tf_frame_robot" value="base_link"/>-->
+        <!-- defines the laser sensors. It is a dictinary with frame_id as key and topic as value -->
+        <rosparam param="sensors">[base_scan]</rosparam>
+    </node>
+
+    <node name="iop_costmap2d" pkg="iop_component_fkie" type="iop_component">
+        <param name="capability_group" value="iop_bridge"/>
+        <rosparam param="services">
+            [
+            iop_costmap2d_fkie: "CostMap2D",
+            iop_accesscontrol_fkie: "AccessControl",
+            iop_discovery_fkie: "DiscoveryClient",
+            iop_events_fkie: "Events",
+            iop_events_fkie: "EventsClient",
+            iop_transport_fkie: "Transport",
+            ]
+        </rosparam>
+        <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).71"/>
+        <param name="enable_ros_interface" value="false"/>
+        <param name="register_own_services" value="true" />
+        <param name="offset_yaw" value="0" />
+        <!-- <param name="offset_yaw" value="1.5707" /> -->
+        <param name="map_max_edge_size" value="200" />
+        <param name="frame_odom" value="$(arg robot_ns)/odom" />
+        <param name="frame_robot" value="$(arg robot_ns)/base_link" />
+    </node>
+
+</launch>

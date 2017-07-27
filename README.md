@@ -32,27 +32,34 @@ catkin build
 
 ## Launch the example
 
-There are two example launch files in the **iop_cfg_sim_stage_fkie** package:
+There are example launch files for robots and OCU in the **iop_cfg_sim_stage_fkie** package:
 
-- **iop_robot.launch**
-contains the simulation configuration and also the ROS/IOP-Bridge components to make the simulated robot IOP compliant. It contains also the **JAUS Node Manager**, so you do not need to start it separately!
+- **multirobot_example.launch**
+contains the simulation configuration and also the ROS/IOP-Bridge components to make two simulated robots IOP compliant. It contains also the **JAUS Node Manager**, so you do not need to start it separately!
 >requires installed multimaster_fkie
 
-- **iop_control.launch**
-contains the RQT and RVIZ gui with corresponding ROS/IOP-Bridge components. So you can control the simulated robot by IOP commands.
+- **control_multirobot_example.launch**
+contains the RQT and RVIZ gui with corresponding ROS/IOP-Bridge components for two robots. In this configuration you can control two simulated robots simultaneously. Or control one and see the sensor data of the another one.
+
+- **control_example.launch**
+contains the RQT and RVIZ gui with corresponding ROS/IOP-Bridge components. In this configuration you control only one simulated robot at the same time. The control is witched between simulated robots.
 
 Start the launch files in two different terminals:
 
 ```
-roslaunch iop_cfg_sim_stage_fkie iop_robot.launch
+roslaunch iop_cfg_sim_stage_fkie multirobot_example.launch
 
-roslaunch iop_cfg_sim_stage_fkie iop_control.launch
+roslaunch iop_cfg_sim_stage_fkie control_multirobot_example.launch
 ```
 
 ## Control the robot
 
-You will not see any sensor data in RViz after you start the launch files. First you have to get access to the robot. Therefor click on the **bobrob** button in the "AccessControl" _rqt_ plugin. Now you should be able to see the position and laser data in RViz. You can also control the robot in the "Robot Steering" rqt-plugin.
-Alternatively, you can control the robot by keyboard using the keys **i**, **j**, **k**, **l**. You have to select the terminal where you launched the iop_control.launch to grab the keys. Or start a new terminal and type:
+You will not see any sensor data in RViz after you start the launch files. First you have to get access to the robot. Therefor click on the **robot_0** or **robot_1** button in the "AccessControl" _rqt_ plugin. Now you should be able to see the position and laser data in RViz. You can also control the robot in the "Robot Steering" rqt-plugin.
+Alternatively, you can control the robot by keyboard using the keys **i**, **j**, **k**, **l**. You have to start a new terminal and type (if you launched control_example.launch):
 ```
-rosrun teleop_twist_keyboard teleop_twist_keyboard.py  __ns:=/control
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py  __ns:=/ocu
+```
+If you launched **control_multirobot_example.launch** you need to add robot name to the namespace, e.g.:
+```
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py  __ns:=/ocu/robot_0
 ```
