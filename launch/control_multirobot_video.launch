@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="ns" default="ocu"/>
+    <arg name="id_subsystem" default="150"/>
+
+    <include file="$(find iop_cfg_sim_stage_fkie)/launch/control_multirobot_example.launch">
+        <arg name="ns" value="$(arg ns)" />
+        <arg name="id_subsystem" value="$(arg id_subsystem)" />
+        <arg name="load_gui" value="false" />
+    </include>
+
+    <node name="rqt_ocu" pkg="rqt_gui" type="rqt_gui"
+          ns="$(arg ns)" args=" --force-discover --perspective-file $(find iop_cfg_sim_stage_fkie)/launch/iop_multi_video.perspective">
+        <param name="capability_group" value="gui"/>
+    </node>
+    <node name="rviz_ocu" pkg="rviz" type="rviz" ns="$(arg ns)" args="-d $(find iop_cfg_sim_stage_fkie)/launch/iop_multi_video.rviz">
+        <param name="capability_group" value="gui"/>
+    </node>
+
+    <group ns="$(arg ns)/robot_0">
+        <node name="iop_client_digital_resource" pkg="iop_component_fkie" type="iop_component">
+            <param name="capability_group" value="iop_bridge"/>
+            <rosparam param="services">
+              [
+                iop_client_digital_resource_fkie : "DigitalResourceClient",
+                iop_digital_resource_discovery_fkie : "DigitalResourceDiscoveryClient",
+                iop_discovery_fkie: "DiscoveryClient",
+                iop_events_fkie: "EventsClient",
+                iop_transport_fkie: "Transport",
+              ]
+            </rosparam>
+            <param name="iop_address" value="$(arg id_subsystem).64.201"/>
+            <param name="register_own_services" value="false" />
+            <param name="enable_ros_interface" value="true" />
+        </node>
+    </group>
+
+    <group ns="$(arg ns)/robot_1">
+        <node name="iop_client_digital_resource" pkg="iop_component_fkie" type="iop_component">
+            <param name="capability_group" value="iop_bridge"/>
+            <rosparam param="services">
+              [
+                iop_client_digital_resource_fkie : "DigitalResourceClient",
+                iop_digital_resource_discovery_fkie : "DigitalResourceDiscoveryClient",
+                iop_discovery_fkie: "DiscoveryClient",
+                iop_events_fkie: "EventsClient",
+                iop_transport_fkie: "Transport",
+              ]
+            </rosparam>
+            <param name="iop_address" value="$(arg id_subsystem).65.201"/>
+            <param name="register_own_services" value="false" />
+            <param name="enable_ros_interface" value="true" />
+        </node>
+    </group>
+
+</launch>

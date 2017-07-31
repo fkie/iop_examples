@@ -1,0 +1,21 @@
+<launch>
+    <arg name="id_subsystem1" default="133"/>
+    <arg name="id_subsystem2" default="134"/>
+    <arg name="robot_ns1" value="robot_0"/>
+    <arg name="robot_ns2" value="robot_1"/>
+
+    <include file="$(find iop_cfg_sim_stage_fkie)/launch/multirobot_example.launch">
+      <arg name="id_subsystem1" value="$(arg id_subsystem1)" />
+      <arg name="id_subsystem2" value="$(arg id_subsystem2)" />
+      <arg name="robot_ns1" value="$(arg robot_ns1)" />
+      <arg name="robot_ns2" value="$(arg robot_ns2)" />
+    </include>
+
+    <include file="$(find iop_cfg_sim_stage_fkie)/launch/inc_video.launch" ns="$(arg robot_ns1)">
+      <arg name="id_subsystem" value="$(arg id_subsystem1)" />
+    </include>
+    <include file="$(find iop_cfg_sim_stage_fkie)/launch/inc_video.launch" ns="$(arg robot_ns2)">
+      <arg name="id_subsystem" value="$(arg id_subsystem2)" />
+    </include>
+
+</launch>

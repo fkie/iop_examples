@@ -1,0 +1,29 @@
+<launch>
+    <arg name="id_subsystem" default="133"/>
+
+    <!-- VIDEO url publisher -->
+    <node name="iop_digital_video" pkg="iop_component_fkie" type="iop_component">
+        <param name="capability_group" value="iop_bridge"/>
+        <rosparam param="services">
+          [
+            iop_digital_resource_discovery_fkie : "DigitalResourceDiscoveryClient",
+            iop_digital_video_fkie: "DigitalVideo",
+            iop_digital_video_fkie: "VisualSensor",
+            iop_discovery_fkie: "DiscoveryClient",
+            iop_accesscontrol_fkie: "AccessControl",
+            iop_events_fkie: "Events",
+            iop_events_fkie: "EventsClient",
+            iop_transport_fkie: "Transport",
+          ]
+        </rosparam>
+        <param name="iop_address" type="str" value="$(arg id_subsystem).64.81"/>
+        <param name="register_own_services" value="true" />
+
+        <!-- list with video streams. Format: "ID/Type of source": "URL".
+          Example for RTSP stream: "0/rtsp" : "rtsp://URL" -->
+        <rosparam param="video_endpoints" subst_value="true">
+          "0/https": "https://youtu.be/h4rhdZ_MXf8?t=17",
+          "1/mpeg2ts": "$(find iop_cfg_sim_stage_fkie)/resources/example.mp4"
+        </rosparam>
+    </node>
+</launch>

@@ -2,8 +2,8 @@
 <launch>
     <arg name="id_subsystem1" default="133"/>
     <arg name="id_subsystem2" default="134"/>
-    <arg name="robot_ns1" value="robot_0"/>
-    <arg name="robot_ns2" value="robot_1"/>
+    <arg name="robot_ns1" default="robot_0"/>
+    <arg name="robot_ns2" default="robot_1"/>
 
     <param name="use_sim_time" value="true"/>
 

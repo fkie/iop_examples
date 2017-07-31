@@ -63,3 +63,14 @@ If you launched **control_multirobot_example.launch** you need to add robot name
 ```
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py  __ns:=/ocu/robot_0
 ```
+
+
+## Examples with video
+
+The package contains also launch files with video example:
+
+- **multirobot_video.launch**
+adds video suport to the ***multirobot_example.launch***
+
+- **control_multirobot_video.launch**
+adds video suport to the ***control_multirobot_example.launch***
