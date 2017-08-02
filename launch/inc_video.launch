@@ -8,7 +8,7 @@
           [
             iop_digital_resource_discovery_fkie : "DigitalResourceDiscoveryClient",
             iop_digital_video_fkie: "DigitalVideo",
-            iop_digital_video_fkie: "VisualSensor",
+            iop_visual_sensor_fkie: "VisualSensor",
             iop_discovery_fkie: "DiscoveryClient",
             iop_accesscontrol_fkie: "AccessControl",
             iop_events_fkie: "Events",
