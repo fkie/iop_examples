@@ -128,11 +128,12 @@
         <rosparam param="sensors">[base_scan]</rosparam>
     </node>
 
-    <node name="iop_costmap2d" pkg="iop_component_fkie" type="iop_component">
+    <node name="iop_costmap2d" pkg="iop_component_fkie" type="iop_component"> 
         <param name="capability_group" value="iop_bridge"/>
         <rosparam param="services">
             [
             iop_costmap2d_fkie: "CostMap2D",
+            iop_liveness_fkie: "Liveness",
             iop_accesscontrol_fkie: "AccessControl",
             iop_discovery_fkie: "DiscoveryClient",
             iop_events_fkie: "Events",

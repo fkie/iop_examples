@@ -33,6 +33,21 @@
             <param name="register_own_services" value="false" />
             <param name="enable_ros_interface" value="true" />
         </node>
+        <node name="iop_client_digital_video" pkg="iop_component_fkie" type="iop_component">
+            <param name="capability_group" value="iop_bridge"/>
+            <rosparam param="services">
+              [
+                iop_client_digital_video_fkie : "DigitalVideoClient",
+                iop_accesscontrol_fkie: "AccessControlClient",
+                iop_discovery_fkie: "DiscoveryClient",
+                iop_events_fkie: "EventsClient",
+                iop_transport_fkie: "Transport",
+              ]
+            </rosparam>
+            <param name="iop_address" value="$(arg id_subsystem).64.202"/>
+            <param name="register_own_services" value="false" />
+            <param name="enable_ros_interface" value="true" />
+        </node>
     </group>
 
     <group ns="$(arg ns)/robot_1">
@@ -48,6 +63,21 @@
               ]
             </rosparam>
             <param name="iop_address" value="$(arg id_subsystem).65.201"/>
+            <param name="register_own_services" value="false" />
+            <param name="enable_ros_interface" value="true" />
+        </node>
+        <node name="iop_client_digital_video" pkg="iop_component_fkie" type="iop_component">
+            <param name="capability_group" value="iop_bridge"/>
+            <rosparam param="services">
+              [
+                iop_client_digital_video_fkie : "DigitalVideoClient",
+                iop_accesscontrol_fkie: "AccessControlClient",
+                iop_discovery_fkie: "DiscoveryClient",
+                iop_events_fkie: "EventsClient",
+                iop_transport_fkie: "Transport",
+              ]
+            </rosparam>
+            <param name="iop_address" value="$(arg id_subsystem).64.202"/>
             <param name="register_own_services" value="false" />
             <param name="enable_ros_interface" value="true" />
         </node>

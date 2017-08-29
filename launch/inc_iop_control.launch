@@ -32,7 +32,6 @@
             iop_client_costmap2d_fkie: "CostMap2DClient",
           ]
         </rosparam>
-        <param name="register_own_services" value="false"/>
         <param name="register_own_services" value="false" />
         <param name="enable_ros_interface" value="true"/>
         <!-- Primitive Driver Parameter -->

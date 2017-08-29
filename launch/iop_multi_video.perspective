@@ -147,13 +147,13 @@
             }, 
             "plugin": {
               "keys": {
-                "service_update_endpoints": {
-                  "type": "repr", 
-                  "repr": "u'/control/update_endpoints'"
-                }, 
                 "topic_endpoints": {
                   "type": "repr", 
                   "repr": "u'/ocu/robot_0/digital_endpoints'"
+                },
+                "topic_resource_id": {
+                  "type": "repr", 
+                  "repr": "u'/ocu/robot_0/dv_resource_id'"
                 }
               }, 
               "groups": {}
@@ -185,6 +185,10 @@
                 "topic_endpoints": {
                   "type": "repr", 
                   "repr": "u'/ocu/robot_1/digital_endpoints'"
+                },
+                "topic_resource_id": {
+                  "type": "repr", 
+                  "repr": "u'/ocu/robot_1/dv_resource_id'"
                 }
               }, 
               "groups": {}
