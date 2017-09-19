@@ -24,9 +24,15 @@
           Example for RTSP stream: "0/rtsp" : "rtsp://URL" -->
         <rosparam param="video_endpoints" subst_value="true">
           [
-            "0/https": "https://youtu.be/h4rhdZ_MXf8?t=17",
-            "1/mpeg2ts": "$(find iop_cfg_sim_stage_fkie)/resources/example.mp4"
+            "1/https": "https://youtu.be/h4rhdZ_MXf8?t=17",
+            "2/mpeg2ts": "$(find iop_cfg_sim_stage_fkie)/resources/example.mp4"
           ]
         </rosparam>
+        <rosparam param="video_names" subst_value="true">
+          [
+            "1" : "youtu.be",
+            "2" : "local"
+          ]
+        </rosparam>        
     </node>
 </launch>

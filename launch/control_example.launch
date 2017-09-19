@@ -16,7 +16,6 @@
 
   <include file="$(find iop_cfg_sim_stage_fkie)/launch/inc_iop_control.launch" ns="$(arg ns)" >
        <arg name="ns" value="$(arg ns)" />
-       <arg name="id_subsystem" value="$(arg id_subsystem)" />
   </include>
 
 </launch>

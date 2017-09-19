@@ -147,13 +147,21 @@
             }, 
             "plugin": {
               "keys": {
-                "topic_endpoints": {
-                  "type": "repr", 
-                  "repr": "u'/ocu/robot_0/digital_endpoints'"
-                },
                 "topic_resource_id": {
                   "type": "repr", 
                   "repr": "u'/ocu/robot_0/dv_resource_id'"
+                }, 
+                "topic_names": {
+                  "type": "repr", 
+                  "repr": "u'/ocu/robot_0/visual_sensor_names'"
+                }, 
+                "topic_endpoints": {
+                  "type": "repr", 
+                  "repr": "u'/ocu/robot_0/digital_endpoints'"
+                }, 
+                "rtps_over_tcp": {
+                  "type": "repr", 
+                  "repr": "u''"
                 }
               }, 
               "groups": {}
@@ -182,13 +190,21 @@
             }, 
             "plugin": {
               "keys": {
-                "topic_endpoints": {
-                  "type": "repr", 
-                  "repr": "u'/ocu/robot_1/digital_endpoints'"
-                },
                 "topic_resource_id": {
                   "type": "repr", 
                   "repr": "u'/ocu/robot_1/dv_resource_id'"
+                }, 
+                "topic_names": {
+                  "type": "repr", 
+                  "repr": "u'/ocu/robot_1/visual_sensor_names'"
+                }, 
+                "topic_endpoints": {
+                  "type": "repr", 
+                  "repr": "u'/ocu/robot_1/digital_endpoints'"
+                }, 
+                "rtps_over_tcp": {
+                  "type": "repr", 
+                  "repr": "u''"
                 }
               }, 
               "groups": {}
@@ -291,8 +307,8 @@
       "keys": {
         "geometry": {
           "type": "repr(QByteArray.hex)", 
-          "repr(QByteArray.hex)": "QtCore.QByteArray('01d9d0cb0002000000000a1f0000007300000d060000038700000a230000009000000d020000038300000001000000000780')", 
-          "pretty-print": "       s     #           "
+          "repr(QByteArray.hex)": "QtCore.QByteArray('01d9d0cb0002000000000408000000db000006ef000003ef0000040c000000f8000006eb000003eb00000000000000000780')", 
+          "pretty-print": "                         "
         }, 
         "state": {
           "type": "repr(QByteArray.hex)", 
