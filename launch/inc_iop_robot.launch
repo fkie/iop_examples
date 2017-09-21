@@ -7,6 +7,10 @@
     <param name="utm_zone" value="32" />
     <param name="utm_band" value="U" />
 
+    <env name="ROSCONSOLE_CONFIG_FILE" value="$(find iop_cfg_sim_stage_fkie)/launch/rosconsole.config"/>
+    <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
+
+
     <!-- SIMULATED GPS -->
     <node name="tf2satfix" pkg="iop_cfg_sim_stage_fkie" type="tf2satfix.py" >
         <param name="capability_group" value="iop_bridge"/>
@@ -72,7 +76,7 @@
             iop_global_pose_sensor_fkie: "GlobalPoseSensor",
             ]
         </rosparam>
-        <param name="enable_ros_interface" value="true"/>
+        <param name="enable_ros_interface" value="false"/>
         <!--
             0: Reserved
             1: System Identification
@@ -149,6 +153,27 @@
         <param name="map_max_edge_size" value="200" />
         <param name="frame_odom" value="$(arg robot_ns)/odom" />
         <param name="frame_robot" value="$(arg robot_ns)/base_link" />
+    </node>
+
+    <node name="iop_global_waypoint_driver" pkg="iop_component_fkie" type="iop_component">
+        <param name="capability_group" value="iop_bridge"/>
+        <param name="name_node" value="platform"/>
+        <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).75"/>
+        <rosparam param="services">
+            [
+            iop_transport_fkie: "Transport",
+            iop_events_fkie: "Events",
+            iop_events_fkie: "EventsClient",
+            iop_accesscontrol_fkie: "AccessControl",
+            iop_discovery_fkie: "Discovery",
+            iop_discovery_fkie: "DiscoveryClient",
+            iop_management_fkie: "Management",
+            iop_liveness_fkie: "Liveness",
+            iop_global_waypoint_driver_fkie: "GlobalWaypointDriver",
+            ]
+        </rosparam>
+        <param name="enable_ros_interface" value="false"/>
+        <remap from="cmd_global_waypoint" to="trucker_path_in"/>
     </node>
 
 </launch>

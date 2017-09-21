@@ -5,7 +5,8 @@
   <arg name="only_monitor" default="false"/>
   <arg name="client_suffix" default=""/>
   <arg name="subsystem_restricted" default="65535" />
-
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find iop_cfg_sim_stage_fkie)/launch/rosconsole.config"/>
+  <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
 <!--
     <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py">
       <param name="capability_group" value="control"/>
@@ -33,6 +34,7 @@
           ]
         </rosparam>
         <param name="register_own_services" value="false" />
+        <param name="use_queries" value="true" />
         <param name="enable_ros_interface" value="true"/>
         <!-- Primitive Driver Parameter -->
         <param name="use_stamped" value="false" />
