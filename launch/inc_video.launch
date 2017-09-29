@@ -28,7 +28,7 @@
             "2/mpeg2ts": "$(find iop_cfg_sim_stage_fkie)/resources/example.mp4"
           ]
         </rosparam>
-        <rosparam param="video_names" subst_value="true">
+        <rosparam param="sensor_names" subst_value="true">
           [
             "1" : "youtu.be",
             "2" : "local"

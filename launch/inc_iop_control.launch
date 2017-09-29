@@ -34,7 +34,7 @@
           ]
         </rosparam>
         <param name="register_own_services" value="false" />
-        <param name="use_queries" value="true" />
+        <param name="use_queries" value="false" />
         <param name="enable_ros_interface" value="true"/>
         <!-- Primitive Driver Parameter -->
         <param name="use_stamped" value="false" />
