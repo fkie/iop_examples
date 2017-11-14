@@ -79,7 +79,7 @@
                 iop_transport_fkie: "Transport",
               ]
             </rosparam>
-            <param name="iop_address" value="$(arg id_subsystem).64.202"/>
+            <param name="iop_address" value="$(arg id_subsystem).65.202"/>
             <param name="register_own_services" value="false" />
             <param name="enable_ros_interface" value="false" />
         </node>
