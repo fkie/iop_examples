@@ -19,15 +19,20 @@
   <run_depend>iop_client_digital_resource_fkie</run_depend>
   <run_depend>iop_client_digital_video_fkie</run_depend>
   <run_depend>iop_client_global_pose_sensor_fkie</run_depend>
+  <run_depend>iop_client_global_waypoint_driver_fkie</run_depend>
+  <run_depend>iop_client_global_waypoint_list_driver_fkie</run_depend>
   <run_depend>iop_client_local_pose_sensor_fkie</run_depend>
   <run_depend>iop_client_range_sensor_fkie</run_depend>
+  <run_depend>iop_client_path_reporter_fkie</run_depend>
   <run_depend>iop_client_primitive_driver_fkie</run_depend>
 
   <run_depend>iop_costmap2d_fkie</run_depend>
   <run_depend>iop_global_pose_sensor_fkie</run_depend>
   <run_depend>iop_global_waypoint_driver_fkie</run_depend>
+  <run_depend>iop_global_waypoint_list_driver_fkie</run_depend>
   <run_depend>iop_liveness_fkie</run_depend>
   <run_depend>iop_local_pose_sensor_fkie</run_depend>
+  <run_depend>iop_path_reporter_fkie</run_depend>
   <run_depend>iop_platform_manager_fkie</run_depend>
   <run_depend>iop_primitive_driver_fkie</run_depend>
   <run_depend>iop_range_sensor_fkie</run_depend>
