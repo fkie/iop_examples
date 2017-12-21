@@ -74,75 +74,54 @@
             iop_local_pose_sensor_fkie: "LocalPoseSensor",
             iop_range_sensor_fkie: "RangeSensor",
             iop_global_pose_sensor_fkie: "GlobalPoseSensor",
-            <!-- iop_pantilt_joint_position_driver_fkie: "PanTiltJointPositionSensor", -->
-            <!-- iop_pantilt_joint_position_driver_fkie: "PanTiltJointPositionDriver", -->
-            <!-- iop_pantilt_joint_position_driver_fkie: "PanTiltMotionProfileService", -->
-            <!-- iop_pantilt_joint_position_driver_fkie: "PanTiltSpecificationService", -->
+            iop_global_waypoint_driver_fkie: "GlobalWaypointDriver",
+            iop_global_waypoint_list_driver_fkie: "GlobalWaypointListDriver",
+            iop_list_manager_fkie: "ListManager",
             ]
         </rosparam>
-        <param name="enable_ros_interface" value="false"/>
-        <!--
-            0: Reserved
-            1: System Identification
-            2: Subsystem Identification
-            3: Node Identification
-            4: Component Identification
-            5: 255: Reserved
-            -->
-        <param name="system_id" value="2"/>
-        <!-- 
-            00000: Reserved
-            10001: VEHICLE
-            20001: OCU
-            30001: OTHER_SUBSYSTEM
-            40001: NODE
-            50001: PAYLOAD
-            60001: COMPONENT
-            -->
-        <param name="system_type" value="10001"/>
+        <rosparam subst_value="true">
+            Events:
+                # minutes
+                events_timeout: 1
+            AccessControl:
+                # seconds
+                access_timeout: 10
+            Discovery:
+                # 2: Subsystem Identification, 3: Node Identification, 4: Component Identification
+                system_id: 2
+                # 10001: VEHICLE, 20001: OCU, 30001: OTHER_SUBSYSTEM, 40001: NODE, 50001: PAYLOAD, 60001: COMPONENT
+                system_type: 10001
+            DiscoveryClient:
+                register_own_services: true
+                enable_ros_interface: false
+                force_component_update_after: 300
+            LocalPoseSensor:
+                tf_hz: 10.0
+            PlatformMode:
+                # 0: Standard_Operating, 1: Training, 2: Maintenance
+                platform_mode: 0
+            PlatformState:
+                # 0: Initializing, 1: Active, 2: Exiting
+                mode_status: 1
+            PrimitiveDriver:
+                max_linear_x: 3.0
+                max_angular_z: -1.5
+                use_stamped: false
+            RangeSensor:
+                range_sensors:
+                - base_scan
+        </rosparam>
 
-        <!-- PlatformMode:
-            0: Standard_Operating
-            1: Training
-            2: Maintenance
-            -->
-        <param name="platform_mode" value="0"/>
-        <!-- PlatformState:
-            0: Initializing
-            1: Active
-            2: Exiting
-            -->
-        <param name="mode_status" value="1"/>
-
-        <param name="events_timeout" value="30" />
-        <param name="events_timeout" value="60" />
         <!-- Primitive Driver Parameter-->
-        <param name="max_linear_x" value="3.0"/>
-        <param name="max_angular_z" value="-1.5"/>
-        <param name="use_stamped" value="false" />
         <remap from="odom" to="$(arg robot_ns)/odom"/>
         <remap from="cmd_vel" to="cmd_vel"/>
 
-        <!-- Local Pose Parameter-->
-        <param name="tf_hz" value="10.0"/>
+        <!-- Tf same for LocalPoseSensor , GlobalPoseSensor, RangeSensor
+          These parameter can also be defined for each service separately. -->
         <param name="tf_frame_odom" value="$(arg robot_ns)/odom" />
         <param name="tf_frame_robot" value="$(arg robot_ns)/base_link" />
         <!-- Global Pose Parameter-->
         <remap from="fix" to="gps_info"/>
-
-        <!-- Range Sensor Parameter-->
-        <!-- tf_frame_robot is used to determine the vehicle's coordinates for the range sensor.
-                If the transformation is not possible only native laser data will be send. -->
-        <!-- <param name="tf_frame_robot" value="base_link"/>-->
-        <!-- defines the laser sensors. It is a dictinary with frame_id as key and topic as value -->
-        <rosparam param="sensors">[base_scan]</rosparam>
-
-        <!-- the position of the pantilt on the robot [x y z roll pitch yaw] -->
-        <param name="origin" type="str" value="0 0 0 0 0 0" />
-        <!-- the ROS name of the first joint and movement specifications [name (optional: minValue maxValue maxSpeed)] -->
-        <param name="joint1" type="str" value="joint_name -3.14 3.14 1.57" />
-        <!-- the ROS name of the second joint and movement specifications [name (optional: minValue maxValue maxSpeed)] -->
-        <param name="joint2" type="str" value="joint_name -3.14 3.14 1.57" />
     </node>
 
     <node name="iop_costmap2d" pkg="iop_component_fkie" type="iop_component"> 
@@ -164,29 +143,7 @@
         <param name="offset_yaw" value="0" />
         <!-- <param name="offset_yaw" value="1.5707" /> -->
         <param name="map_max_edge_size" value="200" />
-        <param name="frame_odom" value="$(arg robot_ns)/odom" />
-        <param name="frame_robot" value="$(arg robot_ns)/base_link" />
+        <param name="tf_frame_odom" value="$(arg robot_ns)/odom" />
+        <param name="tf_frame_robot" value="$(arg robot_ns)/base_link" />
     </node>
-
-    <!-- <node name="iop_global_waypoint_driver" pkg="iop_component_fkie" type="iop_component"> -->
-        <!-- <param name="capability_group" value="iop_bridge"/> -->
-        <!-- <param name="name_node" value="platform"/> -->
-        <!-- <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).75"/> -->
-        <!-- <rosparam param="services"> -->
-            <!-- [ -->
-            <!-- iop_transport_fkie: "Transport", -->
-            <!-- iop_events_fkie: "Events", -->
-            <!-- iop_events_fkie: "EventsClient", -->
-            <!-- iop_accesscontrol_fkie: "AccessControl", -->
-            <!-- iop_discovery_fkie: "Discovery", -->
-            <!-- iop_discovery_fkie: "DiscoveryClient", -->
-            <!-- iop_management_fkie: "Management", -->
-            <!-- iop_liveness_fkie: "Liveness", -->
-            <!-- iop_global_waypoint_driver_fkie: "GlobalWaypointDriver", -->
-            <!-- ] -->
-        <!-- </rosparam> -->
-        <!-- <param name="enable_ros_interface" value="false"/> -->
-        <!-- <remap from="cmd_global_waypoint" to="trucker_path_in"/> -->
-    <!-- </node> -->
-
 </launch>

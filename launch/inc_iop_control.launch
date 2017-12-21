@@ -31,25 +31,29 @@
             iop_client_global_pose_sensor_fkie: "GlobalPoseSensorClient",
             iop_client_range_sensor_fkie: "RangeSensorClient",
             iop_client_costmap2d_fkie: "CostMap2DClient",
+            iop_list_manager_fkie: "ListManagerClient",
+            iop_client_global_waypoint_list_driver_fkie: "GlobalWaypointListDriverClient",
+            iop_client_global_waypoint_driver_fkie: "GlobalWaypointDriverClient",
           ]
         </rosparam>
-        <param name="register_own_services" value="false" />
-        <param name="use_queries" value="false" />
-        <param name="enable_ros_interface" value="true"/>
+        <rosparam subst_value="true">
+            EventsClient:
+                use_queries: false
+            DiscoveryClient:
+                register_own_services: false
+                enable_ros_interface: true
+                force_component_update_after: 300
+            PrimitiveDriverClient:
+                use_stamped: false
+        </rosparam>
         <!-- Primitive Driver Parameter -->
-        <param name="use_stamped" value="false" />
         <remap from="joy_cmd_vel" to="cmd_vel"/>
-        <!-- Local Pose Parameter -->
+        <!-- Tf same for LocalPoseSensorClient , GlobalPoseSensorClient, RangeSensorClient and CostMap2DClient.
+                These parameter can also be defined for each service separately. -->
         <param name="tf_frame_odom" value="/$(arg ns)/odom"/>
         <param name="tf_frame_robot" value="/$(arg ns)/base_link"/>
-        <remap from="~odom" to="odom"/>
-        <!-- Local Pose Parameter -->
-        <!-- <remap from="fix" to="fix_new"/> -->
-        <!-- Range Sensor Parameter -->
-        <param name="tf_frame_robot" value="/$(arg ns)/base_link"/>
-        <!-- CostMap2D Parameter -->
-        <param name="tf_frame_odom" value="/$(arg ns)/odom"/>
         <param name="tf_frame_costmap" value="/$(arg ns)/costmap"/>
+        <remap from="~odom" to="odom"/>
     </node>
 
 </launch>
