@@ -31,6 +31,7 @@
             iop_client_global_pose_sensor_fkie: "GlobalPoseSensorClient",
             iop_client_range_sensor_fkie: "RangeSensorClient",
             iop_client_costmap2d_fkie: "CostMap2DClient",
+            iop_client_path_reporter_fkie: "PathReporterClient",
             iop_list_manager_fkie: "ListManagerClient",
             iop_client_global_waypoint_list_driver_fkie: "GlobalWaypointListDriverClient",
             iop_client_global_waypoint_driver_fkie: "GlobalWaypointDriverClient",
