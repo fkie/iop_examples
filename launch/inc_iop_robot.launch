@@ -50,7 +50,7 @@
     </node>
 
     <!-- IOP-ROS-BRIDGE -->
-    <param name="name_subsystem" value="$(arg robot_ns)"/>
+    <param name="name_subsystem" value="robot_$(arg id_subsystem)"/>
 
     <node name="iop_platform_manager" pkg="iop_component_fkie" type="iop_component">
         <param name="capability_group" value="iop_bridge"/>

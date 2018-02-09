@@ -34,6 +34,10 @@ catkin build
 
 There are example launch files for robots and OCU in the **iop_cfg_sim_stage_fkie** package:
 
+- **jaus_node_manager.launch**
+Starts the JAUS Node Manager. The JAUS Node Manager should be started on each host first.
+> You can also start it with ```rosrun jaustoolset jaus_node_manager.sh start```. In this case `Ctrl+C` wouldn't work. Use ```rosrun jaustoolset jaus_node_manager.sh stop``` instead.
+
 - **multirobot_example.launch**
 contains the simulation configuration and also the ROS/IOP-Bridge components to make two simulated robots IOP compliant. It contains also the **JAUS Node Manager**, so you do not need to start it separately!
 >requires installed multimaster_fkie
@@ -41,8 +45,10 @@ contains the simulation configuration and also the ROS/IOP-Bridge components to 
 - **control_multirobot_example.launch**
 contains the RQT and RVIZ gui with corresponding ROS/IOP-Bridge components for two robots. In this configuration you can control two simulated robots simultaneously. Or control one and see the sensor data of the another one.
 
-- **control_example.launch**
-contains the RQT and RVIZ gui with corresponding ROS/IOP-Bridge components. In this configuration you control only one simulated robot at the same time. The control is witched between simulated robots.
+Start JAUS Node Manager first:
+```
+roslaunch iop_cfg_sim_stage_fkie jaus_node_manager.launch
+```
 
 Start the launch files in two different terminals:
 
@@ -51,6 +57,7 @@ roslaunch iop_cfg_sim_stage_fkie multirobot_example.launch
 
 roslaunch iop_cfg_sim_stage_fkie control_multirobot_example.launch
 ```
+>you cal also use the `node_manager`, a graphical user interface from `multimaster_fkie`, to load the launch files and start the nodes.
 
 ## Control the robot
 

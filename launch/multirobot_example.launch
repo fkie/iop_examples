@@ -7,11 +7,6 @@
 
     <param name="use_sim_time" value="true"/>
 
-    <node name="jaus_node_manager" pkg="node_manager_fkie" type="script_runner.py">
-        <param name="script" value="$(find jaustoolset)/JTSNodeManager $(find jaustoolset)/cfg/nm.cfg" />
-        <!-- <param name="stop_script" value="pkg://iop_builder_fkie///jaus_node_manager.sh stop" /> -->
-    </node>
-
     <!-- stage_simulator -->
     <node name="ros_stage_roemer" pkg="stage_ros" type="stageros" args="$(find iop_cfg_sim_stage_fkie)/launch/stagemulti/maze.world">
         <param name="capability_group" value="0simulation" />
