@@ -4,35 +4,37 @@
     <!-- VIDEO url publisher -->
     <node name="iop_digital_video" pkg="iop_component_fkie" type="iop_component">
         <param name="capability_group" value="iop_bridge"/>
+        <param name="iop_address" type="str" value="$(arg id_subsystem).64.81"/>
         <rosparam param="services">
           [
+            iop_discovery_fkie: "DiscoveryClient",
             iop_digital_resource_discovery_fkie : "DigitalResourceDiscoveryClient",
             iop_digital_video_fkie: "DigitalVideo",
             iop_visual_sensor_fkie: "VisualSensor",
-            iop_liveness_fkie: "Liveness",
-            iop_discovery_fkie: "DiscoveryClient",
-            iop_accesscontrol_fkie: "AccessControl",
-            iop_events_fkie: "Events",
-            iop_events_fkie: "EventsClient",
-            iop_transport_fkie: "Transport",
+            iop_liveness_fkie: "Liveness"
           ]
         </rosparam>
-        <param name="iop_address" type="str" value="$(arg id_subsystem).64.81"/>
-        <param name="register_own_services" value="true" />
-
-        <!-- list with video streams. Format: "ID/Type of source": "URL".
-          Example for RTSP stream: "0/rtsp" : "rtsp://URL" -->
-        <rosparam param="video_endpoints" subst_value="true">
-          [
-            "1/https": "https://youtu.be/h4rhdZ_MXf8?t=17",
-            "2/mpeg2ts": "$(find iop_cfg_sim_stage_fkie)/resources/example.mp4"
-          ]
-        </rosparam>
-        <rosparam param="sensor_names" subst_value="true">
-          [
-            "1" : "youtu.be",
-            "2" : "local"
-          ]
-        </rosparam>        
+        <rosparam subst_value="true">
+            Events:
+                events_timeout: 1
+            AccessControl:
+                access_timeout: 10
+            DiscoveryClient:
+                register_own_services: true
+                enable_ros_interface: false
+                force_component_update_after: 300
+            DigitalVideo:
+                # list with video streams. Format: "ID/Type of source": "URL".
+                # Example for RTSP stream: "1/rtsp" : "rtsp://URL"
+                video_endpoints:
+                - "1/https": "https://youtu.be/h4rhdZ_MXf8?t=17"
+                - "2/mpeg2ts": "$(find iop_cfg_sim_stage_fkie)/resources/example.mp4"
+            VisualSensor:
+                capabilities:
+                - "1":
+                    - name: "youtu.be"
+                - "2":
+                    - name: "local"
+        </rosparam>   
     </node>
 </launch>

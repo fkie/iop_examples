@@ -22,11 +22,9 @@
             <param name="capability_group" value="iop_bridge"/>
             <rosparam param="services">
               [
+                iop_discovery_fkie: "DiscoveryClient",
                 iop_client_digital_resource_fkie : "DigitalResourceClient",
                 iop_digital_resource_discovery_fkie : "DigitalResourceDiscoveryClient",
-                iop_discovery_fkie: "DiscoveryClient",
-                iop_events_fkie: "EventsClient",
-                iop_transport_fkie: "Transport",
               ]
             </rosparam>
             <param name="iop_address" value="$(arg id_subsystem).64.201"/>
@@ -37,12 +35,9 @@
             <param name="capability_group" value="iop_bridge"/>
             <rosparam param="services">
               [
+                iop_discovery_fkie: "DiscoveryClient",
                 iop_client_digital_video_fkie : "DigitalVideoClient",
                 iop_client_visual_sensor_fkie : "VisualSensorClient",
-                iop_accesscontrol_fkie: "AccessControlClient",
-                iop_discovery_fkie: "DiscoveryClient",
-                iop_events_fkie: "EventsClient",
-                iop_transport_fkie: "Transport",
               ]
             </rosparam>
             <param name="iop_address" value="$(arg id_subsystem).64.202"/>
@@ -56,11 +51,9 @@
             <param name="capability_group" value="iop_bridge"/>
             <rosparam param="services">
               [
+                iop_discovery_fkie: "DiscoveryClient",
                 iop_client_digital_resource_fkie : "DigitalResourceClient",
                 iop_digital_resource_discovery_fkie : "DigitalResourceDiscoveryClient",
-                iop_discovery_fkie: "DiscoveryClient",
-                iop_events_fkie: "EventsClient",
-                iop_transport_fkie: "Transport",
               ]
             </rosparam>
             <param name="iop_address" value="$(arg id_subsystem).65.201"/>
@@ -71,12 +64,9 @@
             <param name="capability_group" value="iop_bridge"/>
             <rosparam param="services">
               [
+                iop_discovery_fkie: "DiscoveryClient",
                 iop_client_digital_video_fkie : "DigitalVideoClient",
                 iop_client_visual_sensor_fkie : "VisualSensorClient",
-                iop_accesscontrol_fkie: "AccessControlClient",
-                iop_discovery_fkie: "DiscoveryClient",
-                iop_events_fkie: "EventsClient",
-                iop_transport_fkie: "Transport",
               ]
             </rosparam>
             <param name="iop_address" value="$(arg id_subsystem).65.202"/>
