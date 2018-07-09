@@ -31,7 +31,7 @@ from geodesy import utm
 
 __author__ = "Alexander Tiderko (Alexander.Tiderko@fkie.fraunhofer.de)"
 __copyright__ = "Copyright (c) 2012 Alexander Tiderko, Fraunhofer FKIE/CMS"
-__license__ = "BSD"
+__license__ = "proprietary"
 __version__ = "0.1"
 __date__ = "2017-03-10"
 __doc__ = '''
@@ -41,10 +41,9 @@ __doc__ = '''
             ~world_frame
             ~robot_frame
             ~hz
+            ~utm_zone
+            ~utm_band
           '''
-
-
-roslib.load_manifest('iop_cfg_sim_stage_fkie')
 
 
 class TfPose():
