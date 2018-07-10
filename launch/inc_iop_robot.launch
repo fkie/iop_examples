@@ -58,13 +58,8 @@
         <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).15"/>
         <rosparam param="services">
             [
-            iop_transport_fkie: "Transport",
-            iop_events_fkie: "Events",
-            iop_events_fkie: "EventsClient",
-            iop_accesscontrol_fkie: "AccessControl",
             iop_discovery_fkie: "Discovery",
             iop_discovery_fkie: "DiscoveryClient",
-            iop_management_fkie: "Management",
             iop_liveness_fkie: "Liveness",
             iop_digital_resource_discovery_fkie: "DigitalResourceDiscovery",
             iop_health_monitor_fkie: "HealthMonitor",
@@ -77,7 +72,6 @@
             iop_global_waypoint_driver_fkie: "GlobalWaypointDriver",
             iop_global_waypoint_list_driver_fkie: "GlobalWaypointListDriver",
             iop_path_reporter_fkie: "PathReporter",
-            iop_list_manager_fkie: "ListManager",
             ]
         </rosparam>
         <rosparam subst_value="true">

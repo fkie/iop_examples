@@ -3,6 +3,7 @@
   <arg name="ns" default="ocu"/>
   <arg name="iop_address" default="150.64.200"/>
   <arg name="only_monitor" default="false"/>
+  <arg name="publish_world_anchor" default="false"/>
   <arg name="client_suffix" default=""/>
   <arg name="subsystem_restricted" default="65535" />
   <env name="ROSCONSOLE_CONFIG_FILE" value="$(find iop_cfg_sim_stage_fkie)/launch/rosconsole.config"/>
@@ -21,18 +22,13 @@
         <param name="subsystem_restricted" value="$(arg subsystem_restricted)" />
         <rosparam param="services">
           [
-            iop_transport_fkie: "Transport",
-            iop_events_fkie: "EventsClient",
             iop_discovery_fkie: "DiscoveryClient",
-            iop_accesscontrol_fkie: "AccessControlClient",
-            iop_management_fkie: "ManagementClient",
             iop_client_primitive_driver_fkie: "PrimitiveDriverClient",
             iop_client_local_pose_sensor_fkie: "LocalPoseSensorClient",
             iop_client_global_pose_sensor_fkie: "GlobalPoseSensorClient",
             iop_client_range_sensor_fkie: "RangeSensorClient",
             iop_client_costmap2d_fkie: "CostMap2DClient",
             iop_client_path_reporter_fkie: "PathReporterClient",
-            iop_list_manager_fkie: "ListManagerClient",
             iop_client_global_waypoint_list_driver_fkie: "GlobalWaypointListDriverClient",
             iop_client_global_waypoint_driver_fkie: "GlobalWaypointDriverClient",
           ]
@@ -46,6 +42,10 @@
                 force_component_update_after: 300
             PrimitiveDriverClient:
                 use_stamped: false
+            GlobalPoseSensorClient:
+                anchor_easting: 365796
+                anchor_northing: 5624047
+                publish_world_anchor: $(arg publish_world_anchor)
         </rosparam>
         <!-- Primitive Driver Parameter -->
         <remap from="joy_cmd_vel" to="cmd_vel"/>
