@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="turtle" pkg="turtlesim" type="turtlesim_node" respawn="true" />
+
+    <!-- JAUS configuration used by IOP bridge components
+         EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
+    <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
+    
+    <param name="name_subsystem" value="turtle"/>
+    <node name="iop_platform_manager" pkg="iop_component_fkie" type="iop_component">
+        <param name="name_node" value="platform manager"/>
+        <param name="iop_address" value="1.1.15"/>
+        <rosparam param="services">
+            [
+            iop_discovery_fkie: "Discovery",
+            iop_discovery_fkie: "DiscoveryClient",
+            iop_liveness_fkie: "Liveness",
+            iop_health_monitor_fkie: "HealthMonitor",
+            # add PrimitiveDriver to control the turtle
+            iop_primitive_driver_fkie: "PrimitiveDriver",
+            ]
+        </rosparam>
+        <rosparam subst_value="true">
+            Discovery:
+                system_id: 2  # 2: Subsystem Identification, 3: Node Identification, 4: Component Identification
+                system_type: 10001  # 10001: VEHICLE, 20001: OCU, 30001: OTHER_SUBSYSTEM, 40001: NODE, 50001: PAYLOAD, 60001: COMPONENT
+            PrimitiveDriver:
+                max_linear_x: 3.0
+                max_angular_z: -1.5
+                # do not use the stamped twist messages
+                use_stamped: false
+                # added remap to catch commands from the right topic or use 'remap' of launch file
+                topic_pub_cmd_vel: /turtle1/cmd_vel
+        </rosparam>
+    </node>
+ </launch>

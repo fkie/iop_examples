@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="teleop_key" pkg="turtlesim" type="turtle_teleop_key" required="true" launch-prefix="xterm -e">
+      <!-- added this remap to be able to test the configuration on the same computer -->
+      <remap from="/turtle1/cmd_vel" to="/cmd_vel"/>
+    </node>
+
+    <!-- JAUS configuration used by IOP bridge components
+         EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
+    <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
+
+    
+    <!-- Start the rqt and "FKIE IOP/Access Control" plugin 
+    You need get the control. Without control no commands are published to the ROS topics by primitive driver.
+    -->
+    <node name="rqt_ocu" pkg="rqt_gui" type="rqt_gui" args="--force-discover -s iop_rqt_access_control_fkie.iop_rqt_access_control.AccessControlClient"/>
+
+    <node name="iop_ocu_client" pkg="iop_component_fkie" type="iop_component">
+        <param name="iop_address" value="150.64.200"/>
+        <param name="name_node" value="control_client"/>
+        <rosparam param="services">
+          [
+            iop_discovery_fkie: "DiscoveryClient",
+            # added client for primitive driver and also his subservices
+            iop_client_primitive_driver_fkie: "PrimitiveDriverClient",
+          ]
+        </rosparam>
+        <rosparam subst_value="true">
+            EventsClient:
+                use_queries: false
+            DiscoveryClient:
+                register_own_services: false
+                enable_ros_interface: true
+            # configuration for primitive client
+            # see https://github.com/fkie/iop_jaus_mobility_clients#iop_client_primitive_driver_fkie-primitivedriverclient
+            PrimitiveDriverClient:
+                # do not use the stamped twist messages
+                use_stamped: false
+                # new parameter added to handle velocities greater than 1.0
+                # you should update the https://github.com/fkie/iop_jaus_mobility_clients repository
+                max_linear: 2
+                max_angular: 2
+                # added remap to catch commands from the right topic or use 'remap' of launch file
+                topic_sub_joy_cmd_vel: cmd_vel
+        </rosparam>
+    </node>
+
+</launch>

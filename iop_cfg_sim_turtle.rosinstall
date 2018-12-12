@@ -1,0 +1,3 @@
+- git:
+    local-name: iop_cfg_sim_turtle_fkie
+    uri: https://github.com/fkie/iop_cfg_sim_turtle_fkie
