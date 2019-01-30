@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<package>
+  <name>fkie_iop_cfg_sim_stage</name>
+  <version>1.1.0</version>
+  <description>
+    The configuration for simulation environment to test the basic IOP cababilities.
+  </description>
+
+  <maintainer email="Alexander.Tiderko@fkie.fraunhofer.de">Alexander Tiderko</maintainer>
+  <license>GPLv2</license>
+  <author>Alexander Tiderko</author>
+
+  <url>https://github.com/fkie/fkie_iop_cfg_sim_stage</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>hector_mapping</run_depend>
+
+  <run_depend>iop_client_costmap2d_fkie</run_depend>
+  <run_depend>iop_client_digital_resource_fkie</run_depend>
+  <run_depend>iop_client_digital_video_fkie</run_depend>
+  <run_depend>iop_client_global_pose_sensor_fkie</run_depend>
+  <run_depend>iop_client_global_waypoint_driver_fkie</run_depend>
+  <run_depend>iop_client_global_waypoint_list_driver_fkie</run_depend>
+  <run_depend>iop_client_local_pose_sensor_fkie</run_depend>
+  <run_depend>iop_client_range_sensor_fkie</run_depend>
+  <run_depend>iop_client_path_reporter_fkie</run_depend>
+  <run_depend>iop_client_primitive_driver_fkie</run_depend>
+
+  <run_depend>iop_costmap2d_fkie</run_depend>
+  <run_depend>iop_global_pose_sensor_fkie</run_depend>
+  <run_depend>iop_global_waypoint_driver_fkie</run_depend>
+  <run_depend>iop_global_waypoint_list_driver_fkie</run_depend>
+  <run_depend>iop_liveness_fkie</run_depend>
+  <run_depend>iop_local_pose_sensor_fkie</run_depend>
+  <run_depend>iop_path_reporter_fkie</run_depend>
+  <run_depend>iop_platform_manager_fkie</run_depend>
+  <run_depend>iop_primitive_driver_fkie</run_depend>
+  <run_depend>iop_range_sensor_fkie</run_depend>
+
+  <run_depend>iop_digital_resource_discovery_fkie</run_depend>
+  <run_depend>iop_digital_video_fkie</run_depend>
+  <run_depend>iop_visual_sensor_fkie</run_depend>
+
+  <run_depend>iop_discovery_fkie</run_depend>
+
+  <run_depend>iop_rqt_access_control_fkie</run_depend>
+  <run_depend>iop_rqt_digital_resource_viewer_fkie</run_depend>
+
+  <run_depend>geodesy</run_depend>
+  <run_depend>rqt_gui</run_depend>
+  <run_depend>rqt_robot_steering</run_depend>
+  <run_depend>stage_ros</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>topic_tools</run_depend>
+
+</package>

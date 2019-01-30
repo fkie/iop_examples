@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot_ns" default="robot_0"/>
+    <arg name="id_subsystem" default="133"/>
+    <arg name="id_node" value="64"/>
+
+    <param name="utm_zone" value="32" />
+    <param name="utm_band" value="U" />
+
+    <env name="ROSCONSOLE_CONFIG_FILE" value="$(find fkie_iop_cfg_sim_stage)/launch/rosconsole.config"/>
+    <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
+
+
+    <!-- SIMULATED GPS -->
+    <node name="tf2satfix" pkg="fkie_iop_cfg_sim_stage" type="tf2satfix.py" >
+        <param name="capability_group" value="iop_bridge"/>
+        <param name="world_frame" value="world"/>
+        <param name="robot_frame" value="$(arg robot_ns)/base_link"/>
+        <param name="ori_offset" value="0.0" />
+        <param name="hz" value="10.0"/>
+    </node>
+
+    <!-- MAPPING -->
+    <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" respawn="true" >
+        <param name="capability_group" value="mapping" />
+        <!-- Map size / start point -->
+        <param name="map_resolution" value="0.25"/>
+        <param name="map_size" value="400"/>
+        <param name="map_start_x" value="0.5"/>
+        <param name="map_start_y" value="0.5" />
+        <param name="map_multi_res_levels" value="3" />
+        <!-- <param name="map_update_distance_thresh" value="0.25" /> -->
+        <!-- <param name="map_update_angle_thresh" value="0.25" /> -->
+
+        <!-- TFs -->
+        <param name="use_tf_scan_transformation" value="true"/>
+        <param name="base_frame" value="$(arg robot_ns)/base_link" />
+        <param name="map_frame" value="$(arg robot_ns)/map" />
+        <param name="odom_frame" value="$(arg robot_ns)/odom" />
+        <param name="tf_map_scanmatch_transform_frame_name" value="$(arg robot_ns)/scanmatcher_frame" />
+        <param name="pub_map_odom_transform" value="true"/>
+        <param name="use_tf_pose_start_estimate" value="false"/>
+        <param name="advertise_map_service" value="false"/>
+        <param name="scan_subscriber_queue_size" value="5"/>
+        <param name="scan_topic" value="base_scan"/>
+    </node>
+    
+    <node name="throttle_laser_front" pkg="topic_tools" type="throttle" args="messages laser_front 1">
+        <param name="capability_group" value="iop_bridge"/>
+    </node>
+
+    <!-- IOP-ROS-BRIDGE -->
+    <param name="name_subsystem" value="robot_$(arg id_subsystem)"/>
+
+    <node name="iop_platform_manager" pkg="iop_component_fkie" type="iop_component">
+        <param name="capability_group" value="iop_bridge"/>
+        <param name="name_node" value="platform"/>
+        <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).15"/>
+        <rosparam param="services">
+            [
+            iop_discovery_fkie: "Discovery",
+            iop_discovery_fkie: "DiscoveryClient",
+            iop_liveness_fkie: "Liveness",
+            iop_digital_resource_discovery_fkie: "DigitalResourceDiscovery",
+            iop_health_monitor_fkie: "HealthMonitor",
+            iop_platform_mode_fkie: "PlatformMode",
+            iop_platform_state_fkie: "PlatformState",
+            iop_primitive_driver_fkie: "PrimitiveDriver",
+            iop_local_pose_sensor_fkie: "LocalPoseSensor",
+            iop_range_sensor_fkie: "RangeSensor",
+            iop_global_pose_sensor_fkie: "GlobalPoseSensor",
+            iop_global_waypoint_driver_fkie: "GlobalWaypointDriver",
+            iop_global_waypoint_list_driver_fkie: "GlobalWaypointListDriver",
+            iop_path_reporter_fkie: "PathReporter",
+            ]
+        </rosparam>
+        <rosparam subst_value="true">
+            Events:
+                # minutes
+                events_timeout: 1
+            AccessControl:
+                # seconds
+                access_timeout: 10
+            Discovery:
+                # 2: Subsystem Identification, 3: Node Identification, 4: Component Identification
+                system_id: 2
+                # 10001: VEHICLE, 20001: OCU, 30001: OTHER_SUBSYSTEM, 40001: NODE, 50001: PAYLOAD, 60001: COMPONENT
+                system_type: 10001
+            DiscoveryClient:
+                register_own_services: true
+                enable_ros_interface: false
+                force_component_update_after: 300
+            LocalPoseSensor:
+                tf_hz: 10.0
+            PlatformMode:
+                # 0: Standard_Operating, 1: Training, 2: Maintenance
+                platform_mode: 0
+            PlatformState:
+                # 0: Initializing, 1: Active, 2: Exiting
+                mode_status: 1
+            PrimitiveDriver:
+                max_linear_x: 3.0
+                max_angular_z: -1.5
+                use_stamped: false
+            RangeSensor:
+                range_sensors:
+                - base_scan
+        </rosparam>
+
+        <!-- Primitive Driver Parameter-->
+        <remap from="odom" to="$(arg robot_ns)/odom"/>
+        <remap from="cmd_vel" to="cmd_vel"/>
+
+        <!-- Tf same for LocalPoseSensor , GlobalPoseSensor, RangeSensor
+          These parameter can also be defined for each service separately. -->
+        <param name="tf_frame_odom" value="$(arg robot_ns)/odom" />
+        <param name="tf_frame_robot" value="$(arg robot_ns)/base_link" />
+        <!-- Global Pose Parameter-->
+        <remap from="fix" to="gps_info"/>
+        <remap from="historical_odom" to="/robot_0/odom"/>
+
+    </node>
+
+    <node name="iop_costmap2d" pkg="iop_component_fkie" type="iop_component"> 
+        <param name="capability_group" value="iop_bridge"/>
+        <rosparam param="services">
+            [
+            iop_costmap2d_fkie: "CostMap2D",
+            iop_liveness_fkie: "Liveness",
+            iop_accesscontrol_fkie: "AccessControl",
+            iop_discovery_fkie: "DiscoveryClient",
+            iop_events_fkie: "Events",
+            iop_events_fkie: "EventsClient",
+            iop_transport_fkie: "Transport",
+            ]
+        </rosparam>
+        <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).71"/>
+        <param name="enable_ros_interface" value="false"/>
+        <param name="register_own_services" value="true" />
+        <param name="offset_yaw" value="0" />
+        <!-- <param name="offset_yaw" value="1.5707" /> -->
+        <param name="map_max_edge_size" value="200" />
+        <param name="tf_frame_odom" value="$(arg robot_ns)/odom" />
+        <param name="tf_frame_robot" value="$(arg robot_ns)/base_link" />
+    </node>
+</launch>

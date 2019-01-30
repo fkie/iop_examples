@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="ns" default="ocu"/>
+  <arg name="iop_address" default="150.64.200"/>
+  <arg name="only_monitor" default="false"/>
+  <arg name="publish_world_anchor" default="false"/>
+  <arg name="client_suffix" default=""/>
+  <arg name="subsystem_restricted" default="65535" />
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find fkie_iop_cfg_sim_stage)/launch/rosconsole.config"/>
+  <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
+<!--
+    <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py">
+      <param name="capability_group" value="control"/>
+    </node>
+-->
+    <param name="name_subsystem" value="OCU for $(arg ns)"/>
+    <node name="iop_ocu_client$(arg client_suffix)" pkg="iop_component_fkie" type="iop_component">
+        <param name="capability_group" value="iop_bridge"/>
+        <param name="iop_address" value="$(arg iop_address)"/>
+        <param name="name_node" value="control_client"/>
+        <param name="only_monitor" value="$(arg only_monitor)"/>
+        <param name="subsystem_restricted" value="$(arg subsystem_restricted)" />
+        <rosparam param="services">
+          [
+            iop_discovery_fkie: "DiscoveryClient",
+            iop_client_primitive_driver_fkie: "PrimitiveDriverClient",
+            iop_client_local_pose_sensor_fkie: "LocalPoseSensorClient",
+            iop_client_global_pose_sensor_fkie: "GlobalPoseSensorClient",
+            iop_client_range_sensor_fkie: "RangeSensorClient",
+            iop_client_costmap2d_fkie: "CostMap2DClient",
+            iop_client_path_reporter_fkie: "PathReporterClient",
+            iop_client_global_waypoint_list_driver_fkie: "GlobalWaypointListDriverClient",
+            iop_client_global_waypoint_driver_fkie: "GlobalWaypointDriverClient",
+          ]
+        </rosparam>
+        <rosparam subst_value="true">
+            EventsClient:
+                use_queries: false
+            DiscoveryClient:
+                register_own_services: false
+                enable_ros_interface: true
+                force_component_update_after: 300
+            PrimitiveDriverClient:
+                use_stamped: false
+            GlobalPoseSensorClient:
+                anchor_easting: 365796
+                anchor_northing: 5624047
+                publish_world_anchor: $(arg publish_world_anchor)
+        </rosparam>
+        <!-- Primitive Driver Parameter -->
+        <remap from="joy_cmd_vel" to="cmd_vel"/>
+        <!-- Tf same for LocalPoseSensorClient , GlobalPoseSensorClient, RangeSensorClient and CostMap2DClient.
+                These parameter can also be defined for each service separately. -->
+        <param name="tf_frame_odom" value="/$(arg ns)/odom"/>
+        <param name="tf_frame_robot" value="/$(arg ns)/base_link"/>
+        <param name="tf_frame_costmap" value="/$(arg ns)/costmap"/>
+        <remap from="~odom" to="odom"/>
+    </node>
+
+</launch>
