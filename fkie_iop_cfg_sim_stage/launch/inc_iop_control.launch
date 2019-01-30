@@ -14,7 +14,7 @@
     </node>
 -->
     <param name="name_subsystem" value="OCU for $(arg ns)"/>
-    <node name="iop_ocu_client$(arg client_suffix)" pkg="iop_component_fkie" type="iop_component">
+    <node name="iop_ocu_client$(arg client_suffix)" pkg="fkie_iop_component" type="iop_component">
         <param name="capability_group" value="iop_bridge"/>
         <param name="iop_address" value="$(arg iop_address)"/>
         <param name="name_node" value="control_client"/>
@@ -22,15 +22,15 @@
         <param name="subsystem_restricted" value="$(arg subsystem_restricted)" />
         <rosparam param="services">
           [
-            iop_discovery_fkie: "DiscoveryClient",
-            iop_client_primitive_driver_fkie: "PrimitiveDriverClient",
-            iop_client_local_pose_sensor_fkie: "LocalPoseSensorClient",
-            iop_client_global_pose_sensor_fkie: "GlobalPoseSensorClient",
-            iop_client_range_sensor_fkie: "RangeSensorClient",
-            iop_client_costmap2d_fkie: "CostMap2DClient",
-            iop_client_path_reporter_fkie: "PathReporterClient",
-            iop_client_global_waypoint_list_driver_fkie: "GlobalWaypointListDriverClient",
-            iop_client_global_waypoint_driver_fkie: "GlobalWaypointDriverClient",
+            fkie_iop_discovery: "DiscoveryClient",
+            fkie_iop_client_primitive_driver: "PrimitiveDriverClient",
+            fkie_iop_client_local_pose_sensor: "LocalPoseSensorClient",
+            fkie_iop_client_global_pose_sensor: "GlobalPoseSensorClient",
+            fkie_iop_client_range_sensor: "RangeSensorClient",
+            fkie_iop_client_costmap2d: "CostMap2DClient",
+            fkie_iop_client_path_reporter: "PathReporterClient",
+            fkie_iop_client_global_waypoint_list_driver: "GlobalWaypointListDriverClient",
+            fkie_iop_client_global_waypoint_driver: "GlobalWaypointDriverClient",
           ]
         </rosparam>
         <rosparam subst_value="true">

@@ -52,26 +52,26 @@
     <!-- IOP-ROS-BRIDGE -->
     <param name="name_subsystem" value="robot_$(arg id_subsystem)"/>
 
-    <node name="iop_platform_manager" pkg="iop_component_fkie" type="iop_component">
+    <node name="iop_platform_manager" pkg="fkie_iop_component" type="iop_component">
         <param name="capability_group" value="iop_bridge"/>
         <param name="name_node" value="platform"/>
         <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).15"/>
         <rosparam param="services">
             [
-            iop_discovery_fkie: "Discovery",
-            iop_discovery_fkie: "DiscoveryClient",
-            iop_liveness_fkie: "Liveness",
-            iop_digital_resource_discovery_fkie: "DigitalResourceDiscovery",
-            iop_health_monitor_fkie: "HealthMonitor",
-            iop_platform_mode_fkie: "PlatformMode",
-            iop_platform_state_fkie: "PlatformState",
-            iop_primitive_driver_fkie: "PrimitiveDriver",
-            iop_local_pose_sensor_fkie: "LocalPoseSensor",
-            iop_range_sensor_fkie: "RangeSensor",
-            iop_global_pose_sensor_fkie: "GlobalPoseSensor",
-            iop_global_waypoint_driver_fkie: "GlobalWaypointDriver",
-            iop_global_waypoint_list_driver_fkie: "GlobalWaypointListDriver",
-            iop_path_reporter_fkie: "PathReporter",
+            fkie_iop_discovery: "Discovery",
+            fkie_iop_discovery: "DiscoveryClient",
+            fkie_iop_liveness: "Liveness",
+            fkie_iop_digital_resource_discovery: "DigitalResourceDiscovery",
+            fkie_iop_health_monitor: "HealthMonitor",
+            fkie_iop_platform_mode: "PlatformMode",
+            fkie_iop_platform_state: "PlatformState",
+            fkie_iop_primitive_driver: "PrimitiveDriver",
+            fkie_iop_local_pose_sensor: "LocalPoseSensor",
+            fkie_iop_range_sensor: "RangeSensor",
+            fkie_iop_global_pose_sensor: "GlobalPoseSensor",
+            fkie_iop_global_waypoint_driver: "GlobalWaypointDriver",
+            fkie_iop_global_waypoint_list_driver: "GlobalWaypointListDriver",
+            fkie_iop_path_reporter: "PathReporter",
             ]
         </rosparam>
         <rosparam subst_value="true">
@@ -121,17 +121,17 @@
 
     </node>
 
-    <node name="iop_costmap2d" pkg="iop_component_fkie" type="iop_component"> 
+    <node name="iop_costmap2d" pkg="fkie_iop_component" type="iop_component"> 
         <param name="capability_group" value="iop_bridge"/>
         <rosparam param="services">
             [
-            iop_costmap2d_fkie: "CostMap2D",
-            iop_liveness_fkie: "Liveness",
-            iop_accesscontrol_fkie: "AccessControl",
-            iop_discovery_fkie: "DiscoveryClient",
-            iop_events_fkie: "Events",
-            iop_events_fkie: "EventsClient",
-            iop_transport_fkie: "Transport",
+            fkie_iop_costmap2d: "CostMap2D",
+            fkie_iop_liveness: "Liveness",
+            fkie_iop_accesscontrol: "AccessControl",
+            fkie_iop_discovery: "DiscoveryClient",
+            fkie_iop_events: "Events",
+            fkie_iop_events: "EventsClient",
+            fkie_iop_transport: "Transport",
             ]
         </rosparam>
         <param name="iop_address" value="$(arg id_subsystem).$(arg id_node).71"/>

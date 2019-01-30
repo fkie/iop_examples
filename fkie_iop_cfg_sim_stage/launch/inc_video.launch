@@ -2,16 +2,16 @@
     <arg name="id_subsystem" default="133"/>
 
     <!-- VIDEO url publisher -->
-    <node name="iop_digital_video" pkg="iop_component_fkie" type="iop_component">
+    <node name="iop_digital_video" pkg="fkie_iop_component" type="iop_component">
         <param name="capability_group" value="iop_bridge"/>
         <param name="iop_address" type="str" value="$(arg id_subsystem).64.81"/>
         <rosparam param="services">
           [
-            iop_discovery_fkie: "DiscoveryClient",
-            iop_digital_resource_discovery_fkie : "DigitalResourceDiscoveryClient",
-            iop_digital_video_fkie: "DigitalVideo",
-            iop_visual_sensor_fkie: "VisualSensor",
-            iop_liveness_fkie: "Liveness"
+            fkie_iop_discovery: "DiscoveryClient",
+            fkie_iop_digital_resource_discovery : "DigitalResourceDiscoveryClient",
+            fkie_iop_digital_video: "DigitalVideo",
+            fkie_iop_visual_sensor: "VisualSensor",
+            fkie_iop_liveness: "Liveness"
           ]
         </rosparam>
         <rosparam subst_value="true">

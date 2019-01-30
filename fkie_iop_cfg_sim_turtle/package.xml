@@ -16,15 +16,15 @@
   <run_depend>rqt_gui</run_depend>
   <run_depend>turtlesim</run_depend>
 
-  <run_depend>iop_discovery_fkie</run_depend>
+  <run_depend>fkie_iop_discovery</run_depend>
 
   <!-- dependencies for robot -->
-  <run_depend>iop_liveness_fkie</run_depend>
-  <run_depend>iop_platform_manager_fkie</run_depend>
-  <run_depend>iop_primitive_driver_fkie</run_depend>
+  <run_depend>fkie_iop_liveness</run_depend>
+  <run_depend>fkie_iop_platform_manager</run_depend>
+  <run_depend>fkie_iop_primitive_driver</run_depend>
 
   <!-- dependencies for control station -->
-  <run_depend>iop_rqt_access_control_fkie</run_depend>
-  <run_depend>iop_client_primitive_driver_fkie</run_depend>
+  <run_depend>fkie_iop_rqt_access_control</run_depend>
+  <run_depend>fkie_iop_client_primitive_driver</run_depend>
 
 </package>

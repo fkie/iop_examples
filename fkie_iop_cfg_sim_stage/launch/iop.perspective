@@ -5,7 +5,7 @@
       "keys": {
         "running-plugins": {
           "type": "repr", 
-          "repr": "{u'rqt_robot_steering/RobotSteering': [1], u'iop_rqt_access_control_fkie/IOPAccessControl': [1]}"
+          "repr": "{u'rqt_robot_steering/RobotSteering': [1], u'fkie_iop_rqt_access_control/IOPAccessControl': [1]}"
         }
       }, 
       "groups": {
@@ -31,7 +31,7 @@
             }
           }
         }, 
-        "plugin__iop_rqt_access_control_fkie__IOPAccessControl__1": {
+        "plugin__fkie_iop_rqt_access_control__IOPAccessControl__1": {
           "keys": {}, 
           "groups": {
             "dock_widget__AccessControlClientUi": {
@@ -117,7 +117,7 @@
             }
           }
         }, 
-        "plugin__iop_rqt_digital_resource_viewer_fkie__DigitalResourceViewer__1": {
+        "plugin__fkie_iop_rqt_digital_resource_viewer__DigitalResourceViewer__1": {
           "keys": {}, 
           "groups": {
             "dock_widget__DigitalResourceViewerUi": {
@@ -152,7 +152,7 @@
             }
           }
         }, 
-        "plugin__iop_rqt_selection_fkie__JAUSSelection__1": {
+        "plugin__fkie_iop_rqt_selection__JAUSSelection__1": {
           "keys": {}, 
           "groups": {
             "dock_widget__SelectionClientUi": {

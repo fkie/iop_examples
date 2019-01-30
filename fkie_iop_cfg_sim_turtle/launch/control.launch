@@ -13,16 +13,16 @@
     <!-- Start the rqt and "FKIE IOP/Access Control" plugin 
     You need get the control. Without control no commands are published to the ROS topics by primitive driver.
     -->
-    <node name="rqt_ocu" pkg="rqt_gui" type="rqt_gui" args="--force-discover -s iop_rqt_access_control_fkie.iop_rqt_access_control.AccessControlClient"/>
+    <node name="rqt_ocu" pkg="rqt_gui" type="rqt_gui" args="--force-discover -s fkie_iop_rqt_access_control.iop_rqt_access_control.AccessControlClient"/>
 
-    <node name="iop_ocu_client" pkg="iop_component_fkie" type="iop_component">
+    <node name="iop_ocu_client" pkg="fkie_iop_component" type="iop_component">
         <param name="iop_address" value="150.64.200"/>
         <param name="name_node" value="control_client"/>
         <rosparam param="services">
           [
-            iop_discovery_fkie: "DiscoveryClient",
+            fkie_iop_discovery: "DiscoveryClient",
             # added client for primitive driver and also his subservices
-            iop_client_primitive_driver_fkie: "PrimitiveDriverClient",
+            fkie_iop_client_primitive_driver: "PrimitiveDriverClient",
           ]
         </rosparam>
         <rosparam subst_value="true">
@@ -32,7 +32,7 @@
                 register_own_services: false
                 enable_ros_interface: true
             # configuration for primitive client
-            # see https://github.com/fkie/iop_jaus_mobility_clients#iop_client_primitive_driver_fkie-primitivedriverclient
+            # see https://github.com/fkie/iop_jaus_mobility_clients#fkie_iop_client_primitive_driver-primitivedriverclient
             PrimitiveDriverClient:
                 # do not use the stamped twist messages
                 use_stamped: false
