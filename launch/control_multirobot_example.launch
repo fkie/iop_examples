@@ -5,21 +5,21 @@
   <arg name="load_gui" default="true"/>
 
   <node if="$(arg load_gui)" name="rqt_ocu" pkg="rqt_gui" type="rqt_gui"
-        ns="$(arg ns)" args="--force-discover --perspective-file $(find iop_cfg_sim_stage_fkie)/launch/iop_multi.perspective">
+        ns="$(arg ns)" args="--force-discover --perspective-file $(find fkie_iop_cfg_sim_stage)/launch/iop_multi.perspective">
     <param name="capability_group" value="gui"/>
   </node>
 
   <node if="$(arg load_gui)" name="rviz_ocu" pkg="rviz" type="rviz"
-        ns="$(arg ns)" args="-d $(find iop_cfg_sim_stage_fkie)/launch/iop_multi.rviz">
+        ns="$(arg ns)" args="-d $(find fkie_iop_cfg_sim_stage)/launch/iop_multi.rviz">
     <param name="capability_group" value="gui"/>
   </node>
 
-  <!-- <include file="$(find iop_cfg_sim_stage_fkie)/launch/inc_iop_control.launch" ns="$(arg ns)" > -->
+  <!-- <include file="$(find fkie_iop_cfg_sim_stage)/launch/inc_iop_control.launch" ns="$(arg ns)" > -->
        <!-- <arg name="ns" value="$(arg ns)" /> -->
        <!-- <arg name="id_subsystem" value="$(arg id_subsystem)" /> -->
   <!-- </include> -->
 
-  <include file="$(find iop_cfg_sim_stage_fkie)/launch/inc_iop_control.launch" ns="$(arg ns)/robot_0" >
+  <include file="$(find fkie_iop_cfg_sim_stage)/launch/inc_iop_control.launch" ns="$(arg ns)/robot_0" >
        <arg name="ns" value="$(arg ns)/robot_0" />
        <arg name="iop_address" value="$(arg id_subsystem).64.200" />
        <!-- The node id must be different for each view/control client for support further robot -->
@@ -28,7 +28,7 @@
        <arg name="publish_world_anchor" value="true" />
   </include>
 
-  <include file="$(find iop_cfg_sim_stage_fkie)/launch/inc_iop_control.launch" ns="$(arg ns)/robot_1" >
+  <include file="$(find fkie_iop_cfg_sim_stage)/launch/inc_iop_control.launch" ns="$(arg ns)/robot_1" >
        <arg name="ns" value="$(arg ns)/robot_1" />
        <arg name="iop_address" value="$(arg id_subsystem).65.200" />
        <!-- The node id must be different for each view/control client for support further robot -->

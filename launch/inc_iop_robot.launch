@@ -7,12 +7,12 @@
     <param name="utm_zone" value="32" />
     <param name="utm_band" value="U" />
 
-    <env name="ROSCONSOLE_CONFIG_FILE" value="$(find iop_cfg_sim_stage_fkie)/launch/rosconsole.config"/>
+    <env name="ROSCONSOLE_CONFIG_FILE" value="$(find fkie_iop_cfg_sim_stage)/launch/rosconsole.config"/>
     <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
 
 
     <!-- SIMULATED GPS -->
-    <node name="tf2satfix" pkg="iop_cfg_sim_stage_fkie" type="tf2satfix.py" >
+    <node name="tf2satfix" pkg="fkie_iop_cfg_sim_stage" type="tf2satfix.py" >
         <param name="capability_group" value="iop_bridge"/>
         <param name="world_frame" value="world"/>
         <param name="robot_frame" value="$(arg robot_ns)/base_link"/>

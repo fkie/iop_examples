@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>iop_cfg_sim_stage_fkie</name>
+  <name>fkie_iop_cfg_sim_stage</name>
   <version>1.1.0</version>
   <description>
     The configuration for simulation environment to test the basic IOP cababilities.
@@ -10,7 +10,7 @@
   <license>GPLv2</license>
   <author>Alexander Tiderko</author>
 
-  <url>https://github.com/fkie/iop_cfg_sim_stage_fkie</url>
+  <url>https://github.com/fkie/fkie_iop_cfg_sim_stage</url>
 
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>hector_mapping</run_depend>

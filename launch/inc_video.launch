@@ -28,7 +28,7 @@
                 # Example for RTSP stream: "1/rtsp" : "rtsp://URL"
                 video_endpoints:
                 - "1/https": "https://youtu.be/h4rhdZ_MXf8?t=17"
-                - "2/mpeg2ts": "$(find iop_cfg_sim_stage_fkie)/resources/example.mp4"
+                - "2/mpeg2ts": "$(find fkie_iop_cfg_sim_stage)/resources/example.mp4"
             VisualSensor:
                 capabilities:
                 - "1":

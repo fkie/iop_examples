@@ -21,7 +21,7 @@ To install ROS/IOP-Bridge packages follow the instruction [here](https://github.
 
 Merge the iop_cfg_sim_stage.rosinstall file and fetch code.
 ```
-wstool merge -t src/iop https://raw.githubusercontent.com/fkie/iop_cfg_sim_stage_fkie/master/iop_cfg_sim_stage.rosinstall
+wstool merge -t src/iop https://raw.githubusercontent.com/fkie/fkie_iop_cfg_sim_stage/master/iop_cfg_sim_stage.rosinstall
 wstool update -t src/iop
 ```
 
@@ -32,7 +32,7 @@ catkin build
 
 ## Launch the example
 
-There are example launch files for robots and OCU in the **iop_cfg_sim_stage_fkie** package:
+There are example launch files for robots and OCU in the **fkie_iop_cfg_sim_stage** package:
 
 - **jaus_node_manager.launch**
 Starts the JAUS Node Manager. The JAUS Node Manager should be started on each host first.
@@ -47,15 +47,15 @@ contains the RQT and RVIZ gui with corresponding ROS/IOP-Bridge components for t
 
 Start JAUS Node Manager first:
 ```
-roslaunch iop_cfg_sim_stage_fkie jaus_node_manager.launch
+roslaunch fkie_iop_cfg_sim_stage jaus_node_manager.launch
 ```
 
 Start the launch files in two different terminals:
 
 ```
-roslaunch iop_cfg_sim_stage_fkie multirobot_example.launch
+roslaunch fkie_iop_cfg_sim_stage multirobot_example.launch
 
-roslaunch iop_cfg_sim_stage_fkie control_multirobot_example.launch
+roslaunch fkie_iop_cfg_sim_stage control_multirobot_example.launch
 ```
 >you cal also use the `node_manager`, a graphical user interface from `multimaster_fkie`, to load the launch files and start the nodes.
 
