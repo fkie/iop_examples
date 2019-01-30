@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>iop_cfg_sim_turtle_fkie</name>
+  <name>fkie_iop_cfg_sim_turtle</name>
   <version>1.1.0</version>
   <description>
     A very simple configuration with turtlesim to show the start with ROS/IOP-Bridge.
@@ -10,7 +10,7 @@
   <license>GPLv2</license>
   <author>Alexander Tiderko</author>
 
-  <url>https://github.com/fkie/iop_cfg_sim_turtle_fkie</url>
+  <url>https://github.com/fkie/fkie_iop_cfg_sim_turtle</url>
 
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>rqt_gui</run_depend>
