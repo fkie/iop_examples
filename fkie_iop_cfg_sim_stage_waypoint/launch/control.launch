@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="ns" value="ocu"/>
+    <!-- JAUS configuration used by IOP bridge components
+         EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
+    <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
+
+    
+    <!-- Start the rqt and "FKIE IOP/Access Control" plugin 
+    You need get the control. Without control no commands are published to the ROS topics by local waypoint driver.
+    -->
+    <node name="rqt" pkg="rqt_gui" type="rqt_gui" ns="$(arg ns)" args="--force-discover -s fkie_iop_rqt_access_control.iop_rqt_access_control.AccessControlClient"/>
+    <node name="rviz" pkg="rviz" type="rviz" ns="$(arg ns)" args="-d $(find fkie_iop_cfg_sim_stage_waypoint)/config/waypoint.rviz"/>
+
+    <node name="iop_client" pkg="fkie_iop_component" type="iop_component" ns="$(arg ns)">
+        <param name="iop_address" value="150.65.200"/>
+        <param name="name_node" value="control_client"/>
+        <rosparam param="services">
+          [
+            fkie_iop_discovery: "DiscoveryClient",
+            # added client for local waypoint driver
+            fkie_iop_client_local_waypoint_driver: "LocalWaypointDriverClient",
+            # add client for LocalPoseSensor to offer local position of the robot and create a TF tree
+            fkie_iop_client_local_pose_sensor: "LocalPoseSensorClient",
+            # add client for RangeSensor to offer laser scans to ROS
+            fkie_iop_client_range_sensor: "RangeSensorClient",
+          ]
+        </rosparam>
+        <rosparam subst_value="true">
+            EventsClient:
+                use_queries: false
+            DiscoveryClient:
+                register_own_services: false
+                enable_ros_interface: true
+            # configuration for local waypoint driver client
+            # see https://github.com/fkie/iop_jaus_mobility_clients/tree/master/fkie_iop_client_local_waypoint_driver
+            LocalWaypointDriverClient:
+                tf_frame_robot: "ocu/base_link"
+                travel_speed: 1.0
+                # added remap to catch commands from the right topic or use 'remap' of launch file
+                topic_sub_cmd_local_pose: "/ocu/cmd_local_pose"
+            LocalPoseSensorClient:
+                tf_frame_odom: "ocu/odom"
+                tf_frame_robot: "ocu/base_link"
+                send_inverse_trafo: false
+            RangeSensorClient:
+                tf_frame_robot: "ocu/base_link"
+        </rosparam>
+    </node>
+
+</launch>

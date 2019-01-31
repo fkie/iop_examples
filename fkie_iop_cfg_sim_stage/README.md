@@ -19,7 +19,7 @@ You should also install "teleop-twist-keyboard" if you want control your robot b
 
 To install ROS/IOP-Bridge packages follow the instruction [here](https://github.com/fkie/iop_core/blob/master/README.md)
 
-Merge the iop_cfg_sim_stage.rosinstall file and fetch code.
+Merge the iop_example.rosinstall file and fetch code.
 ```
 wstool merge -t src/iop https://raw.githubusercontent.com/fkie/iop_examples/master/iop_examples.rosinstall
 wstool update -t src/iop

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="use_sim_time" value="true"/>
+    <!-- stage_simulator -->
+    <node name="ros_stage_roemer" pkg="stage_ros" type="stageros" args="$(find fkie_iop_cfg_sim_stage_waypoint)/config/stage/roemer.world" />
+    
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true">
+      <rosparam file="$(find fkie_iop_cfg_sim_stage_waypoint)/config/move_base/move_base_params.yaml" command="load" />
+      <rosparam file="$(find fkie_iop_cfg_sim_stage_waypoint)/config/move_base/common_costmap_params.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find fkie_iop_cfg_sim_stage_waypoint)/config/move_base/local_costmap_params.yaml" command="load" />
+      <rosparam file="$(find fkie_iop_cfg_sim_stage_waypoint)/config/move_base/common_costmap_params.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find fkie_iop_cfg_sim_stage_waypoint)/config/move_base/global_costmap_params.yaml" command="load" />
+      <rosparam file="$(find fkie_iop_cfg_sim_stage_waypoint)/config/move_base/base_local_planner_params.yaml" command="load" />
+    </node>
+
+
+   <!-- JAUS configuration used by IOP bridge components
+         EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
+    <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
+    
+    <param name="name_subsystem" value="robot"/>
+    <node name="iop_platform_manager" pkg="fkie_iop_component" type="iop_component">
+        <param name="name_node" value="platform manager"/>
+        <param name="iop_address" value="1.2.15"/>
+        <rosparam param="services">
+            [
+            fkie_iop_discovery: "Discovery",
+            fkie_iop_discovery: "DiscoveryClient",
+            fkie_iop_liveness: "Liveness",
+            fkie_iop_health_monitor: "HealthMonitor",
+            # add LocalWaypointDriver to handle local waypoints from IOP
+            fkie_iop_local_waypoint_driver: "LocalWaypointDriver",
+            # add LocalPoseSensor to report the local position of the robot
+            fkie_iop_local_pose_sensor: "LocalPoseSensor",
+            # add RangeSensor to report laser scans to IOP
+            fkie_iop_range_sensor: "RangeSensor",
+            ]
+        </rosparam>
+        <rosparam subst_value="true">
+            Discovery:
+                system_id: 2  # 2: Subsystem Identification, 3: Node Identification, 4: Component Identification
+                system_type: 10001  # 10001: VEHICLE, 20001: OCU, 30001: OTHER_SUBSYSTEM, 40001: NODE, 50001: PAYLOAD, 60001: COMPONENT
+            LocalWaypointDriver:
+                tf_frame_robot: "base_link"
+                tv_max: 1.0
+                topic_pub_cmd_local_pose: "/move_base_simple/goal"
+            LocalPoseSensor:
+                source_type: 0  # 0: tf, 1: geometry_msgs::PoseStamped, 2: nav_msgs::Odometry
+                tf_frame_odom: "odom"
+                tf_frame_robot: "base_link"
+            RangeSensor:
+                range_sensors:
+                  - base_scan
+        </rosparam>
+    </node>
+ </launch>
