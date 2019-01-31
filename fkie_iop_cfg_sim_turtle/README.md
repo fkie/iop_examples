@@ -16,7 +16,7 @@ To install ROS/IOP-Bridge packages follow the instruction [here](https://github.
 
 Merge the iop_cfg_sim_turtle.rosinstall file and fetch code.
 ```
-wstool merge -t src/iop https://raw.githubusercontent.com/fkie/fkie_iop_cfg_sim_turtle/master/iop_cfg_sim_turtle.rosinstall
+wstool merge -t src/iop https://raw.githubusercontent.com/fkie/iop_examples/master/iop_examples.rosinstall
 wstool update -t src/iop
 ```
 
@@ -53,4 +53,4 @@ roslaunch fkie_iop_cfg_sim_turtle control.launch
 ```
 >you cal also use the `node_manager`, a graphical user interface from `multimaster_fkie`, to load the launch files and start the nodes.
 
->for more complex example see [fkie_iop_cfg_sim_stage](https://github.com/fkie/fkie_iop_cfg_sim_stage/blob/master/README.md)
+>for more complex example see [fkie_iop_cfg_sim_stage](https://github.com/fkie/iop_examples/tree/master/fkie_iop_cfg_sim_stage)

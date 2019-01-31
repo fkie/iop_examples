@@ -21,7 +21,7 @@ To install ROS/IOP-Bridge packages follow the instruction [here](https://github.
 
 Merge the iop_cfg_sim_stage.rosinstall file and fetch code.
 ```
-wstool merge -t src/iop https://raw.githubusercontent.com/fkie/fkie_iop_cfg_sim_stage/master/iop_cfg_sim_stage.rosinstall
+wstool merge -t src/iop https://raw.githubusercontent.com/fkie/iop_examples/master/iop_examples.rosinstall
 wstool update -t src/iop
 ```
 
