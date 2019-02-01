@@ -1,0 +1,158 @@
+{
+  "keys": {},
+  "groups": {
+    "pluginmanager": {
+      "keys": {
+        "running-plugins": {
+          "type": "repr",
+          "repr": "{u'fkie_iop_rqt_access_control/IOPAccessControl': [1], u'fkie_iop_rqt_digital_resource_viewer/DigitalResourceViewer': [1]}"
+        }
+      },
+      "groups": {
+        "plugin__fkie_iop_rqt_access_control__IOPAccessControl__1": {
+          "keys": {},
+          "groups": {
+            "dock_widget__AccessControlClientUi": {
+              "keys": {
+                "dockable": {
+                  "type": "repr",
+                  "repr": "True"
+                },
+                "parent": {
+                  "type": "repr",
+                  "repr": "None"
+                },
+                "dock_widget_title": {
+                  "type": "repr",
+                  "repr": "u'&AccessControlClient'"
+                }
+              },
+              "groups": {}
+            },
+            "plugin": {
+              "keys": {
+                "handoff_explanation": {
+                  "type": "repr",
+                  "repr": "u'autorequest'"
+                },
+                "ocu_feedback": {
+                  "type": "repr",
+                  "repr": "u'/ocu_feedback'"
+                },
+                "ocu_cmd": {
+                  "type": "repr",
+                  "repr": "u'/ocu_cmd'"
+                },
+                "handoff_autorequest": {
+                  "type": "repr",
+                  "repr": "False"
+                },
+                "namespace": {
+                  "type": "repr",
+                  "repr": "u'/'"
+                },
+                "authority": {
+                  "type": "repr",
+                  "repr": "205"
+                },
+                "iop_identification": {
+                  "type": "repr",
+                  "repr": "u'/iop_identification'"
+                },
+                "iop_system": {
+                  "type": "repr",
+                  "repr": "u'/iop_system'"
+                },
+                "iop_update_discovery": {
+                  "type": "repr",
+                  "repr": "u'/iop_update_discovery'"
+                }
+              },
+              "groups": {}
+            }
+          }
+        },
+        "plugin__fkie_iop_rqt_digital_resource_viewer__DigitalResourceViewer__1": {
+          "keys": {},
+          "groups": {
+            "dock_widget__DigitalResourceViewerUi": {
+              "keys": {
+                "dockable": {
+                  "type": "repr",
+                  "repr": "True"
+                },
+                "parent": {
+                  "type": "repr",
+                  "repr": "None"
+                },
+                "dock_widget_title": {
+                  "type": "repr",
+                  "repr": "u'&DigitalResourceViewer'"
+                }
+              },
+              "groups": {}
+            },
+            "plugin": {
+              "keys": {
+                "rtps_over_tcp": {
+                  "type": "repr",
+                  "repr": "u'--rtsp-tcp'"
+                },
+                "topic_endpoints": {
+                  "type": "repr",
+                  "repr": "u'/ocu/digital_endpoints'"
+                },
+                "use_internal_vlc": {
+                  "type": "repr",
+                  "repr": "True"
+                },
+                "topic_current_video_url": {
+                  "type": "repr",
+                  "repr": "u'/ocu/current_video_url'"
+                },
+                "topic_names": {
+                  "type": "repr",
+                  "repr": "u'/ocu/visual_sensor_names'"
+                },
+                "use_multi_url": {
+                  "type": "repr",
+                  "repr": "False"
+                },
+                "topic_resource_id": {
+                  "type": "repr",
+                  "repr": "u'/ocu/dv_resource_id'"
+                }
+              },
+              "groups": {}
+            }
+          }
+        }
+      }
+    },
+    "mainwindow": {
+      "keys": {
+        "geometry": {
+          "type": "repr(QByteArray.hex)",
+          "repr(QByteArray.hex)": "QtCore.QByteArray('01d9d0cb00020000000002b40000003900000528000002b8000002b80000005600000524000002b400000000000000000780')",
+          "pretty-print": "       9 (     V $       "
+        },
+        "state": {
+          "type": "repr(QByteArray.hex)",
+          "repr(QByteArray.hex)": "QtCore.QByteArray('000000ff00000000fd00000001000000030000026d0000022afc0100000001fc000000000000026d0000011b00fffffffc0200000002fb0000008e0066006b00690065005f0069006f0070005f007200710074005f006100630063006500730073005f0063006f006e00740072006f006c005f005f0049004f00500041006300630065007300730043006f006e00740072006f006c005f005f0031005f005f0041006300630065007300730043006f006e00740072006f006c0043006c00690065006e007400550069010000001e0000005f0000004501000003fb000000ae0066006b00690065005f0069006f0070005f007200710074005f006400690067006900740061006c005f007200650073006f0075007200630065005f007600690065007700650072005f005f004400690067006900740061006c005200650073006f0075007200630065005600690065007700650072005f005f0031005f005f004400690067006900740061006c005200650073006f007500720063006500560069006500770065007200550069010000007e000001ca0000004b010000030000026d0000000000000004000000040000000800000008fc00000001000000030000000100000036004d0069006e0069006d0069007a006500640044006f0063006b00570069006400670065007400730054006f006f006c0062006100720000000000ffffffff0000000000000000')",
+          "pretty-print": "                   m                                                                                    _ E                                                                                             ~   K   m                                                      "
+        }
+      },
+      "groups": {
+        "toolbar_areas": {
+          "keys": {
+            "MinimizedDockWidgetsToolbar": {
+              "type": "repr",
+              "repr": "8"
+            }
+          },
+          "groups": {}
+        }
+      }
+    }
+  }
+}

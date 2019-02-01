@@ -10,7 +10,7 @@
   <license>GPLv2</license>
   <author>Alexander Tiderko</author>
 
-  <url>https://github.com/fkie/fkie_iop_cfg_sim_stage</url>
+  <url>https://github.com/fkie/iop_examples</url>
 
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>hector_mapping</run_depend>

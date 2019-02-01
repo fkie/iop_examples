@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
-  <name>fkie_iop_cfg_sim_turtle</name>
+  <name>fkie_iop_cfg_sim_video</name>
   <version>1.1.0</version>
   <description>
-    A very simple configuration with turtlesim to show the start with ROS/IOP-Bridge.
+     Configuration shows how to use video with ROS/IOP-Bridge.
   </description>
 
   <maintainer email="Alexander.Tiderko@fkie.fraunhofer.de">Alexander Tiderko</maintainer>
@@ -14,17 +14,20 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>rqt_gui</run_depend>
-  <run_depend>turtlesim</run_depend>
 
   <run_depend>fkie_iop_discovery</run_depend>
 
   <!-- dependencies for robot -->
+  <run_depend>fkie_iop_digital_resource_discovery</run_depend>
+  <run_depend>fkie_iop_digital_video</run_depend>
   <run_depend>fkie_iop_liveness</run_depend>
   <run_depend>fkie_iop_platform_manager</run_depend>
-  <run_depend>fkie_iop_primitive_driver</run_depend>
+  <run_depend>fkie_iop_visual_sensor</run_depend>
 
   <!-- dependencies for control station -->
+  <run_depend>fkie_iop_client_digital_resource</run_depend>
+  <run_depend>fkie_iop_client_digital_video</run_depend>
   <run_depend>fkie_iop_rqt_access_control</run_depend>
-  <run_depend>fkie_iop_client_primitive_driver</run_depend>
+  <run_depend>fkie_iop_rqt_digital_resource_viewer</run_depend>
 
 </package>

@@ -25,7 +25,6 @@
         <rosparam param="services">
             [
             fkie_iop_discovery: "Discovery",
-            fkie_iop_discovery: "DiscoveryClient",
             fkie_iop_liveness: "Liveness",
             fkie_iop_health_monitor: "HealthMonitor",
             # add LocalWaypointDriver to handle local waypoints from IOP

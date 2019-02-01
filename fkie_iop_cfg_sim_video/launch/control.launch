@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- JAUS configuration used by IOP bridge components
+         EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
+    <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
+
+    <!-- Start the rqt and "FKIE IOP/Access Control" plugin 
+    You need get the control. Without control no commands are published to the ROS topics by primitive driver.
+    -->
+    <node ns="ocu" name="rqt" pkg="rqt_gui" type="rqt_gui" args="--force-discover -p $(find fkie_iop_cfg_sim_video)/launch/iop.perspective"/>
+
+    <node ns="ocu" name="iop_client" pkg="fkie_iop_component" type="iop_component">
+        <param name="iop_address" value="150.63.200"/>
+        <param name="name_node" value="control_client"/>
+        <rosparam param="services">
+          [
+            fkie_iop_discovery: "DiscoveryClient",
+            fkie_iop_digital_resource_discovery : "DigitalResourceDiscoveryClient",
+            fkie_iop_client_digital_resource : "DigitalResourceClient",
+            fkie_iop_client_digital_video : "DigitalVideoClient",
+            fkie_iop_client_visual_sensor : "VisualSensorClient",
+          ]
+        </rosparam>
+        <rosparam subst_value="true">
+            EventsClient:
+                use_queries: false
+            DiscoveryClient:
+                register_own_services: false
+                enable_ros_interface: true
+        </rosparam>
+    </node>
+
+</launch>

@@ -13,7 +13,6 @@
         <rosparam param="services">
             [
             fkie_iop_discovery: "Discovery",
-            fkie_iop_discovery: "DiscoveryClient",
             fkie_iop_liveness: "Liveness",
             fkie_iop_health_monitor: "HealthMonitor",
             # add PrimitiveDriver to control the turtle
