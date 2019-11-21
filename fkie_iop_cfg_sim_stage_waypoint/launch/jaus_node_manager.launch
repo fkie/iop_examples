@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <node name="jaus_node_manager" pkg="node_manager_fkie" type="script_runner.py">
+    <node name="jaus_node_manager" pkg="fkie_node_manager" type="script_runner.py">
         <param name="script" value="$(find jaustoolset)/JTSNodeManager $(find jaustoolset)/cfg/nm.cfg" />
         <!-- <param name="stop_script" value="pkg://fkie_iop_builder///jaus_node_manager.sh stop" /> -->
     </node>
