@@ -2,6 +2,8 @@
 <launch>
     <node name="turtle" pkg="turtlesim" type="turtlesim_node" respawn="true" />
 
+    <node name="turtle2iop" pkg="fkie_iop_cfg_sim_turtle" type="turtle2iop.py">
+    </node>
     <!-- JAUS configuration used by IOP bridge components
          EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
     <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
@@ -17,6 +19,8 @@
             fkie_iop_health_monitor: "HealthMonitor",
             # add PrimitiveDriver to control the turtle
             fkie_iop_primitive_driver: "PrimitiveDriver",
+            fkie_iop_velocity_state_sensor: "VelocityStateSensor",
+            fkie_iop_local_pose_sensor: "LocalPoseSensor"
             ]
         </rosparam>
         <rosparam subst_value="true">
@@ -30,6 +34,9 @@
                 use_stamped: false
                 # added remap to catch commands from the right topic or use 'remap' of launch file
                 topic_pub_cmd_vel: /turtle1/cmd_vel
+            LocalPoseSensor:
+                source_type: 2
+                tf_frame_odom: base_link
         </rosparam>
     </node>
  </launch>

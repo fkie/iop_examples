@@ -13,6 +13,7 @@
   <url>https://github.com/fkie/iop_examples</url>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>nav_msgs</run_depend>
   <run_depend>rqt_gui</run_depend>
   <run_depend>turtlesim</run_depend>
 
@@ -20,11 +21,15 @@
 
   <!-- dependencies for robot -->
   <run_depend>fkie_iop_liveness</run_depend>
+  <run_depend>fkie_iop_local_pose_sensor</run_depend>
   <run_depend>fkie_iop_platform_manager</run_depend>
   <run_depend>fkie_iop_primitive_driver</run_depend>
+  <run_depend>fkie_iop_velocity_state_sensor</run_depend>
 
   <!-- dependencies for control station -->
   <run_depend>fkie_iop_rqt_access_control</run_depend>
+  <run_depend>fkie_iop_client_local_pose_sensor</run_depend>
   <run_depend>fkie_iop_client_primitive_driver</run_depend>
+  <run_depend>fkie_iop_client_velocity_state_sensor</run_depend>
 
 </package>

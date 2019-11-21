@@ -5,7 +5,7 @@
     <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
 
     <param name="name_subsystem" value="robot"/>
-    <node name="iop_platform_manager" pkg="fkie_iop_component" type="iop_component">
+    <node name="iop_platform_manager2" pkg="fkie_iop_component" type="iop_component">
         <param name="name_node" value="platform manager"/>
         <param name="iop_address" value="1.3.15"/>
         <rosparam param="services">

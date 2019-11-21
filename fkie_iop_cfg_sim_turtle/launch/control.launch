@@ -8,26 +8,26 @@
     <!-- JAUS configuration used by IOP bridge components
          EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
     <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
-
     
     <!-- Start the rqt and "FKIE IOP/Access Control" plugin 
     You need get the control. Without control no commands are published to the ROS topics by primitive driver.
     -->
     <node name="rqt_ocu" pkg="rqt_gui" type="rqt_gui" args="--force-discover -s fkie_iop_rqt_access_control.iop_rqt_access_control.AccessControlClient"/>
 
-    <node name="iop_ocu_client" pkg="fkie_iop_component" type="iop_component">
-        <param name="iop_address" value="150.64.200"/>
+    <node name="iop_ocu_client" pkg="fkie_iop_component" type="iop_component" clear_params="true">
+        <param name="iop_address" value="153.64.200"/>
         <param name="name_node" value="control_client"/>
         <rosparam param="services">
           [
             fkie_iop_discovery: "DiscoveryClient",
             # added client for primitive driver and also his subservices
             fkie_iop_client_primitive_driver: "PrimitiveDriverClient",
+            fkie_iop_client_velocity_state_sensor: "VelocityStateSensorClient",
+            fkie_iop_client_local_pose_sensor: "LocalPoseSensorClient"
           ]
         </rosparam>
         <rosparam subst_value="true">
-            EventsClient:
-                use_queries: false
+            use_queries: false
             DiscoveryClient:
                 register_own_services: false
                 enable_ros_interface: true
@@ -42,6 +42,11 @@
                 max_angular: 2
                 # added remap to catch commands from the right topic or use 'remap' of launch file
                 topic_sub_joy_cmd_vel: cmd_vel
+            LocalPoseSensorClient:
+                source_type: 2
+                tf_frame_odom: base_link
+                topic_pub_pose: /client_pose
+                topic_pub_odom: /client_odom
         </rosparam>
     </node>
 
