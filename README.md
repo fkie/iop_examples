@@ -9,6 +9,24 @@ It contains ROS-packages with different examples for using ROS/IOP-Bridge.
 
 
 
+## Use in a Docker
+
+    docker build -t fkie:iop .
+
+
+Launch example:
+
+    # for Rviz, Rqt and Stage GUI
+    xhost +local:root
+
+    # 1. Terminal
+    docker run -it --network host  --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1"  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTHORITY" --volume="$XAUTHORITY:$XAUTHORITY" --device=/dev/dri:/dev/dri --security-opt apparmor:unconfined -v /tmp:/tmp --rm fkie:iop rosrun fkie_iop_node_manager rosiopnodemanager.py
+
+    # 2. Terminal
+    docker run -it --network host  --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1"  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTHORITY" --volume="$XAUTHORITY:$XAUTHORITY" --device=/dev/dri:/dev/dri --security-opt apparmor:unconfined -v /tmp:/tmp --rm fkie:iop roslaunch fkie_iop_cfg_sim_stage_waypoint robot.launch
+
+    # 3. Terminal
+    docker run -it --network host  --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1"  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTHORITY" --volume="$XAUTHORITY:$XAUTHORITY" --device=/dev/dri:/dev/dri --security-opt apparmor:unconfined -v /tmp:/tmp --rm fkie:iop roslaunch fkie_iop_cfg_sim_stage_waypoint control.launch
 
 
 
