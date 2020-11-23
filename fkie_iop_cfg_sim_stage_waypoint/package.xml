@@ -13,9 +13,12 @@
   <url>https://github.com/fkie/iop_examples</url>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>move_base</run_depend>
   <run_depend>rqt_gui</run_depend>
-  <run_depend>turtlesim</run_depend>
+  <run_depend>rviz</run_depend>
+  <run_depend>stage_ros</run_depend>
 
+  <run_depend>fkie_iop_component</run_depend>
   <run_depend>fkie_iop_discovery</run_depend>
 
   <!-- dependencies for robot -->
@@ -30,5 +33,6 @@
   <run_depend>fkie_iop_client_local_pose_sensor</run_depend>
   <run_depend>fkie_iop_client_local_waypoint_driver</run_depend>
   <run_depend>fkie_iop_client_range_sensor</run_depend>
+  <run_depend>jaustoolset</run_depend>
 
 </package>

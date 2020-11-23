@@ -17,8 +17,9 @@
   <run_depend>rqt_gui</run_depend>
   <run_depend>turtlesim</run_depend>
 
-  <run_depend>fkie_iop_discovery</run_depend>
+  <run_depend>fkie_iop_component</run_depend>
 
+  <run_depend>fkie_iop_liveness</run_depend>
   <!-- dependencies for robot -->
   <run_depend>fkie_iop_liveness</run_depend>
   <run_depend>fkie_iop_local_pose_sensor</run_depend>
@@ -31,5 +32,6 @@
   <run_depend>fkie_iop_client_local_pose_sensor</run_depend>
   <run_depend>fkie_iop_client_primitive_driver</run_depend>
   <run_depend>fkie_iop_client_velocity_state_sensor</run_depend>
+  <run_depend>jaustoolset</run_depend>
 
 </package>

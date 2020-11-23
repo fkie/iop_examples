@@ -15,6 +15,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>hector_mapping</run_depend>
 
+  <run_depend>fkie_iop_component</run_depend>
   <run_depend>fkie_iop_client_costmap2d</run_depend>
   <run_depend>fkie_iop_client_digital_resource</run_depend>
   <run_depend>fkie_iop_client_digital_video</run_depend>
@@ -45,10 +46,12 @@
 
   <run_depend>fkie_iop_rqt_access_control</run_depend>
   <run_depend>fkie_iop_rqt_digital_resource_viewer</run_depend>
+  <run_depend>jaustoolset</run_depend>
 
   <run_depend>geodesy</run_depend>
   <run_depend>rqt_gui</run_depend>
   <run_depend>rqt_robot_steering</run_depend>
+  <run_depend>rviz</run_depend>
   <run_depend>stage_ros</run_depend>
   <run_depend>sensor_msgs</run_depend>
   <run_depend>topic_tools</run_depend>

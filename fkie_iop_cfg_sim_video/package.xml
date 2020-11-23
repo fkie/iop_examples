@@ -29,5 +29,6 @@
   <run_depend>fkie_iop_client_digital_video</run_depend>
   <run_depend>fkie_iop_rqt_access_control</run_depend>
   <run_depend>fkie_iop_rqt_digital_resource_viewer</run_depend>
+  <run_depend>jaustoolset</run_depend>
 
 </package>
