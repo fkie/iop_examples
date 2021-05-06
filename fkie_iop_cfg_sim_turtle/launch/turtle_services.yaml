@@ -1,0 +1,29 @@
+iop_platform_manager:
+  ros__parameters:
+    iop_services:
+      - fkie_iop_discovery/Discovery
+      - fkie_iop_liveness/Liveness
+      - fkie_iop_platform_mode/PlatformMode
+      - fkie_iop_platform_state/PlatformState
+      - fkie_iop_health_monitor/HealthMonitor
+      # add PrimitiveDriver to control the turtle
+      - fkie_iop_primitive_driver/PrimitiveDriver
+      - fkie_iop_velocity_state_sensor/VelocityStateSensor
+      - fkie_iop_local_pose_sensor/LocalPoseSensor
+    Discovery:
+      system_id: 2  # 2: Subsystem Identification, 3: Node Identification, 4: Component Identification
+      system_type: 10001  # 10001: VEHICLE, 20001: OCU, 30001: OTHER_SUBSYSTEM, 40001: NODE, 50001: PAYLOAD, 60001: COMPONENT
+      name_subsystem: Turtle
+      name_node: TurtleDriver
+      platform_mode: 0
+    PrimitiveDriver:
+      max_linear_x: 3.0
+      max_angular_z: -1.5
+      # do not use the stamped twist messages
+      use_stamped: false
+      # added remap to catch commands from the right topic or use 'remap' of launch file
+      topic.pub.cmd_vel: /turtle1/cmd_vel
+    LocalPoseSensor:
+      source_type: 2
+      tf_frame_odom: odom
+

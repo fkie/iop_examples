@@ -1,0 +1,31 @@
+iop_control_turtle:
+  ros__parameters:
+    iop_services:
+      - fkie_iop_discovery/DiscoveryClient
+      - fkie_iop_platform_state/PlatformStateClient
+      - fkie_iop_client_primitive_driver/PrimitiveDriverClient
+      - fkie_iop_client_global_pose_sensor/GlobalPoseSensorClient
+      - fkie_iop_client_velocity_state_sensor/VelocityStateSensorClient
+      - fkie_iop_client_local_pose_sensor/LocalPoseSensorClient
+    EventsClient:
+      use_queries: false
+    DiscoveryClient:
+      register_own_services: false
+      enable_ros_interface: true
+    # configuration for primitive client
+    # see https://github.com/fkie/iop_jaus_mobility_clients#fkie_iop_client_primitive_driver-primitivedriverclient
+    PrimitiveDriverClient:
+        # do not use the stamped twist messages
+        use_stamped: false
+        # new parameter added to handle velocities greater than 1.0
+        # you should update the https://github.com/fkie/iop_jaus_mobility_clients repository
+        max_linear: 2.
+        max_angular: 2.
+        # added remap to catch commands from the right topic or use 'remap' of launch file
+        topic.sub.joy_cmd_vel: cmd_vel
+    LocalPoseSensorClient:
+        source_type: 2
+        tf_frame_odom: odom
+        topic.pub.pose: /client_pose
+        topic.pub.odom: /client_odom
+

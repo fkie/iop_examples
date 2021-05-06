@@ -1,0 +1,20 @@
+- git:
+    local-name: iop_msgs
+    uri: https://github.com/fkie/iop_msgs
+    version: foxy-devel
+- git:
+    local-name: iop_core
+    uri: https://github.com/fkie/iop_core
+    version: foxy-devel
+- git:
+    local-name: iop_gui
+    uri: https://github.com/fkie/iop_gui
+    version: foxy-devel
+- git:
+    local-name: iop_jaus_mobility
+    uri: https://github.com/fkie/iop_jaus_mobility
+    version: foxy-devel
+- git:
+    local-name: iop_jaus_mobility_clients
+    uri: https://github.com/fkie/iop_jaus_mobility_clients
+    version: foxy-devel

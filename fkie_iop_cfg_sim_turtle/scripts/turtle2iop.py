@@ -3,7 +3,7 @@
 ## FRAUNHOFER INTERNAL                                                       ##
 ###############################################################################
 ##                                                                           ##
-## Copyright 2006-2016 Fraunhofer FKIE                                       ##
+## Copyright 2021 Fraunhofer FKIE                                       ##
 ## All rights reserved                                                       ##
 ##                                                                           ##
 ## RIGHT OF USE. The contents of this file may neither be passed on to third ##
@@ -24,43 +24,93 @@ import sys
 
 from nav_msgs.msg import Odometry
 from turtlesim.msg import Pose
-import roslib.names
-import rospy
-from tf.transformations import quaternion_from_euler
+import rclpy
 
 __author__ = "Alexander Tiderko (Alexander.Tiderko@fkie.fraunhofer.de)"
-__copyright__ = "Copyright (c) 2019 Alexander Tiderko, Fraunhofer FKIE/CMS"
+__copyright__ = "Copyright (c) 2021 Alexander Tiderko, Fraunhofer FKIE/CMS"
 __license__ = "proprietary"
 __version__ = "0.1"
-__date__ = "2019-11-21"
+__date__ = "2021-05-06"
 __doc__ = '''
           Creates a node to convert turtlesim/Pose to nav_msgs/Odometry
           '''
 
+from rclpy.node import Node
 
-class Converter():
+# fix as long not available in ROS2
+def quaternion_from_euler(roll, pitch, yaw):
+    """
+    Converts euler roll, pitch, yaw to quaternion (w in last place)
+    quat = [x, y, z, w]
+    Bellow should be replaced when porting for ROS 2 Python tf_conversions is done.
+    """
+    cy = math.cos(yaw * 0.5)
+    sy = math.sin(yaw * 0.5)
+    cp = math.cos(pitch * 0.5)
+    sp = math.sin(pitch * 0.5)
+    cr = math.cos(roll * 0.5)
+    sr = math.sin(roll * 0.5)
+
+    q = [0] * 4
+    q[0] = cy * cp * cr + sy * sp * sr
+    q[1] = cy * cp * sr - sy * sp * cr
+    q[2] = sy * cp * sr + cy * sp * cr
+    q[3] = sy * cp * cr - cy * sp * sr
+
+    return q
+
+# import numpy as np
+
+# def euler_from_quaternion(quaternion):
+#     """
+#     Converts quaternion (w in last place) to euler roll, pitch, yaw
+#     quaternion = [x, y, z, w]
+#     Bellow should be replaced when porting for ROS 2 Python tf_conversions is done.
+#     """
+#     x = quaternion.x
+#     y = quaternion.y
+#     z = quaternion.z
+#     w = quaternion.w
+
+#     sinr_cosp = 2 * (w * x + y * z)
+#     cosr_cosp = 1 - 2 * (x * x + y * y)
+#     roll = np.arctan2(sinr_cosp, cosr_cosp)
+
+#     sinp = 2 * (w * y - z * x)
+#     pitch = np.arcsin(sinp)
+
+#     siny_cosp = 2 * (w * z + x * y)
+#     cosy_cosp = 1 - 2 * (y * y + z * z)
+#     yaw = np.arctan2(siny_cosp, cosy_cosp)
+
+#     return roll, pitch, yaw
+
+class Converter(Node):
 
   ORI_OFFSET = 0.
   ORI_INVERT = 1.0
 
   def __init__(self):
-    self.ORI_OFFSET = rospy.get_param('~ori_offset', Converter.ORI_OFFSET)
-    rospy.loginfo("~ori_offset: '%f'", self.ORI_OFFSET)
-    ori_invert = rospy.get_param('~ori_invert', Converter.ORI_INVERT)
-    if ori_invert not in [-1., 1.]:
-      rospy.logwarn("Invalid value for ~ori_invert %s, expected: {1., -1.}; use default: %s" % (ori_invert, self.ORI_INVERT))
+    super().__init__('iop_turtle_pose_converter')
+    self.declare_parameter('ori_offset', Converter.ORI_OFFSET)
+    self.declare_parameter('ori_invert', Converter.ORI_INVERT)
+    self.ORI_OFFSET = self.get_parameter('ori_offset').get_parameter_value().double_value
+    self.get_logger().info(f'ori_offset: {self.ORI_OFFSET}')
+    ori_invert = self.get_parameter('ori_invert').get_parameter_value().double_value
+    if ori_invert not in [-1.0, 1.0]:
+      self.get_logger().warn(f'Invalid value {ori_invert} for ori_invert, expected: {1., -1.}; use default: {self.ORI_INVERT}')
       ori_invert = 1.
     self.ORI_INVERT = ori_invert
-    self._pub_odom = rospy.Publisher("odom", Odometry, queue_size=1)
-    rospy.loginfo("Publisher `%s` created", self._pub_odom.name)
-    self._sub_pose = rospy.Subscriber("/turtle1/pose", Pose, self._on_turtle_pose, queue_size=1)
-    rospy.loginfo("Subscriber `%s` created", self._sub_pose.name)
+    self._pub_odom = self.create_publisher(Odometry, 'odom', 1)
+    self.get_logger().info(f'Publisher `{self._pub_odom.topic_name}` created')
+    self._sub_pose = self.create_subscription(Pose, '/turtle1/pose', self._on_turtle_pose, 1)
+    self.get_logger().info(f'Subscriber `{self._sub_pose.topic_name}` created')
 
   def _on_turtle_pose(self, msg):
     new_msg = Odometry()
-    new_msg.header.stamp = rospy.Time.now()
-    new_msg.header.frame_id = "base_link"
-    new_msg.child_frame_id = "base_link"
+    new_msg.header.stamp = self.get_clock().now().to_msg()
+    new_msg.header.frame_id = 'odom'
+    #new_msg.child_frame_id = 'base_link'
     new_msg.twist.twist.linear.x = msg.linear_velocity
     new_msg.twist.twist.angular.x = msg.angular_velocity
     new_msg.pose.pose.position.x = msg.x
@@ -93,10 +143,21 @@ def setTerminalName(name):
   sys.stdout.write("".join(["\x1b]2;", name, "\x07"]))
 
 if __name__ == '__main__':
-  rospy.init_node('convert_turtle_pose_to_odom')
-  set_process_name(rospy.get_name())
+  rclpy.init(args=None)
+  converter = Converter()
+  set_process_name(converter.get_name())
   # set the terminal name
-  setTerminalName(rospy.get_name())
-  cl = Converter()
-  rospy.spin()
+  setTerminalName(converter.get_name())
+  try:
+    rclpy.spin(converter)
+
+    # Destroy the node explicitly
+    # (optional - otherwise it will be done automatically
+    # when the garbage collector destroys the node object)
+    converter.destroy_node()
+    rclpy.shutdown()
+  except KeyboardInterrupt:
+    converter.destroy_node()
+    rclpy.shutdown()
+
 

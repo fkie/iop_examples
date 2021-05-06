@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
 
-# setup rtk environment
-source "/ws_iop/devel/setup.bash"
+source "/ws_iop/install/setup.bash"
 exec "$@"
