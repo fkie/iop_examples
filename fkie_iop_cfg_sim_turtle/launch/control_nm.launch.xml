@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node name="iop_node_manager" pkg="fkie_iop_node_manager" exec="rosiopnodemanager.py" />
+
+    <node name="iop_control_turtle" pkg="fkie_iop_component" exec="iop_component" _args="--ros-args --log-level debug" output="screen" >
+        <param name="iop_address" value="153.64.200"/>
+        <param name="name_node" value="control_turtle"/>
+        <param from="$(find-pkg-share fkie_iop_cfg_sim_turtle)/launch/control_services.yaml"/>
+        <!-- JAUS configuration used by IOP bridge components
+            EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
+        <param name="jaus_config" value="$(find-pkg-share jaustoolset)/cfg/nm.cfg"/>
+    </node>
+
+    <!-- Start the rqt and "FKIE IOP/Access Control" plugin 
+    You need get the control. Without control no commands are published to the ROS topics by primitive driver.
+    -->
+    <node name="rqt_ocu" pkg="rqt_gui" exec="rqt_gui" args="--force-discover -s fkie_iop_rqt_access_control.iop_rqt_access_control.AccessControlClient"/>
+
+    <node name="teleop_key" pkg="turtlesim" exec="turtle_teleop_key" required="true" launch-prefix="xterm -e">
+      <!-- added this remap to be able to test the configuration on the same computer -->
+      <!-- <remap from="/cmd_vel" to="/joy_cmd_vel"/> -->
+    </node>
+
+</launch>

@@ -50,4 +50,3 @@ ros2 launch fkie_iop_cfg_sim_turtle turtle.launch.xml
 
 ros2 launch fkie_iop_cfg_sim_turtle control.launch.xml
 ```
->you cal also use the `node_manager`, a graphical user interface from `multimaster_fkie`, to load the launch files and start the nodes.

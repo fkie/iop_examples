@@ -9,9 +9,11 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
-        ('share/' + package_name + '/launch', ['launch/control_services.yaml',
+        ('share/' + package_name + '/launch', ['launch/control_nm.launch.xml',
+                                               'launch/control_services.yaml',
                                                'launch/control.launch.xml',
                                                'launch/iop_node_manager.launch.xml',
+                                               'launch/turtle_nm.launch.xml',
                                                'launch/turtle_services.yaml',
                                                'launch/turtle.launch.xml']),
         ('share/' + package_name, ['package.xml']),

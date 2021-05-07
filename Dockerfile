@@ -26,10 +26,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # build
-RUN ["/bin/bash", "-c", "source ${ROS_PATH}/setup.bash && cd ${ROS_WS} && colcon build"]
+RUN ["/bin/bash", "-c", "source ${ROS_PATH}/setup.bash && cd ${WS} && colcon build"]
 
 # setup ROS if open only bash
-RUN echo "source ${ROS_WS}/install/setup.bash" >> /root/.bashrc
+RUN echo "source ${WS}/install/setup.bash" >> /root/.bashrc
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

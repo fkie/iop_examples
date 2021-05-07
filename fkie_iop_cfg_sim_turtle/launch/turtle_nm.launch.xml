@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="turtle_sim" pkg="turtlesim" exec="turtlesim_node" respawn="true" />
+
+    <node name="turtle2iop" pkg="fkie_iop_cfg_sim_turtle" exec="turtle2iop.py">
+    </node>
+
+    <node name="iop_node_manager" pkg="fkie_iop_node_manager" exec="rosiopnodemanager.py" />
+
+    <node name="iop_platform_manager" pkg="fkie_iop_component" exec="iop_component" _args="--ros-args --log-level debug" output="screen" >
+        <param name="name_node" value="turtle_platform manager"/>
+        <param name="iop_address" value="1.1.15"/>
+        <param from="$(find-pkg-share fkie_iop_cfg_sim_turtle)/launch/turtle_services.yaml"/>
+        <!-- JAUS configuration used by IOP bridge components
+            EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
+        <param name="jaus_config" value="$(find-pkg-share jaustoolset)/cfg/nm.cfg"/>
+    </node>
+ </launch>
