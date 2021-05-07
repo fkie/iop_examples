@@ -18,11 +18,13 @@ RUN mkdir -p ${WS_SRC}/iop
 RUN sh -c 'wstool init ${WS_SRC}/iop'
 RUN sh -c 'wstool merge -t ${WS_SRC}/iop https://raw.githubusercontent.com/fkie/iop_node_manager/foxy-devel/iop_node_manager.rosinstall'
 RUN sh -c 'wstool merge -t ${WS_SRC}/iop https://raw.githubusercontent.com/fkie/iop_core/foxy-devel/iop.rosinstall'
-#RUN sh -c 'wstool merge -t ${WS_SRC}/iop https://raw.githubusercontent.com/fkie/iop_examples/foxy-devel/iop_examples.rosinstall'
+RUN sh -c 'wstool merge -t ${WS_SRC}/iop https://raw.githubusercontent.com/fkie/iop_examples/foxy-devel/iop_examples.rosinstall'
 RUN sh -c 'wstool update -t ${WS_SRC}/iop'
 # install dependencies
 RUN apt-get update \
     && rosdep install --from-paths ${WS_SRC} --ignore-src --rosdistro ${ROS_DISTRO} -y \
+    --skip-keys catkin --skip-keys topic_tools --skip-keys stage_ros --skip-keys rviz \
+    --skip-keys move_base --skip-keys hector_mapping \
     && rm -rf /var/lib/apt/lists/*
 
 # build

@@ -20,10 +20,10 @@ Launch example:
     xhost +local:root
 
     # 1. Terminal
-    docker run -it --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1"  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTHORITY" --volume="$XAUTHORITY:$XAUTHORITY" --device=/dev/dri:/dev/dri --security-opt apparmor:unconfined -v /tmp:/tmp --rm fkie:iop ros2 launch fkie_iop_cfg_sim_stage_waypoint robot_nm.launch.xml
+    docker run -it --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1"  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTHORITY" --volume="$XAUTHORITY:$XAUTHORITY" --device=/dev/dri:/dev/dri --security-opt apparmor:unconfined -v /tmp:/tmp --rm fkie:iop ros2 launch fkie_iop_cfg_sim_turtle robot_nm.launch.xml
 
     # 2. Terminal
-    docker run -it --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1"  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTHORITY" --volume="$XAUTHORITY:$XAUTHORITY" --device=/dev/dri:/dev/dri --security-opt apparmor:unconfined -v /tmp:/tmp --rm fkie:iop ros2 launch fkie_iop_cfg_sim_stage_waypoint control_nm.launch.xml
+    docker run -it --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1"  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTHORITY" --volume="$XAUTHORITY:$XAUTHORITY" --device=/dev/dri:/dev/dri --security-opt apparmor:unconfined -v /tmp:/tmp --rm fkie:iop ros2 launch fkie_iop_cfg_sim_turtle control_nm.launch.xml
 
 
 
