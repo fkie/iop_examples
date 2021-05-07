@@ -18,8 +18,9 @@
     <node name="rqt_ocu" pkg="rqt_gui" exec="rqt_gui" args="--force-discover -s fkie_iop_rqt_access_control.iop_rqt_access_control.AccessControlClient"/>
 
     <node name="teleop_key" pkg="turtlesim" exec="turtle_teleop_key" required="true" launch-prefix="xterm -e">
-      <!-- added this remap to be able to test the configuration on the same computer -->
-      <remap from="cmd_vel" to="/cmd_vel"/>
+        <!-- added remapping to be able to test the configuration on the same computer -->
+        <remap from="/turtle1/cmd_vel" to="/cmd_vel"/>
     </node>
+
 
 </launch>
