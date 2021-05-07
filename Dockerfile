@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     vim mc bash-completion wget \
     python3-wstool \
     default-jdk \
+    xterm \
     && rm -rf /var/lib/apt/lists/*
 
 ARG ROS_PATH=/opt/ros/foxy
