@@ -36,7 +36,6 @@
                 topic_pub_cmd_vel: /turtle1/cmd_vel
             LocalPoseSensor:
                 source_type: 2
-                tf_frame_odom: base_link
         </rosparam>
     </node>
  </launch>

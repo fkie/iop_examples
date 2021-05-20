@@ -59,7 +59,7 @@ class Converter():
   def _on_turtle_pose(self, msg):
     new_msg = Odometry()
     new_msg.header.stamp = rospy.Time.now()
-    new_msg.header.frame_id = "base_link"
+    new_msg.header.frame_id = "odom"
     new_msg.child_frame_id = "base_link"
     new_msg.twist.twist.linear.x = msg.linear_velocity
     new_msg.twist.twist.angular.x = msg.angular_velocity

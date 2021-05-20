@@ -44,7 +44,7 @@
                 topic_sub_joy_cmd_vel: cmd_vel
             LocalPoseSensorClient:
                 source_type: 2
-                tf_frame_odom: base_link
+                tf_frame_odom: odom
                 topic_pub_pose: /client_pose
                 topic_pub_odom: /client_odom
         </rosparam>
