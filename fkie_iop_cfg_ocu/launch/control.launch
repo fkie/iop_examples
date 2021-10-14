@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="ns" value="ocu"/>
+  <node name="iopnodemanager" pkg="fkie_iop_node_manager" type="rosiopnodemanager.py">
+    <rosparam subst_value="true">
+        global:
+          loglevel: info
+        transport:
+          loopback_debug:
+            enable: true
+    </rosparam>
+  </node>
+
+  <node ns="$(arg ns)" name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" required="true" launch-prefix="xterm -e">
+  </node>
+  <!-- JAUS configuration used by IOP bridge components
+         EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
+  <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
+  <!-- Start the rqt and "FKIE IOP/Access Control" plugin 
+    You need get the control. Without control no commands are published to the ROS topics by primitive driver.
+    -->
+  <node ns="$(arg ns)" name="mapviz_initialize_origin" pkg="swri_transform_util" type="initialize_origin.py">
+  </node>
+  <node ns="$(arg ns)" name="tf_wgs84_map" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 anchor map">
+  </node>
+
+  <node ns="$(arg ns)" name="rqt_ocu" pkg="rqt_gui" type="rqt_gui"
+      args="--force-discover --perspective-file $(find fkie_iop_cfg_ocu)/launch/iop.perspective" respawn="true">
+      <param name="config" value="$(find fkie_iop_cfg_ocu)/launch/iop.mvc"/>
+  </node>
+<!--   <node pkg="multires_image" type="mapviz_tile_loader" name="mapviz_tile_loader"> -->
+<!--     <param name="base_directory" value="$(env HOME)/.map_tiles"/> -->
+<!--     <param name="draw_order" value="1"/> -->
+<!--      -->
+<!--     <remap from="add_mapviz_display" to="mapviz/add_mapviz_display"/> -->
+<!--     <remap from="gps" to="/local_xy_origin"/> -->
+<!--   </node> -->
+
+  <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="rtsp_driver_node.py" name="rtsp_driver_node" output="screen">
+      <param name="rtsp_resource" value="" />
+      <param name="camera_name" value="front" />
+      <param name="image_raw_topic" value="image_raw" />
+      <param name="camera_info_topic" value="camera_info" />
+      <remap from="current_video_url" to="current_video_url"/>
+  </node>
+
+  <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="swri_plan_route.py" name="swri_plan_route" output="screen">
+  </node>
+
+  <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="swri_route2iop_cmd.py" name="swri_route2iop_cmd" output="screen">
+  </node>
+
+  <node ns="$(arg ns)" name="iop_ocu_client" pkg="fkie_iop_component" type="iop_component" clear_params="true">
+    <param name="iop_address" value="153.64.200"/>
+    <param name="name_node" value="control_client"/>
+    <rosparam param="services">
+          [
+            fkie_iop_discovery: "DiscoveryClient",
+            fkie_iop_client_global_pose_sensor: "GlobalPoseSensorClient",
+            fkie_iop_client_local_pose_sensor: "LocalPoseSensorClient",
+            fkie_iop_client_velocity_state_sensor: "VelocityStateSensorClient",
+            fkie_iop_client_primitive_driver: "PrimitiveDriverClient",
+            fkie_iop_client_costmap2d: "CostMap2DClient",
+            fkie_iop_client_digital_resource : "DigitalResourceClient",
+            fkie_iop_digital_resource_discovery : "DigitalResourceDiscoveryClient",
+            fkie_iop_client_global_waypoint_list_driver: "GlobalWaypointListDriverClient",
+            fkie_iop_client_global_waypoint_driver: "GlobalWaypointDriverClient",
+            fkie_iop_client_path_reporter: "PathReporterClient",
+            fkie_iop_client_measurement_sensor: "MeasurementSensorClient",
+            fkie_iop_client_power_plant: "PowerPlantManagerClient",
+            fkie_iop_client_digital_video : "DigitalVideoClient",
+            fkie_iop_client_visual_sensor : "VisualSensorClient",
+            fkie_iop_handoff: "HandoffController"
+          ]
+    </rosparam>
+    <rosparam subst_value="true">
+        use_queries: false
+        DiscoveryClient:
+          register_own_services: false
+          enable_ros_interface: true
+        # configuration for primitive client
+        # see https://github.com/fkie/iop_jaus_mobility_clients#fkie_iop_client_primitive_driver-primitivedriverclient
+        PrimitiveDriverClient:
+          # do not use the stamped twist messages
+          use_stamped: false
+          # new parameter added to handle velocities greater than 1.0
+          # you should update the https://github.com/fkie/iop_jaus_mobility_clients repository
+          max_linear: 2
+          max_angular: 2
+          # added remap to catch commands from the right topic or use 'remap' of launch file
+          topic_sub_joy_cmd_vel: cmd_vel
+        GlobalPoseSensorClient:
+#                anchor_easting: 367591
+#                anchor_northing: 5608783
+            publish_world_anchor: true
+#            tf_frame_world: "world"
+        GlobalWaypointDriverClient:
+ #           tf_frame_world: "world"
+            topic_sub_cmd_pose: "cmd_local_pose"
+        GlobalWaypointListDriverClient:
+            topic_sub_cmd_global_path: "/rviz/interactive_path"
+        LocalWaypointListDriverClient:
+            topic_sub_cmd_local_path: "/rviz/interactive_path"
+        LocalPoseSensorClient:
+          source_type: 2
+          tf_frame_odom: odom
+          topic_pub_pose: /client_pose
+          topic_pub_odom: /client_odom
+    </rosparam>
+    <param name="tf_frame_world" value="world" />
+  </node>
+</launch>

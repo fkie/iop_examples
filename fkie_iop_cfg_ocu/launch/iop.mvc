@@ -1,0 +1,98 @@
+capture_directory: ~
+fixed_frame: anchor
+target_frame: base_link
+fix_orientation: false
+rotate_90: false
+enable_antialiasing: true
+show_displays: true
+show_status_bar: true
+show_capture_tools: false
+window_width: 977
+window_height: 745
+view_scale: 0.1351306
+offset_x: 0.5927966
+offset_y: -0.09370241
+use_latest_transforms: true
+background: "#a0a0a4"
+displays:
+  - type: mapviz_plugins/tile_map
+    name: new display
+    config:
+      visible: true
+      collapsed: true
+      custom_sources:
+        - base_url: http://tile.openstreetmap.org/{level}/{x}/{y}.png
+          max_zoom: 19
+          name: OpenStreetMap
+          type: wmts
+      bing_api_key: ""
+      source: OpenStreetMap
+  - type: mapviz_plugins/navsat
+    name: new display
+    config:
+      visible: true
+      collapsed: true
+      topic: /ocu/fix
+      color: "#00ff00"
+      draw_style: lines
+      position_tolerance: 0
+      buffer_size: 0
+  - type: mapviz_plugins/plan_route
+    name: new display
+    config:
+      visible: true
+      collapsed: false
+      route_topic: /ocu/cmd_route
+      color: "#00ff00"
+      service: /ocu/plan_route
+      start_from_vehicle: true
+  - type: mapviz_plugins/path
+    name: new display
+    config:
+      visible: true
+      collapsed: true
+      topic: /ocu/planned_global_path
+      color: "#00ff00"
+  - type: mapviz_plugins/odometry
+    name: new display
+    config:
+      visible: false
+      collapsed: true
+      topic: /client_odom
+      color: "#8f5902"
+      draw_style: arrows
+      position_tolerance: 0
+      buffer_size: 0
+      show_laps: false
+      show_covariance: false
+      show_all_covariances: false
+      static_arrow_sizes: false
+      arrow_size: 29
+      show_timestamps: 0
+  - type: mapviz_plugins/pose
+    name: new display
+    config:
+      visible: true
+      collapsed: true
+      topic: /client_pose
+      color: "#c17d11"
+      draw_style: arrows
+      position_tolerance: 0
+      buffer_size: 0
+      show_laps: false
+      static_arrow_sizes: false
+      arrow_size: 25
+  - type: mapviz_plugins/image
+    name: new display
+    config:
+      visible: true
+      collapsed: true
+      topic: /ocu/image_raw
+      anchor: top left
+      units: pixels
+      offset_x: 0
+      offset_y: 0
+      width: 320
+      height: 240
+      keep_ratio: true
+      image_transport: default

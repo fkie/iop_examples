@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<package>
+  <name>fkie_iop_cfg_ocu</name>
+  <version>1.1.0</version>
+  <description>
+    An example configuration for an OCU with ROS/IOP-Bridge.
+  </description>
+
+  <maintainer email="Alexander.Tiderko@fkie.fraunhofer.de">Alexander Tiderko</maintainer>
+  <license>GPLv2</license>
+  <author>Alexander Tiderko</author>
+
+  <url>https://github.com/fkie/iop_examples</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>rqt_gui</run_depend>
+  <run_depend>teleop_twist_keyboard</run_depend>
+  <run_depend>mapviz</run_depend>
+  <run_depend>mapviz_plugins</run_depend>
+  <run_depend>tile_map</run_depend>
+  <run_depend>multires_image</run_depend>
+  <run_depend>camera_info_manager_py</run_depend>
+  <run_depend>geographic_msgs</run_depend>
+  <run_depend>marti_nav_msgs</run_depend>
+  <run_depend>geographic_msgs</run_depend>
+
+
+  <run_depend>fkie_iop_node_manager</run_depend>
+  <run_depend>fkie_iop_component</run_depend>
+
+  <!-- dependencies for control station -->
+  <run_depend>fkie_iop_client_costmap2d</run_depend>
+  <run_depend>fkie_iop_client_digital_resource</run_depend>
+  <run_depend>fkie_iop_client_digital_video</run_depend>
+  <run_depend>fkie_iop_client_global_pose_sensor</run_depend>
+  <run_depend>fkie_iop_client_global_waypoint_driver</run_depend>
+  <run_depend>fkie_iop_client_global_waypoint_list_driver</run_depend>
+  <run_depend>fkie_iop_client_local_pose_sensor</run_depend>
+  <run_depend>fkie_iop_client_measurement_sensor</run_depend>
+  <run_depend>fkie_iop_client_path_reporter</run_depend>
+  <run_depend>fkie_iop_client_power_plant</run_depend>
+  <run_depend>fkie_iop_client_primitive_driver</run_depend>
+  <run_depend>fkie_iop_client_velocity_state_sensor</run_depend>
+  <run_depend>fkie_iop_client_digital_video</run_depend>
+  <run_depend>fkie_iop_client_visual_sensor</run_depend>
+  <run_depend>fkie_iop_handoff</run_depend>
+  <run_depend>fkie_iop_rqt_access_control</run_depend>
+  <run_depend>jaustoolset</run_depend>
+
+</package>

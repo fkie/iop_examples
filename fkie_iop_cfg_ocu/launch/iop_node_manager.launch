@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="use_iop_node_manager" default="true"/>
+
+  <node unless="$(arg use_iop_node_manager)" name="jaus_node_manager" pkg="fkie_node_manager" type="script_runner.py">
+    <param name="script" value="$(find jaustoolset)/JTSNodeManager $(find jaustoolset)/cfg/nm.cfg"/>
+    <!-- <param name="stop_script" value="pkg://fkie_iop_builder///jaus_node_manager.sh stop" /> -->
+  </node>
+
+  <node     if="$(arg use_iop_node_manager)" name="iopnodemanager" pkg="fkie_iop_node_manager" type="rosiopnodemanager.py">
+    <rosparam subst_value="true">
+        global:
+          loglevel: info
+        transport:
+          loopback_debug:
+            enable: false
+    </rosparam>
+  </node>
+</launch>
