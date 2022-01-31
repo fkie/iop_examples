@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>fkie_iop_cfg_sim_stage_waypoint</name>
-  <version>1.1.0</version>
+  <version>2.1.0</version>
   <description>
     A configuration example to demonstrate waypoint navigation using ROS/IOP-Bridge in between of rviz and move_base.
   </description>
