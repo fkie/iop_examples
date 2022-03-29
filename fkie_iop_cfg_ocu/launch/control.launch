@@ -24,10 +24,12 @@
   <node ns="$(arg ns)" name="tf_wgs84_map" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 anchor map">
   </node>
 
-  <node ns="$(arg ns)" name="rqt_ocu" pkg="rqt_gui" type="rqt_gui"
-      args="--force-discover --perspective-file $(find fkie_iop_cfg_ocu)/launch/iop.perspective" respawn="true">
+  <node pkg="mapviz" type="mapviz" name="mapviz"></node>
+
+  <!-- <node ns="$(arg ns)" name="rqt_ocu" pkg="rqt_gui" type="rqt_gui"
+      args="- -force-discover - -perspective-file $(find fkie_iop_cfg_ocu)/launch/iop.perspective" respawn="true">
       <param name="config" value="$(find fkie_iop_cfg_ocu)/launch/iop.mvc"/>
-  </node>
+  </node> -->
 <!--   <node pkg="multires_image" type="mapviz_tile_loader" name="mapviz_tile_loader"> -->
 <!--     <param name="base_directory" value="$(env HOME)/.map_tiles"/> -->
 <!--     <param name="draw_order" value="1"/> -->

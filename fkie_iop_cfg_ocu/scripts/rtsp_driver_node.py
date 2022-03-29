@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # based on https://github.com/afdaniele/rtsp-ros-driver.git
 import os
 import cv2
@@ -8,7 +8,7 @@ import rospy
 from cv_bridge import CvBridge
 from std_msgs.msg import String
 from sensor_msgs.msg import Image, CameraInfo
-from camera_info_manager import *
+from fkie_iop_cfg_ocu.camera_info_manager import *
 from threading import Thread
 from time import sleep
 

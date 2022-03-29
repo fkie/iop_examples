@@ -7,14 +7,28 @@ enable_antialiasing: true
 show_displays: true
 show_status_bar: true
 show_capture_tools: false
-window_width: 977
-window_height: 745
-view_scale: 0.1351306
-offset_x: 0.5927966
-offset_y: -0.09370241
+window_width: 1141
+window_height: 769
+view_scale: 2.357948
+offset_x: 2.357948
+offset_y: 0
 use_latest_transforms: true
 background: "#a0a0a4"
 displays:
+  - type: fkie_iop_mapviz_plugins/iop_access_control
+    name: new display
+    config:
+      visible: true
+      collapsed: false
+      autorithy: 205
+      topic_namespace: /
+      autorequest: false
+  - type: fkie_iop_mapviz_plugins/iop_digital_resource
+    name: new display
+    config:
+      visible: true
+      collapsed: false
+      topic: /ocu/
   - type: mapviz_plugins/tile_map
     name: new display
     config:
@@ -41,7 +55,7 @@ displays:
     name: new display
     config:
       visible: true
-      collapsed: false
+      collapsed: true
       route_topic: /ocu/cmd_route
       color: "#00ff00"
       service: /ocu/plan_route
@@ -93,6 +107,6 @@ displays:
       offset_x: 0
       offset_y: 0
       width: 320
-      height: 240
+      height: 320
       keep_ratio: true
       image_transport: default

@@ -14,13 +14,11 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>nav_msgs</run_depend>
-  <run_depend>rqt_gui</run_depend>
   <run_depend>teleop_twist_keyboard</run_depend>
   <run_depend>mapviz</run_depend>
   <run_depend>mapviz_plugins</run_depend>
   <run_depend>tile_map</run_depend>
   <run_depend>multires_image</run_depend>
-  <run_depend>camera_info_manager_py</run_depend>
   <run_depend>geographic_msgs</run_depend>
   <run_depend>marti_nav_msgs</run_depend>
   <run_depend>geographic_msgs</run_depend>
@@ -45,7 +43,7 @@
   <run_depend>fkie_iop_client_digital_video</run_depend>
   <run_depend>fkie_iop_client_visual_sensor</run_depend>
   <run_depend>fkie_iop_handoff</run_depend>
-  <run_depend>fkie_iop_rqt_access_control</run_depend>
+  <run_depend>fkie_iop_mapviz_plugins</run_depend>
   <run_depend>jaustoolset</run_depend>
 
 </package>
