@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
   <arg name="ns" value="ocu"/>
+  <arg name="use_teleop_twist_keyboard" value="false"/>
   <node name="iopnodemanager" pkg="fkie_iop_node_manager" type="rosiopnodemanager.py">
     <rosparam subst_value="true">
         global:
@@ -11,8 +12,10 @@
     </rosparam>
   </node>
 
-  <node ns="$(arg ns)" name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" required="true" launch-prefix="xterm -e">
-  </node>
+  <group if="$(arg use_teleop_twist_keyboard)">
+    <node ns="$(arg ns)" name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" required="true" launch-prefix="xterm -e">
+    </node>
+  </group>
   <!-- JAUS configuration used by IOP bridge components
          EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
   <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
@@ -24,7 +27,7 @@
   <node ns="$(arg ns)" name="tf_wgs84_map" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 anchor map">
   </node>
 
-  <node pkg="mapviz" type="mapviz" name="mapviz"></node>
+  <node ns="$(arg ns)" pkg="mapviz" type="mapviz" name="mapviz"></node>
 
   <!-- <node ns="$(arg ns)" name="rqt_ocu" pkg="rqt_gui" type="rqt_gui"
       args="- -force-discover - -perspective-file $(find fkie_iop_cfg_ocu)/launch/iop.perspective" respawn="true">
@@ -67,6 +70,8 @@
             fkie_iop_digital_resource_discovery : "DigitalResourceDiscoveryClient",
             fkie_iop_client_global_waypoint_list_driver: "GlobalWaypointListDriverClient",
             fkie_iop_client_global_waypoint_driver: "GlobalWaypointDriverClient",
+            fkie_iop_client_local_waypoint_list_driver: "LocalWaypointListDriverClient",
+            fkie_iop_client_local_waypoint_driver: "LocalWaypointDriverClient",
             fkie_iop_client_path_reporter: "PathReporterClient",
             fkie_iop_client_measurement_sensor: "MeasurementSensorClient",
             fkie_iop_client_power_plant: "PowerPlantManagerClient",
@@ -91,6 +96,8 @@
           max_angular: 2
           # added remap to catch commands from the right topic or use 'remap' of launch file
           topic_sub_joy_cmd_vel: cmd_vel
+        CostMap2DClient:
+            tf_frame_costmap: "ocu/costmap"
         GlobalPoseSensorClient:
 #                anchor_easting: 367591
 #                anchor_northing: 5608783
@@ -103,6 +110,11 @@
             topic_sub_cmd_global_path: "/rviz/interactive_path"
         LocalWaypointListDriverClient:
             topic_sub_cmd_local_path: "/rviz/interactive_path"
+        LocalWaypointDriverClient:
+            tf_frame_robot: "ocu/base_link"
+            travel_speed: 1.0
+            # added remap to catch commands from the right topic or use 'remap' of launch file
+            topic_sub_cmd_local_pose: "cmd_local_pose"
         LocalPoseSensorClient:
           source_type: 2
           tf_frame_odom: odom

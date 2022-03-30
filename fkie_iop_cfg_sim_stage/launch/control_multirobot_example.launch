@@ -24,7 +24,7 @@
        <arg name="iop_address" value="$(arg id_subsystem).64.200" />
        <!-- The node id must be different for each view/control client for support further robot -->
        <arg name="only_monitor" value="false" />
-       <arg name="subsystem_restricted" value="133" />
+       <arg name="subsystem_restricted" value="128" />
        <arg name="publish_world_anchor" value="true" />
   </include>
 

@@ -35,6 +35,8 @@
   <run_depend>fkie_iop_client_global_waypoint_driver</run_depend>
   <run_depend>fkie_iop_client_global_waypoint_list_driver</run_depend>
   <run_depend>fkie_iop_client_local_pose_sensor</run_depend>
+  <run_depend>fkie_iop_client_local_waypoint_driver</run_depend>
+  <run_depend>fkie_iop_client_local_waypoint_list_driver</run_depend>
   <run_depend>fkie_iop_client_measurement_sensor</run_depend>
   <run_depend>fkie_iop_client_path_reporter</run_depend>
   <run_depend>fkie_iop_client_power_plant</run_depend>
