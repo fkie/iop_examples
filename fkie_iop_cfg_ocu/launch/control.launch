@@ -97,7 +97,9 @@
           # added remap to catch commands from the right topic or use 'remap' of launch file
           topic_sub_joy_cmd_vel: cmd_vel
         CostMap2DClient:
-            tf_frame_costmap: "ocu/costmap"
+            tf_frame_costmap: "$(arg ns)/costmap"
+            tf_frame_robot: $(arg ns)/base_link_ground
+            send_inverse_trafo: false
         GlobalPoseSensorClient:
 #                anchor_easting: 367591
 #                anchor_northing: 5608783
@@ -111,15 +113,16 @@
         LocalWaypointListDriverClient:
             topic_sub_cmd_local_path: "/rviz/interactive_path"
         LocalWaypointDriverClient:
-            tf_frame_robot: "ocu/base_link"
+            tf_frame_robot: "$(arg ns)/base_link"
             travel_speed: 1.0
             # added remap to catch commands from the right topic or use 'remap' of launch file
             topic_sub_cmd_local_pose: "cmd_local_pose"
         LocalPoseSensorClient:
           source_type: 2
-          tf_frame_odom: odom
-          topic_pub_pose: /client_pose
-          topic_pub_odom: /client_odom
+          topic_pub_pose: client_pose
+          topic_pub_odom: client_odom
+        tf_frame_odom: $(arg ns)/odom
+        tf_frame_robot: $(arg ns)/base_link
     </rosparam>
     <param name="tf_frame_world" value="world" />
   </node>
