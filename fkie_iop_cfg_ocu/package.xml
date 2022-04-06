@@ -13,6 +13,7 @@
   <url>https://github.com/fkie/iop_examples</url>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>cv_bridge</run_depend>
   <run_depend>nav_msgs</run_depend>
   <run_depend>teleop_twist_keyboard</run_depend>
   <run_depend>mapviz</run_depend>
@@ -21,7 +22,7 @@
   <run_depend>multires_image</run_depend>
   <run_depend>geographic_msgs</run_depend>
   <run_depend>marti_nav_msgs</run_depend>
-  <run_depend>geographic_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
 
 
   <run_depend>fkie_iop_node_manager</run_depend>
