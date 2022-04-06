@@ -12,6 +12,7 @@ Merge the iop_example.rosinstall file and fetch code.
 wstool merge -t src/iop https://raw.githubusercontent.com/fkie/iop_examples/master/iop_examples.rosinstall
 wstool update -t src/iop
 ```
+For ROS version with python2.7 change to __melodic__ branch!
 
 Install dependecies
 ```
