@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # based on https://github.com/afdaniele/rtsp-ros-driver.git
 import os
 import cv2
