@@ -14,6 +14,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>cv_bridge</run_depend>
+  <run_depend>joy</run_depend>
   <run_depend>nav_msgs</run_depend>
   <run_depend>teleop_twist_keyboard</run_depend>
   <run_depend>mapviz</run_depend>
@@ -36,6 +37,7 @@
   <run_depend>fkie_iop_client_global_pose_sensor</run_depend>
   <run_depend>fkie_iop_client_global_waypoint_driver</run_depend>
   <run_depend>fkie_iop_client_global_waypoint_list_driver</run_depend>
+  <run_depend>fkie_iop_client_illumination</run_depend>
   <run_depend>fkie_iop_client_local_pose_sensor</run_depend>
   <run_depend>fkie_iop_client_local_waypoint_driver</run_depend>
   <run_depend>fkie_iop_client_local_waypoint_list_driver</run_depend>

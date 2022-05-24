@@ -7,11 +7,11 @@ enable_antialiasing: true
 show_displays: true
 show_status_bar: true
 show_capture_tools: false
-window_width: 2560
-window_height: 1391
-view_scale: 0.07627771
-offset_x: 5.821286
-offset_y: -34.63052
+window_width: 2349
+window_height: 1197
+view_scale: 0.04967414
+offset_x: 0
+offset_y: 0
 use_latest_transforms: true
 background: "#a0a0a4"
 displays:
@@ -27,13 +27,19 @@ displays:
     name: new display
     config:
       visible: true
-      collapsed: true
+      collapsed: false
       namespace: /
       usemultiurl: false
-  - type: mapviz_plugins/tile_map
+  - type: fkie_iop_mapviz_plugins/iop_illuminator
     name: new display
     config:
       visible: true
+      collapsed: false
+      topic_states: /ocu/illuminator_states
+  - type: mapviz_plugins/tile_map
+    name: new display
+    config:
+      visible: false
       collapsed: true
       custom_sources:
         - base_url: http://tile.openstreetmap.org/{level}/{x}/{y}.png
@@ -52,15 +58,37 @@ displays:
       draw_style: lines
       position_tolerance: 0
       buffer_size: 0
+  - type: mapviz_plugins/occupancy_grid
+    name: new display
+    config:
+      visible: true
+      collapsed: true
+      alpha: 1
+      topic: /ocu/costmap
+      update: true
+      scheme: map
   - type: mapviz_plugins/plan_route
     name: plan_route_global
     config:
-      visible: false
-      collapsed: false
+      visible: true
+      collapsed: true
       route_topic: /ocu/cmd_route
       color: "#00ff00"
       service: /ocu/plan_route
       start_from_vehicle: true
+  - type: mapviz_plugins/pose
+    name: new display
+    config:
+      visible: true
+      collapsed: true
+      topic: /ocu/client_pose
+      color: "#c17d11"
+      draw_style: arrows
+      position_tolerance: 0
+      buffer_size: 1
+      show_laps: false
+      static_arrow_sizes: false
+      arrow_size: 25
   - type: mapviz_plugins/path
     name: new display
     config:
@@ -73,30 +101,17 @@ displays:
     config:
       visible: true
       collapsed: true
-      topic: /client_odom
+      topic: /ocu/client_odom
       color: "#8f5902"
       draw_style: arrows
       position_tolerance: 0
-      buffer_size: 0
+      buffer_size: 1
       show_laps: false
       show_covariance: false
       show_all_covariances: false
       static_arrow_sizes: false
       arrow_size: 29
       show_timestamps: 0
-  - type: mapviz_plugins/pose
-    name: new display
-    config:
-      visible: true
-      collapsed: true
-      topic: /client_pose
-      color: "#c17d11"
-      draw_style: arrows
-      position_tolerance: 0
-      buffer_size: 0
-      show_laps: false
-      static_arrow_sizes: false
-      arrow_size: 25
   - type: mapviz_plugins/image
     name: new display
     config:
@@ -108,24 +123,15 @@ displays:
       offset_x: 0
       offset_y: 0
       width: 320
-      height: 240
+      height: 320
       keep_ratio: true
       image_transport: default
   - type: mapviz_plugins/plan_route
     name: plan_route_local
     config:
-      visible: true
+      visible: false
       collapsed: false
-      route_topic: /ocu/cmd_route_local
+      route_topic: /ocu/cmd_local_route
       color: "#00ff00"
       service: /ocu/plan_route
       start_from_vehicle: false
-  - type: mapviz_plugins/occupancy_grid
-    name: new display
-    config:
-      visible: true
-      collapsed: false
-      alpha: 1
-      topic: /ocu/costmap
-      update: true
-      scheme: costmap

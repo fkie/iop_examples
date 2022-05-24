@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
   <arg name="ns" value="ocu"/>
-  <arg name="use_teleop_twist_keyboard" value="false"/>
   <node name="iopnodemanager" pkg="fkie_iop_node_manager" type="rosiopnodemanager.py">
     <rosparam subst_value="true">
         global:
@@ -12,10 +11,6 @@
     </rosparam>
   </node>
 
-  <group if="$(arg use_teleop_twist_keyboard)">
-    <node ns="$(arg ns)" name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" required="true" launch-prefix="xterm -e">
-    </node>
-  </group>
   <!-- JAUS configuration used by IOP bridge components
          EnableLoopback  = "2" enables you to catch the UDP messages by wireshark. -->
   <param name="jaus_config" value="$(find jaustoolset)/cfg/nm.cfg"/>
@@ -55,6 +50,9 @@
   <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="swri_route2iop_cmd.py" name="swri_route2iop_cmd" output="screen">
   </node>
 
+  <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="swri_route2iop_cmd_local.py" name="swri_route2iop_cmd_local" output="screen">
+  </node>
+
   <node ns="$(arg ns)" name="iop_ocu_client" pkg="fkie_iop_component" type="iop_component" clear_params="true">
     <param name="iop_address" value="153.64.200"/>
     <param name="name_node" value="control_client"/>
@@ -77,6 +75,7 @@
             fkie_iop_client_power_plant: "PowerPlantManagerClient",
             fkie_iop_client_digital_video : "DigitalVideoClient",
             fkie_iop_client_visual_sensor : "VisualSensorClient",
+            fkie_iop_client_illumination : "IlluminationClient",
             fkie_iop_handoff: "HandoffController"
           ]
     </rosparam>
@@ -89,16 +88,16 @@
         # see https://github.com/fkie/iop_jaus_mobility_clients#fkie_iop_client_primitive_driver-primitivedriverclient
         PrimitiveDriverClient:
           # do not use the stamped twist messages
-          use_stamped: false
+          use_stamped: true
           # new parameter added to handle velocities greater than 1.0
           # you should update the https://github.com/fkie/iop_jaus_mobility_clients repository
           max_linear: 2
           max_angular: 2
           # added remap to catch commands from the right topic or use 'remap' of launch file
-          topic_sub_joy_cmd_vel: cmd_vel
+          topic_sub_joy_cmd_vel: joy_cmd_vel
         CostMap2DClient:
             tf_frame_costmap: "$(arg ns)/costmap"
-            tf_frame_robot: $(arg ns)/base_link_ground
+            tf_frame_robot: $(arg ns)/base_link
             send_inverse_trafo: false
         GlobalPoseSensorClient:
 #                anchor_easting: 367591
@@ -108,10 +107,10 @@
         GlobalWaypointDriverClient:
  #           tf_frame_world: "world"
             topic_sub_cmd_pose: "cmd_local_pose"
-        GlobalWaypointListDriverClient:
-            topic_sub_cmd_global_path: "/rviz/interactive_path"
-        LocalWaypointListDriverClient:
-            topic_sub_cmd_local_path: "/rviz/interactive_path"
+#        GlobalWaypointListDriverClient:
+#            topic_sub_cmd_global_path: "/rviz/interactive_path"
+#        LocalWaypointListDriverClient:
+#            topic_sub_cmd_local_path: "/rviz/interactive_path"
         LocalWaypointDriverClient:
             tf_frame_robot: "$(arg ns)/base_link"
             travel_speed: 1.0
@@ -125,5 +124,82 @@
         tf_frame_robot: $(arg ns)/base_link
     </rosparam>
     <param name="tf_frame_world" value="world" />
+  </node>
+
+  <node ns="$(arg ns)" name="joy_node" pkg="joy" type="joy_node">
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="autorepeat_rate" value="5.0" />
+  </node>
+
+  <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="joy_intepreter.py" name="joy_intepreter" clear_params="true">
+    <rosparam param="teleop">
+      # XBOX GamepPad
+      move:  # command name -> freely selectable
+        type: topic  # type of the command. Command are: topic, service, action, scale
+        interface_type: geometry_msgs/msg/TwistStamped
+        topic_name: joy_cmd_vel  # depends on type: topic_name, service_name, action_name
+        deadman_buttons: [5]  # deadman_buttons or deadman_axes
+        deadman_zero: true  # if all values in axis_mappings are zero, publish only once and then deadman_message if defined. Only active if deadman{_buttons, _axis} is not defined
+        deadman_message:  # message send if deadman is released.
+          twist-linear-x:  # message fields separeted by '-'
+            value: 0
+          twist-angular-z:
+            value: 0
+        hz: 10  # Activates the low-freq timer for a command output independent of the joy message rate
+        timeout: 0.5  # timeout should be defined if hz is set.
+        axis_mappings:
+          twist-linear-x:  # message fields changed by axis or buttons. '-' are replaced by '.' by interpreter.
+            axis: 3
+            scale: scale_speedtx  # reference to scale command
+            offset: 0
+            deadzone: 0.0  # below this value, no action is taken. After that, the value is scaled to one between 0 and 1.
+          twist-angular-z:
+            axis:   # defines multiple axis for one value. The first value that is differt from zero is taken.
+              "0":
+                scale: scale_speedrz
+                offset: 0
+                deadzone: 0.0
+              "2":
+                scale: scale_speedrz
+                offset: 0
+                deadzone: 0.8
+#            header-frame_id:
+#              value: 'my_tf_frame'
+      scale_speedtx:
+        type: scale
+        default: 0
+        #deadman_buttons: [5] # possible
+        axis_mappings:
+          low:
+            button: 0
+            value: 0.7
+          mid:
+            button: 2
+            value: 1.0
+          mid2:
+            button: 3
+            value: 1.5
+          high:
+            button: 1
+            value: 2.6
+
+      scale_speedrz:
+        type: scale
+        default: 0
+        #deadman_buttons: [5] # possible
+        axis_mappings:
+          low:
+            button: 0
+            value: 0.3
+          mid:
+            button: 2
+            value: 0.4
+          mid2:
+            button: 3
+            value: 0.7
+          high:
+            button: 1
+            value: 0.9
+    </rosparam>
   </node>
 </launch>
