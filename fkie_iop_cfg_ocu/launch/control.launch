@@ -47,13 +47,17 @@
   <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="swri_plan_route.py" name="swri_plan_route" output="screen">
   </node>
 
+  <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="measurement2string.py" name="measurement2string" output="screen">
+  </node>
+
   <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="swri_route2iop_cmd.py" name="swri_route2iop_cmd" output="screen">
   </node>
 
   <node ns="$(arg ns)" pkg="fkie_iop_cfg_ocu" type="swri_route2iop_cmd_local.py" name="swri_route2iop_cmd_local" output="screen">
+    <param name="frame_robot" value="$(arg ns)/base_link" />
   </node>
 
-  <node ns="$(arg ns)" name="iop_ocu_client" pkg="fkie_iop_component" type="iop_component" clear_params="true">
+  <node ns="$(arg ns)" name="iop_ocu_client" pkg="fkie_iop_component" type="iop_component" clear_params="true" respawn="true">
     <param name="iop_address" value="153.64.200"/>
     <param name="name_node" value="control_client"/>
     <rosparam param="services">
@@ -73,8 +77,7 @@
             fkie_iop_client_path_reporter: "PathReporterClient",
             fkie_iop_client_measurement_sensor: "MeasurementSensorClient",
             fkie_iop_client_power_plant: "PowerPlantManagerClient",
-            fkie_iop_client_digital_video : "DigitalVideoClient",
-            fkie_iop_client_visual_sensor : "VisualSensorClient",
+            fkie_iop_client_range_sensor: "RangeSensorClient",
             fkie_iop_client_illumination : "IlluminationClient",
             fkie_iop_handoff: "HandoffController"
           ]
@@ -107,12 +110,12 @@
         GlobalWaypointDriverClient:
  #           tf_frame_world: "world"
             topic_sub_cmd_pose: "cmd_local_pose"
-#        GlobalWaypointListDriverClient:
-#            topic_sub_cmd_global_path: "/rviz/interactive_path"
-#        LocalWaypointListDriverClient:
-#            topic_sub_cmd_local_path: "/rviz/interactive_path"
+        GlobalWaypointListDriverClient:
+            topic_sub_cmd_global_path: "cmd_global_path"
+            topic_sub_cmd_global_geopath: cmd_global_geopath
+        LocalWaypointListDriverClient:
+            topic_sub_cmd_local_path: cmd_local_path
         LocalWaypointDriverClient:
-            tf_frame_robot: "$(arg ns)/base_link"
             travel_speed: 1.0
             # added remap to catch commands from the right topic or use 'remap' of launch file
             topic_sub_cmd_local_pose: "cmd_local_pose"
@@ -122,8 +125,29 @@
           topic_pub_odom: client_odom
         tf_frame_odom: $(arg ns)/odom
         tf_frame_robot: $(arg ns)/base_link
+        tf_frame_odom: $(arg ns)/odom
+        tf_frame_robot: $(arg ns)/base_link
+        tf_frame_world: world
     </rosparam>
-    <param name="tf_frame_world" value="world" />
+  </node>
+
+  <node ns="$(arg ns)" name="iop_client_digital_video" pkg="fkie_iop_component" type="iop_component" >
+      <param name="iop_address" value="153.64.201"/>
+      <rosparam param="services">
+        [
+          fkie_iop_discovery: "DiscoveryClient",
+          fkie_iop_client_digital_video : "DigitalVideoClient",
+          fkie_iop_client_visual_sensor : "VisualSensorClient",
+        ]
+      </rosparam>
+      <rosparam subst_value="true">
+          EventsClient:
+              use_queries: false
+          DiscoveryClient:
+              register_own_services: false
+              enable_ros_interface: false
+              force_component_update_after: 300
+      </rosparam>
   </node>
 
   <node ns="$(arg ns)" name="joy_node" pkg="joy" type="joy_node">

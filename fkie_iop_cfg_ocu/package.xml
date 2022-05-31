@@ -45,8 +45,10 @@
   <run_depend>fkie_iop_client_path_reporter</run_depend>
   <run_depend>fkie_iop_client_power_plant</run_depend>
   <run_depend>fkie_iop_client_primitive_driver</run_depend>
+  <run_depend>fkie_iop_client_range_sensor</run_depend>
   <run_depend>fkie_iop_client_velocity_state_sensor</run_depend>
   <run_depend>fkie_iop_client_digital_video</run_depend>
+  <run_depend>fkie_iop_client_stabilizer_driver</run_depend>
   <run_depend>fkie_iop_client_visual_sensor</run_depend>
   <run_depend>fkie_iop_handoff</run_depend>
   <run_depend>fkie_iop_mapviz_plugins</run_depend>

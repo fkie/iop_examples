@@ -43,28 +43,37 @@ __doc__ = '''
 class RouteToGeoPath():
 
   def __init__(self):
+    self.tf_buffer = tf2_ros.Buffer()
+    self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
+    self.tf_frame_robot = rospy.get_param('~frame_robot', 'base_link')
+    rospy.loginfo("~frame_robot: %s" % self.tf_frame_robot)
+    self.tf_frame_world = rospy.get_param('~frame_world', 'wgs84')
+    rospy.loginfo("~frame_world: %s" % self.tf_frame_world)
     self._pub_path = rospy.Publisher("cmd_local_path", Path, queue_size=1)
     rospy.loginfo("Publisher `%s` created", self._pub_path.name)
     self._sub_route = rospy.Subscriber("cmd_local_route", Route, self._on_swri_route, queue_size=1)
     rospy.loginfo("Subscriber `%s` created", self._sub_route.name)
-    self.tf_frame_word = rospy.get_param('~frame_world', 'world')
-    rospy.loginfo("~frame_word: %s" % self.tf_frame_word)
-    self.tf_frame_robot = rospy.get_param('~frame_robot', 'base_link')
-    rospy.loginfo("~frame_robot: %s" % self.tf_frame_robot)
-    self.tf_buffer = tf2_ros.Buffer()
-    self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
 
   def _on_swri_route(self, msg):
     rospy.loginfo('convert path with %d RoutePoints to Path' % len(msg.route_points))
     result = Path()
     result.header = msg.header
-    result.header.frame_id = self.tf_frame_word
+    #result.header.frame_id = self.tf_frame_robot
     for point in msg.route_points:
-      utm_point = utm.fromLatLong(point.pose.position.y, point.pose.position.x).toPoint()
+      x,y = point.pose.position.x, point.pose.position.y
+      if self.tf_frame_world in msg.header.frame_id:
+        try:
+          utm_point = utm.fromLatLong(point.pose.position.y, point.pose.position.x)
+          if utm_point.valid():
+            utm_msg = utm_point.toPoint()
+            x = utm_msg.x
+            y = utm_msg.y
+        except Exception:
+          pass
       ps = PoseStamped()
       ps.header = result.header
-      ps.pose.position.x = utm_point.x
-      ps.pose.position.y = utm_point.y
+      ps.pose.position.x = x
+      ps.pose.position.y = y
       ps.pose.position.z = point.pose.position.z
       ps.pose.orientation.x = point.pose.orientation.x
       ps.pose.orientation.y = point.pose.orientation.y
@@ -103,7 +112,7 @@ def setTerminalName(name):
   sys.stdout.write("".join(["\x1b]2;", name, "\x07"]))
 
 if __name__ == '__main__':
-  rospy.init_node('swri_route2iop_cmd_local')
+  rospy.init_node('swri_route2iop_cmd')
   set_process_name(rospy.get_name())
   # set the terminal name
   setTerminalName(rospy.get_name())

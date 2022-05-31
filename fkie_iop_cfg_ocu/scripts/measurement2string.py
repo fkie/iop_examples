@@ -19,47 +19,42 @@
 ##                                                                           ##
 ###############################################################################
 
-import math
 import sys
 
-from marti_nav_msgs.srv import PlanRoute, PlanRouteResponse
-from marti_nav_msgs.msg import RoutePoint
+from fkie_iop_msgs.msg import Measurement
+from std_msgs.msg import String
 import rospy
+from tf.transformations import quaternion_from_euler
 
 __author__ = "Alexander Tiderko (Alexander.Tiderko@fkie.fraunhofer.de)"
-__copyright__ = "Copyright (c) 2021 Alexander Tiderko, Fraunhofer FKIE/CMS"
+__copyright__ = "Copyright (c) 2019 Alexander Tiderko, Fraunhofer FKIE/CMS"
 __license__ = "proprietary"
 __version__ = "0.1"
-__date__ = "2021-10-14"
+__date__ = "2022-05-20"
 __doc__ = '''
-          A very simple node to plan the route for mapviz
+          Converts first MeasurementValue with single_value to astring. For visualization in Mapviz 
           '''
 
 
-class SwriPlanRoute():
+class Measurement2String():
 
   def __init__(self):
-    self.s = rospy.Service('plan_route', PlanRoute, self._plan_route)
-    rospy.loginfo("create service plan_route")
+    self._pub_string = rospy.Publisher("measurement_str", String, queue_size=1)
+    rospy.loginfo("Publisher `%s` created", self._pub_string.name)
+    self._sub_measurement = rospy.Subscriber("measurement", Measurement, self._on_measurement, queue_size=1)
+    rospy.loginfo("Subscriber `%s` created", self._sub_measurement.name)
 
-  def _plan_route(self, req):
-    rospy.logdebug('received path with %d waypoints' % len(req.waypoints))
-    result = PlanRouteResponse()
-    result.route.header = req.header
-    idx = 1
-    for pose in req.waypoints:
-      rp = RoutePoint()
-      rp.pose = pose
-      rp.pose.orientation.w = 1.0
-      rp.pose.orientation.x = 0.0
-      rp.pose.orientation.y = 0.0
-      rp.pose.orientation.z = 0.0
-      rp.id = str(idx)
-      idx += 1
-      result.route.route_points.append(rp)
-    result.success = True
-    return result
-
+  def _on_measurement(self, msg):
+    strmsg = String()
+    strmsg.data = '{}: '.format(msg.device_name)
+    count_val = 0
+    for val in msg.values:
+      if len(val.value):
+        if count_val:
+          strmsg.data += ', '
+        strmsg.data += '%.3f %s' % (val.value[0], val.unit)
+        count_val += 1
+    self._pub_string.publish(strmsg)
 
 def set_process_name(name):
   # change the process name
@@ -82,9 +77,9 @@ def setTerminalName(name):
   sys.stdout.write("".join(["\x1b]2;", name, "\x07"]))
 
 if __name__ == '__main__':
-  rospy.init_node('swri_plan_route')
+  rospy.init_node('swri_route2iop_cmd')
   set_process_name(rospy.get_name())
   # set the terminal name
   setTerminalName(rospy.get_name())
-  pr = SwriPlanRoute()
+  pr = Measurement2String()
   rospy.spin()

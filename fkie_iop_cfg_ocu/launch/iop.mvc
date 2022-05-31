@@ -1,17 +1,17 @@
 capture_directory: .
 fixed_frame: anchor
-target_frame: base_link
+target_frame: ocu/base_link
 fix_orientation: false
 rotate_90: false
 enable_antialiasing: true
 show_displays: true
 show_status_bar: true
 show_capture_tools: false
-window_width: 2349
-window_height: 1197
-view_scale: 0.04967414
-offset_x: 0
-offset_y: 0
+window_width: 1920
+window_height: 1031
+view_scale: 0.02430443
+offset_x: -3.247707
+offset_y: 0.8273817
 use_latest_transforms: true
 background: "#a0a0a4"
 displays:
@@ -28,13 +28,13 @@ displays:
     config:
       visible: true
       collapsed: false
-      namespace: /
+      namespace: /ocu/
       usemultiurl: false
   - type: fkie_iop_mapviz_plugins/iop_illuminator
     name: new display
     config:
-      visible: true
-      collapsed: false
+      visible: false
+      collapsed: true
       topic_states: /ocu/illuminator_states
   - type: mapviz_plugins/tile_map
     name: new display
@@ -48,16 +48,6 @@ displays:
           type: wmts
       bing_api_key: ""
       source: OpenStreetMap
-  - type: mapviz_plugins/navsat
-    name: new display
-    config:
-      visible: true
-      collapsed: true
-      topic: /ocu/fix
-      color: "#00ff00"
-      draw_style: lines
-      position_tolerance: 0
-      buffer_size: 0
   - type: mapviz_plugins/occupancy_grid
     name: new display
     config:
@@ -67,39 +57,59 @@ displays:
       topic: /ocu/costmap
       update: true
       scheme: map
+  - type: mapviz_plugins/navsat
+    name: new display
+    config:
+      visible: false
+      collapsed: true
+      topic: /ocu/fix
+      color: "#00ff00"
+      draw_style: lines
+      position_tolerance: 0
+      buffer_size: 0
   - type: mapviz_plugins/plan_route
     name: plan_route_global
     config:
-      visible: true
+      visible: false
       collapsed: true
       route_topic: /ocu/cmd_route
       color: "#00ff00"
       service: /ocu/plan_route
       start_from_vehicle: true
+  - type: fkie_iop_mapviz_plugins/plan_local_route
+    name: new display
+    config:
+      visible: true
+      collapsed: false
+      route_topic: /ocu/cmd_local_route
+      color: "#8ae234"
+      service: /ocu/plan_route
+      start_from_vehicle: false
+      source_frame: anchor
   - type: mapviz_plugins/pose
     name: new display
     config:
       visible: true
       collapsed: true
       topic: /ocu/client_pose
-      color: "#c17d11"
+      color: "#73d216"
       draw_style: arrows
       position_tolerance: 0
       buffer_size: 1
       show_laps: false
-      static_arrow_sizes: false
+      static_arrow_sizes: true
       arrow_size: 25
   - type: mapviz_plugins/path
     name: new display
     config:
-      visible: true
+      visible: false
       collapsed: true
       topic: /ocu/planned_global_path
       color: "#00ff00"
   - type: mapviz_plugins/odometry
     name: new display
     config:
-      visible: true
+      visible: false
       collapsed: true
       topic: /ocu/client_odom
       color: "#8f5902"
@@ -123,15 +133,33 @@ displays:
       offset_x: 0
       offset_y: 0
       width: 320
-      height: 320
+      height: 262
       keep_ratio: true
       image_transport: default
-  - type: mapviz_plugins/plan_route
-    name: plan_route_local
+  - type: mapviz_plugins/string
+    name: measurement
     config:
-      visible: false
+      visible: true
+      collapsed: true
+      font: Helvetica,9,-1,5,50,0,0,0,0,0
+      color: "#000000"
+      topic: /ocu/measurement_str
+      anchor: top right
+      units: pixels
+      offset_x: 0
+      offset_y: 0
+  - type: mapviz_plugins/laserscan
+    name: new display
+    config:
+      visible: true
       collapsed: false
-      route_topic: /ocu/cmd_local_route
-      color: "#00ff00"
-      service: /ocu/plan_route
-      start_from_vehicle: false
+      topic: /ocu/scan_throttle
+      size: 3
+      buffer_size: 1
+      alpha: 1
+      color_transformer: Flat Color
+      min_color: "#ff0000"
+      max_color: "#000000"
+      value_min: 0
+      value_max: 100
+      use_rainbow: false
