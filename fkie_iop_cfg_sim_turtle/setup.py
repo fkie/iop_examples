@@ -18,7 +18,7 @@ setup(
                                                'launch/turtle.launch.xml']),
         ('share/' + package_name, ['package.xml']),
     ],
-    install_requires=['setuptools', 'fkie_iop_msgs', 'nav_msgs'],
+    # install_requires=['setuptools', 'fkie_iop_msgs', 'nav_msgs'],
     zip_safe=True,
     author='Alexander Tiderko',
     maintainer='Alexander Tiderko',

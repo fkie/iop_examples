@@ -5,7 +5,7 @@
     <node name="turtle2iop" pkg="fkie_iop_cfg_sim_turtle" exec="turtle2iop.py">
     </node>
 
-    <node name="iop_platform_manager" pkg="fkie_iop_component" exec="iop_component" _args="--ros-args --log-level debug" output="screen" >
+    <node name="iop_platform_manager" pkg="fkie_iop_component" exec="iop_component" output="screen" >
         <param name="name_node" value="turtle_platform manager"/>
         <param name="iop_address" value="1.1.15"/>
         <param from="$(find-pkg-share fkie_iop_cfg_sim_turtle)/launch/turtle_services.yaml"/>
