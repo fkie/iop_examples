@@ -20,6 +20,7 @@ setup(
     ],
     # install_requires=['setuptools', 'fkie_iop_msgs', 'nav_msgs'],
     zip_safe=True,
+    py_modules=[],
     author='Alexander Tiderko',
     maintainer='Alexander Tiderko',
     maintainer_email='alexander.tiderko@fkie.fraunhofer.de',
