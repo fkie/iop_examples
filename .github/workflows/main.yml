@@ -1,4 +1,4 @@
-name: CI
+name: jazzy
 
 on: [push, pull_request]
 
@@ -7,7 +7,6 @@ jobs:
     strategy:
       matrix:
         env:
-          - {ROS_DISTRO: humble, UPSTREAM_WORKSPACE: 'dependencies.rosinstall', CMAKE_ARGS: '--event-handlers console_direct+'}
           - {ROS_DISTRO: jazzy, UPSTREAM_WORKSPACE: 'dependencies.rosinstall', CMAKE_ARGS: '--event-handlers console_direct+'}
     runs-on: ubuntu-latest
     steps:
