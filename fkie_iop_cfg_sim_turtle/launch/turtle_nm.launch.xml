@@ -6,8 +6,9 @@
     </node>
 
     <node name="iop_node_manager" pkg="fkie_iop_node_manager" exec="rosiopnodemanager.py" />
+    <node name="iop_json_connector" pkg="fkie_iop_json_connector" exec="ros-iop-json-connector.py" />
 
-    <node name="iop_platform_manager" pkg="fkie_iop_component" exec="iop_component">
+    <node name="iop_platform_manager_turtle" pkg="fkie_iop_component" exec="iop_component">
         <param name="name_node" value="turtle_platform manager"/>
         <param name="iop_address" value="1.1.15"/>
         <param from="$(find-pkg-share fkie_iop_cfg_sim_turtle)/launch/turtle_services.yaml"/>

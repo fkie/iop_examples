@@ -1,4 +1,4 @@
-iop_platform_manager:
+iop_platform_manager_turtle:
   ros__parameters:
     iop_services:
       - fkie_iop_discovery/Discovery
