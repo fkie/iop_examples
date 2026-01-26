@@ -17,6 +17,7 @@
   <depend>nav_msgs</depend>
   <depend>rqt_gui</depend>
   <depend>turtlesim</depend>
+  <depend>tf_transformations</depend>
 
   <!-- dependencies for robot -->
   <depend>fkie_iop_liveness</depend>
@@ -24,6 +25,7 @@
   <depend>fkie_iop_platform_manager</depend>
   <depend>fkie_iop_primitive_driver</depend>
   <depend>fkie_iop_velocity_state_sensor</depend>
+  <depend>fkie_iop_json_connector</depend>
 
   <!-- dependencies for control station -->
   <depend>fkie_iop_rqt_access_control</depend>

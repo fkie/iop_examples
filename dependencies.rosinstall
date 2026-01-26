@@ -22,3 +22,6 @@
     local-name: iop_jaus_mobility_clients
     uri: https://github.com/fkie/iop_jaus_mobility_clients
     version: ros2
+- git:
+    local-name: iop_json_connector
+    uri: https://github.com/fkie-forks/iop-json-connector
