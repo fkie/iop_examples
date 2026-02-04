@@ -106,7 +106,7 @@ class Converter(Node):
         new_msg.twist.twist.angular.x = msg.angular_velocity
         new_msg.pose.pose.position.x = msg.x
         new_msg.pose.pose.position.y = msg.y
-        print(f"YAW: {(msg.theta * self.ORI_INVERT) + self.ORI_OFFSET}")
+        # print(f"YAW: {(msg.theta * self.ORI_INVERT) + self.ORI_OFFSET}, normalized: {self.normalize_angle_rad((msg.theta * self.ORI_INVERT) + self.ORI_OFFSET)}")
         quat = quaternion_from_euler(0, 0, self.normalize_angle_rad((msg.theta * self.ORI_INVERT) + self.ORI_OFFSET))
         new_msg.pose.pose.orientation.x = quat[0]
         new_msg.pose.pose.orientation.y = quat[1]
