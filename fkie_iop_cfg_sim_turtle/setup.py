@@ -19,6 +19,7 @@ setup(
         ('share/' + package_name, ['package.xml']),
     ],
     # install_requires=['setuptools', 'fkie_iop_msgs', 'nav_msgs'],
+    install_requires=['setuptools'],
     zip_safe=True,
     py_modules=[],
     author='Alexander Tiderko',
